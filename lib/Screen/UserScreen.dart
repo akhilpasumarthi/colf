@@ -1,7 +1,9 @@
+import 'package:bvm/Screen/LoginSigninScreen.dart';
 import 'package:bvm/Screen/MyCourse.dart';
 import 'package:bvm/Screen/MyProfil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserScreen extends StatefulWidget {
   static const routeName = '/UserScreen';
@@ -12,6 +14,11 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   @override
+
+  Future<int> _getint() async{
+    final prefs= await SharedPreferences.getInstance();
+    await prefs.setInt('user',0);
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -145,6 +152,7 @@ class _UserScreenState extends State<UserScreen> {
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
                     onPressed: () {
+
                       Navigator.push(context,
                           MaterialPageRoute(builder: (ctx) => MyCourse()));
                     },
@@ -208,7 +216,11 @@ class _UserScreenState extends State<UserScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () async{
+                      await _getint();
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                    },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
                     color: Colors.white,

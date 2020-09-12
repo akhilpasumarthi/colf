@@ -1,10 +1,15 @@
+
+import 'package:bvm/Screen/BottomNavigation.dart';
+import 'package:bvm/Screen/HomeMain.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Signin.dart';
 import 'SignUp.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
+
 }
 
 class _LoginScreenState extends State<LoginScreen>
@@ -16,10 +21,20 @@ class _LoginScreenState extends State<LoginScreen>
       length: 2,
       vsync: this,
     );
+    _getint();
     super.initState();
   }
 //final double height;
-
+  Future<int> _getint() async{
+    final prefs=await SharedPreferences.getInstance();
+    final  user= await prefs.getInt('user');
+    print(user);
+    if(user==1)
+      {
+        Navigator.pop(context);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> BottomNavigation()));
+      }
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

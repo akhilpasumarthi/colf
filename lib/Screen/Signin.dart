@@ -1,5 +1,7 @@
+import 'package:bvm/Screen/BottomNavigation.dart';
 import 'package:bvm/Screen/HomeMain.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'LoginSigninScreen.dart';
 import 'SignUp.dart';
 import 'dart:convert';
@@ -25,12 +27,14 @@ class _SigninState extends State<Signin> {
     var response = await http.post('https://bilaltech.in/api/public/api/login',
         body: {"mobile": mobile.text, "password": password.text});
     var msg = json.decode(response.body);
-    if (msg == "true") {
+    print(msg['success']);
+    if (msg['success'].toString() == "true") {
+      _getint();
       print(json.decode(response.body));
       return Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => HomeMain(),
+          builder: (context) => BottomNavigation(),
         ),
       );
     } else {
@@ -41,6 +45,10 @@ class _SigninState extends State<Signin> {
     //print(msg);
   }
 
+  Future<int> _getint() async{
+    final prefs= await SharedPreferences.getInstance();
+    await prefs.setInt('user',1);
+  }
 //
 
   @override
