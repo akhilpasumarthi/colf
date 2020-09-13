@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'package:bvm/Screen/HomeMain.dart';
+import 'package:bvm/Screen/otp.dart';
 import 'package:toast/toast.dart';
 import 'BottomNavigation.dart';
 import 'package:bvm/Screen/Signin.dart';
@@ -35,40 +36,33 @@ class _SignUpState extends State<SignUp> {
   Future signUp() async {
     if (mobile.text.isEmpty || mobile.text.length > 8) {
       if (password.text == confirmpassword.text) {
-        if (password.text.length > 8) {
+        if (password.text.length >= 8) {
           if (firstname.text.isNotEmpty) {
-            final response = await http
-                .post('https://bilaltech.in/api/public/api/register', body: {
-              "first_name": firstname.text,
-              "last_name": lastname.text,
-              "mobile": mobile.text,
-              "password": password.text,
-              "confirm_password": confirmpassword.text,
-              //"token": true,
-            });
-             Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BottomNavigation(),
-                  ),
-                );
-                showToast("Thanks for registering .",
-                duration: 4, gravity: Toast.CENTER);
-            if (response.body.isNotEmpty) {
-              var msg = json.decode(response.body);
-              if (msg=='true') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeMain(),
-                  ),
-                );
-              }
-              print(json.decode(response.body));
-            }
+            var queryParams = {
+              'authkey': "326864A92hJb2My5ea005a9P1",
+              'templateid': "5f5cd473d83f4279930f5679",
+              'mobile': "91" + mobile.text
+            };
+            var uri = Uri.parse("https://api.msg91.com/api/v5/otp");
+            uri = uri.replace(queryParameters: queryParams);
 
-            showToast("Thanks for registering .",
-                duration: 4, gravity: Toast.CENTER);
+            print(uri);
+            var otp_response = await http.get(uri);
+            var data = json.decode(otp_response.body);
+            if (data['type'] == "success") {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return Otp(
+                    mobile: mobile.text,
+                    firstname: firstname.text,
+                    lastname: lastname.text,
+                    password: password.text,
+                    confirmation_password: confirmpassword.text,
+                  );
+                },
+              ));
+            }
+            
           } else {
             showToast("Enter Username and password first",
                 duration: 3, gravity: Toast.TOP);

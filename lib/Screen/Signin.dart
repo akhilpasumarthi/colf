@@ -6,6 +6,7 @@ import 'LoginSigninScreen.dart';
 import 'SignUp.dart';
 import 'dart:convert';
 import 'HomeMain.dart';
+import 'otp.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
 
@@ -45,9 +46,9 @@ class _SigninState extends State<Signin> {
     //print(msg);
   }
 
-  Future<int> _getint() async{
-    final prefs= await SharedPreferences.getInstance();
-    await prefs.setInt('user',1);
+  Future<int> _getint() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('user', 1);
   }
 //
 
