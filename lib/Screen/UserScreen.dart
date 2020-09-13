@@ -15,9 +15,9 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> {
   @override
 
-  Future<int> _getint() async{
+  Future<String> _getint() async{
     final prefs= await SharedPreferences.getInstance();
-    await prefs.setInt('user',0);
+    await prefs.setString('user',"hi");
   }
   Widget build(BuildContext context) {
     return Scaffold(

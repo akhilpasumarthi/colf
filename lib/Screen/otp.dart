@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bvm/Screen/BottomNavigation.dart';
 import 'package:bvm/Screen/HomeMain.dart';
+import 'package:bvm/services/usertoken.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
@@ -64,9 +65,13 @@ class _OTpState extends State<Otp> {
             Padding(
               padding: EdgeInsets.only(top: 20.0),
               child: RaisedButton(
-                onPressed: () {
+                onPressed: () async{
                   verifyOtp();
-                },
+                  var a =await gettoken();
+
+
+               print(a);
+                 },
                 child: Text(
                   "Submit",
                   style: TextStyle(color: Colors.black, fontSize: 20.0),

@@ -27,9 +27,9 @@ class _LoginScreenState extends State<LoginScreen>
 //final double height;
   Future<int> _getint() async{
     final prefs=await SharedPreferences.getInstance();
-    final  user= await prefs.getInt('user');
+    final  user= await prefs.getString('user');
     print(user);
-    if(user==1)
+    if(user!=null)
       {
         Navigator.pop(context);
         Navigator.push(context, MaterialPageRoute(builder: (context)=> BottomNavigation()));
