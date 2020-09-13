@@ -30,6 +30,7 @@ class _SigninState extends State<Signin> {
     var msg = json.decode(response.body);
     print(msg['success']);
     if (msg['success'].toString() == "true") {
+      print(msg);
       _getint();
       print(json.decode(response.body));
       return Navigator.push(

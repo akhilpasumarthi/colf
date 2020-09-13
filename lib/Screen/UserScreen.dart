@@ -1,6 +1,7 @@
 import 'package:bvm/Screen/LoginSigninScreen.dart';
 import 'package:bvm/Screen/MyCourse.dart';
 import 'package:bvm/Screen/MyProfil.dart';
+import 'package:bvm/services/usertoken.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,11 +15,11 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   @override
-
-  Future<String> _getint() async{
-    final prefs= await SharedPreferences.getInstance();
-    await prefs.setString('user',"hi");
+  Future<String> _getint() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user', "hi");
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -152,7 +153,6 @@ class _UserScreenState extends State<UserScreen> {
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
                     onPressed: () {
-
                       Navigator.push(context,
                           MaterialPageRoute(builder: (ctx) => MyCourse()));
                     },
@@ -164,8 +164,7 @@ class _UserScreenState extends State<UserScreen> {
                         Container(
                           height: 40.0,
                           width: 40.0,
-                          child:
-                              SvgPicture.asset("assets/images/courses.svg"),
+                          child: SvgPicture.asset("assets/images/courses.svg"),
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 20.0),
@@ -216,10 +215,13 @@ class _UserScreenState extends State<UserScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
-                    onPressed: () async{
-                      await _getint();
+                    onPressed: () async {
+                      await sendtoken(null);
                       Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
                     },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),

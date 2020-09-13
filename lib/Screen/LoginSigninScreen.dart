@@ -1,6 +1,6 @@
-
 import 'package:bvm/Screen/BottomNavigation.dart';
 import 'package:bvm/Screen/HomeMain.dart';
+import 'package:bvm/services/usertoken.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Signin.dart';
@@ -9,7 +9,6 @@ import 'SignUp.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
-
 }
 
 class _LoginScreenState extends State<LoginScreen>
@@ -24,17 +23,17 @@ class _LoginScreenState extends State<LoginScreen>
     _getint();
     super.initState();
   }
-//final double height;
-  Future<int> _getint() async{
-    final prefs=await SharedPreferences.getInstance();
-    final  user= await prefs.getString('user');
-    print(user);
-    if(user!=null)
-      {
-        Navigator.pop(context);
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> BottomNavigation()));
-      }
+
+  _getint() async {
+    final user = await gettoken();
+    print("user is $user");
+    if (user != null) {
+      Navigator.pop(context);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => BottomNavigation()));
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -101,6 +100,4 @@ class _LoginScreenState extends State<LoginScreen>
       ),
     );
   }
-
-  
 }
