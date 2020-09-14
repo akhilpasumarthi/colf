@@ -62,7 +62,6 @@ class _SignUpState extends State<SignUp> {
                 },
               ));
             }
-            
           } else {
             showToast("Enter Username and password first",
                 duration: 3, gravity: Toast.TOP);
@@ -79,6 +78,7 @@ class _SignUpState extends State<SignUp> {
       showToast("please enter correct Mobile Number .",
           duration: 4, gravity: Toast.CENTER);
     }
+
     //return 0;
   }
 
@@ -163,11 +163,7 @@ class _SignUpState extends State<SignUp> {
                     children: [
                       RaisedButton(
                         onPressed: () {
-                          setState(() {
-                            signUp();
-                            firstname.text = "";
-                            password.text = "";
-                          });
+                          signUp();
                         },
                         padding: EdgeInsets.only(
                             left: 40.0, right: 40.0, top: 7.0, bottom: 7.0),

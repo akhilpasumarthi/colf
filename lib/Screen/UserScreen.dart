@@ -1,25 +1,31 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:bvm/Screen/LoginSigninScreen.dart';
 import 'package:bvm/Screen/MyCourse.dart';
 import 'package:bvm/Screen/MyProfil.dart';
+import 'package:bvm/Screen/Signin.dart';
 import 'package:bvm/services/usertoken.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toast/toast.dart';
 
 class UserScreen extends StatefulWidget {
+  final user_details;
   static const routeName = '/UserScreen';
-
+  UserScreen({this.user_details});
   @override
   _UserScreenState createState() => _UserScreenState();
 }
 
 class _UserScreenState extends State<UserScreen> {
-  @override
   Future<String> _getint() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('user', "hi");
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -71,7 +77,9 @@ class _UserScreenState extends State<UserScreen> {
                             Padding(
                               padding: EdgeInsets.only(top: 0.0, left: 20.0),
                               child: Text(
-                                "User",
+                                (widget.user_details["data"]["first_name"] +
+                                        " " +
+                                        widget.user_details["data"]["last_name"]),
                                 style: TextStyle(
                                   fontSize: 20.0,
                                 ),
@@ -91,7 +99,7 @@ class _UserScreenState extends State<UserScreen> {
                   child: RaisedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (ctx) => MyProfil()));
+                          MaterialPageRoute(builder: (ctx) => MyProfil(user_details:widget.user_details)));
                     },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
@@ -199,7 +207,7 @@ class _UserScreenState extends State<UserScreen> {
                         Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Text(
-                            "Setting",
+                            "Settings",
                             style: TextStyle(
                               fontSize: 18.0,
                             ),
@@ -215,8 +223,8 @@ class _UserScreenState extends State<UserScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
-                    onPressed: () async {
-                      await sendtoken(null);
+                    onPressed: ()  {
+                       sendtoken(null);
                       Navigator.pop(context);
                       Navigator.push(
                           context,

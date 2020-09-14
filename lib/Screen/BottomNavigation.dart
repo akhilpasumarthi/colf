@@ -1,12 +1,17 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:bvm/Screen/HomeMain.dart';
 import 'package:bvm/Screen/MyCourse.dart';
 import 'package:bvm/Screen/SearchScreen.dart';
 import 'package:bvm/Screen/EbookScreen.dart';
 import 'package:bvm/Screen/UserScreen.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toast/toast.dart';
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -14,7 +19,30 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
- 
+  String token;
+  static var user_data;
+  @override
+  void initState() {
+    super.initState();
+    getuserdata();
+  }
+
+  getuserdata() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    token = preferences.getString('user');
+    var response = await http.get(
+        'https://bilaltech.in/api/public/api/getAuthUser',
+        headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
+    if (response.statusCode == 200) {
+      setState(() {
+        user_data = jsonDecode(response.body);
+        print(user_data);
+      });
+    } else {
+      Toast.show("Error Occured Please SignIn Again", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+    }
+  }
 
   //int _currentindex = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
@@ -30,7 +58,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final MyCourse _myCourse = MyCourse();
   final EbookScreen _ebookScreen = EbookScreen();
   final SearchScreen _searchScreen = SearchScreen();
-  final UserScreen _userScreen = UserScreen();
+  final UserScreen _userScreen = UserScreen(user_details: user_data);
 
   Widget _showpage = HomeMain();
 

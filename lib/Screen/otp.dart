@@ -29,6 +29,11 @@ class _OTpState extends State<Otp> {
 
   @override
   Widget build(BuildContext context) {
+ print(widget.confirmation_password +
+        widget.firstname +
+        widget.lastname +
+        widget.mobile +
+        widget.password);
     return Scaffold(
       body: Container(
         child: Column(
@@ -65,13 +70,11 @@ class _OTpState extends State<Otp> {
             Padding(
               padding: EdgeInsets.only(top: 20.0),
               child: RaisedButton(
-                onPressed: () async{
+                onPressed: () async {
                   verifyOtp();
-                  var a =await gettoken();
-
-
-               print(a);
-                 },
+                  // var a = await gettoken();
+                  // print(a);
+                },
                 child: Text(
                   "Submit",
                   style: TextStyle(color: Colors.black, fontSize: 20.0),
@@ -109,6 +112,8 @@ class _OTpState extends State<Otp> {
   }
 
   void register() async {
+   
+    String token;
     final response =
         await http.post('https://bilaltech.in/api/public/api/register', body: {
       "first_name": widget.firstname,
@@ -118,26 +123,26 @@ class _OTpState extends State<Otp> {
       "confirm_password": widget.confirmation_password,
       //"token": true,
     });
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => BottomNavigation(),
-      ),
-    );
-    showToast("Thanks for registering .", duration: 4, gravity: Toast.CENTER);
-    if (response.body.isNotEmpty) {
-      var msg = json.decode(response.body);
-      if (msg == 'true') {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomeMain(),
-          ),
-        );
-      }
-      print(json.decode(response.body));
-    }
 
-    showToast("Thanks for registering .", duration: 4, gravity: Toast.CENTER);
+    var res = jsonDecode(response.body);
+    print(response.statusCode);
+    if (res["success"] == true) {
+      token = res["data"]["token"];
+      sendtoken(token);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BottomNavigation(),
+        ),
+      );
+      showToast("Thanks for registering .", duration: 4, gravity: Toast.CENTER);
+    } else if (res["errors"] == "The mobile has already been taken.") {
+      Navigator.pop(context);
+      showToast("Mobile Number already registered.",
+          duration: 5, gravity: Toast.CENTER);
+    } else {
+      showToast("Error Occured, Try again.", duration: 5, gravity: Toast.TOP);
+      Navigator.pop(context);
+    }
   }
 }
