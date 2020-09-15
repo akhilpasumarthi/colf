@@ -346,16 +346,18 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
     String token;
     SharedPreferences preferences = await SharedPreferences.getInstance();
     token = preferences.getString('user');
-    var response = await http
-        .put("https://bilaltech.in/api/public/api/updateAuthUser", body: {
-      "mobile": mobile.text,
+    var queryParams = {
+      'mobile': mobile.text,
       "first_name": firstName.text,
-      "last_name": lastName.text
-    }, headers: {
-      HttpHeaders.authorizationHeader: "Bearer $token"
-    });
+      "last_name": lastName.text,
+    };
+    var uri = Uri.parse("https://bilaltech.in/api/public/api/updateAuthUser");
+    uri = uri.replace(queryParameters: queryParams);
+    var response = await http
+        .put(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
     Toast.show("update Successfull", context,
         duration: 4, gravity: Toast.CENTER);
+    print(jsonDecode(response.body));
     Navigator.pop(context);
     Navigator.pushReplacement(context,
         new MaterialPageRoute(builder: (context) {
