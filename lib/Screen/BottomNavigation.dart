@@ -19,29 +19,9 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  String token;
-  static var user_data;
   @override
   void initState() {
     super.initState();
-    getuserdata();
-  }
-
-  getuserdata() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    token = preferences.getString('user');
-    var response = await http.get(
-        'https://bilaltech.in/api/public/api/getAuthUser',
-        headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
-    if (response.statusCode == 200) {
-      setState(() {
-        user_data = jsonDecode(response.body);
-        print(user_data);
-      });
-    } else {
-      Toast.show("Error Occured Please SignIn Again", context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
-    }
   }
 
   //int _currentindex = 0;
@@ -58,7 +38,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final MyCourse _myCourse = MyCourse();
   final EbookScreen _ebookScreen = EbookScreen();
   final SearchScreen _searchScreen = SearchScreen();
-  final UserScreen _userScreen = UserScreen(user_details: user_data);
+  final UserScreen _userScreen = UserScreen();
 
   Widget _showpage = HomeMain();
 

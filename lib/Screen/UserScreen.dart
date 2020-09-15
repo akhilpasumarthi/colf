@@ -12,14 +12,42 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
 class UserScreen extends StatefulWidget {
-  final user_details;
   static const routeName = '/UserScreen';
-  UserScreen({this.user_details});
   @override
   _UserScreenState createState() => _UserScreenState();
 }
 
 class _UserScreenState extends State<UserScreen> {
+  var userdata;
+  String token;
+  @override
+  void initState() {
+    super.initState();
+    getdata();
+  }
+
+  getdata() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    token = preferences.getString('user');
+    var response = await http.get(
+        'https://bilaltech.in/api/public/api/getAuthUser',
+        headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
+    if (response.statusCode == 200) {
+      setState(() {
+        userdata = jsonDecode(response.body);
+        print(userdata);
+      });
+    } else {
+      Toast.show("Error Occured Please SignIn Again", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Future<String> _getint() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('user', "hi");
@@ -77,9 +105,11 @@ class _UserScreenState extends State<UserScreen> {
                             Padding(
                               padding: EdgeInsets.only(top: 0.0, left: 20.0),
                               child: Text(
-                                (widget.user_details["data"]["first_name"] +
+                                (userdata != null)
+                                    ? (userdata["data"]["first_name"] +
                                         " " +
-                                        widget.user_details["data"]["last_name"]),
+                                        userdata["data"]["last_name"])
+                                    : "Loading...",
                                 style: TextStyle(
                                   fontSize: 20.0,
                                 ),
@@ -99,7 +129,7 @@ class _UserScreenState extends State<UserScreen> {
                   child: RaisedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (ctx) => MyProfil(user_details:widget.user_details)));
+                          MaterialPageRoute(builder: (ctx) => MyProfil()));
                     },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
@@ -223,8 +253,8 @@ class _UserScreenState extends State<UserScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
-                    onPressed: ()  {
-                       sendtoken(null);
+                    onPressed: () {
+                      sendtoken(null);
                       Navigator.pop(context);
                       Navigator.push(
                           context,

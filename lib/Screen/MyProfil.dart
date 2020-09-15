@@ -12,13 +12,36 @@ import 'package:toast/toast.dart';
 import 'MyCourse.dart';
 
 class MyProfil extends StatefulWidget {
-  final user_details;
-  MyProfil({this.user_details});
   @override
   _MyProfilState createState() => _MyProfilState();
 }
 
 class _MyProfilState extends State<MyProfil> {
+  var userdata;
+  String token;
+  @override
+  void initState() {
+    super.initState();
+    getdata();
+  }
+
+  getdata() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    token = preferences.getString('user');
+    var response = await http.get(
+        'https://bilaltech.in/api/public/api/getAuthUser',
+        headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
+    if (response.statusCode == 200) {
+      setState(() {
+        userdata = jsonDecode(response.body);
+        print(userdata);
+      });
+    } else {
+      Toast.show("Error Occured Please SignIn Again", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +52,7 @@ class _MyProfilState extends State<MyProfil> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 110.0,
+                height: 130.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
                   color: Colors.white,
@@ -67,17 +90,22 @@ class _MyProfilState extends State<MyProfil> {
                         ),
                       ),
                       Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
                         //height: 200.0,
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 40.0, left: 10.0),
+                              padding: EdgeInsets.only(top: 50.0, left: 10.0),
                               child: Text(
-                                widget.user_details["data"]["first_name"],
+                                (userdata != null)
+                                    ? (userdata["data"]["first_name"] +
+                                        " " +
+                                        userdata["data"]["last_name"])
+                                    : "Loading...",
                                 style: TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                 ),
                               ),
                             ),
@@ -91,7 +119,9 @@ class _MyProfilState extends State<MyProfil> {
                                     size: 14.0,
                                   ),
                                   Text(
-                                    widget.user_details["data"]["mobile"],
+                                    (userdata != null)
+                                        ? userdata["data"]["mobile"]
+                                        : "Loading...",
                                     style: TextStyle(
                                       fontSize: 15.0,
                                     ),
@@ -103,13 +133,19 @@ class _MyProfilState extends State<MyProfil> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 50.0, top: 18.0),
+                        padding: EdgeInsets.only(top: 18.0),
                         child: RaisedButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (ctx) => ProfilEditScreen()));
+                            (userdata != null)
+                                ? {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (ctx) => ProfilEditScreen(
+                                                  editableData: userdata,
+                                                )))
+                                  }
+                                : null;
                           },
                           shape: CircleBorder(
                               side: BorderSide(
