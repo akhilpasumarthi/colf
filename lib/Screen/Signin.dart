@@ -1,5 +1,6 @@
 import 'package:bvm/Screen/BottomNavigation.dart';
 import 'package:bvm/Screen/HomeMain.dart';
+import 'package:bvm/Screen/PasswordForgot.dart';
 import 'package:bvm/services/usertoken.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,6 +19,7 @@ class Signin extends StatefulWidget {
 
 List userData;
 Map data;
+String token;
 
 class _SigninState extends State<Signin> {
   TextEditingController mobile = TextEditingController();
@@ -26,14 +28,15 @@ class _SigninState extends State<Signin> {
 //login code
 
   Future login() async {
-    String token;
+
     var response = await http.post('https://bilaltech.in/api/public/api/login',
         body: {"mobile": mobile.text, "password": password.text});
     var msg = json.decode(response.body);
     print(msg['success']);
     if (msg['success'].toString() == "true") {
-      _getint();
+
       token = msg["data"]["token"];
+      _getint();
       sendtoken(token);
       print(json.decode(response.body));
       return Navigator.push(
@@ -50,9 +53,10 @@ class _SigninState extends State<Signin> {
     //print(msg);
   }
 
-  Future<int> _getint() async {
+  Future<String> _getint() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('user', 1);
+    await prefs.setString('user', token);
+    print(token);
   }
 //
 
@@ -184,20 +188,20 @@ class _SigninState extends State<Signin> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Forgot Password",
-                        style: TextStyle(
-                          fontSize: 12.0,
-                        ),
-                      ),
+                     
                       Padding(
                         padding: EdgeInsets.only(top: 3.0),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                             Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (ctx) => PasswordForgot()));
+                          },
                           child: Padding(
                             padding: EdgeInsets.only(left: 4.0),
                             child: Text(
-                              "Change Password",
+                              "Forgot Password",
                               style: TextStyle(
                                 color: Colors.blue,
                                 fontSize: 12.0,

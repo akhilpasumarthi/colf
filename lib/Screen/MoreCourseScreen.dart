@@ -1,3 +1,4 @@
+import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'BottomNavigation.dart';
 import '../nda/NdaScreen.dart';
@@ -12,6 +13,22 @@ class MoreCourseScreen extends StatefulWidget {
 class _MoreCourseScreenState extends State<MoreCourseScreen> {
 
   int _currentindex = 0;
+  Map courses;
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+   courselist();
+  }
+  void courselist()
+ async {
+    Map course1=await getcourses();
+     setState(()  {
+       courses=course1;
+       print(courses);
+       print(courses['success']);
+     });
+  }
 
 
   @override
@@ -75,7 +92,8 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                       width: 170,
                       child: RaisedButton(
                         color: Colors.white,
-                        onPressed: () {
+                        onPressed: () async{
+                          getcourses();
                             Navigator.push(
                                                       context,
                                                       MaterialPageRoute(

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:bvm/Screen/LoginSigninScreen.dart';
 import 'package:bvm/Screen/MyCourse.dart';
 import 'package:bvm/Screen/MyProfil.dart';
-import 'package:bvm/Screen/Signin.dart';
+import 'package:share/share.dart';
 import 'package:bvm/services/usertoken.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,6 +18,7 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+  String appshareurl = "https://play.google.com/store/apps/details?id=com.bvnschool";
   var userdata;
   String token;
   @override
@@ -290,7 +291,13 @@ class _UserScreenState extends State<UserScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final RenderBox box = context.findRenderObject();
+                      Share.share(appshareurl,
+                          //subject: ,
+                          sharePositionOrigin:
+                              box.localToGlobal(Offset.zero) & box.size);
+                    },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
                     color: Colors.white,

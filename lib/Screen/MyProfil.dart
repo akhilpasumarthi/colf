@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:bvm/services/usertoken.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bvm/Screen/ChangePassword.dart';
 import 'package:http/http.dart' as http;
-import 'package:bvm/Screen/BottomNavigation.dart';
+import 'package:share/share.dart';
 import 'package:bvm/Screen/ProfilEditScreen.dart';
 import 'package:bvm/Screen/UserScreen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'LoginSigninScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
@@ -17,6 +20,9 @@ class MyProfil extends StatefulWidget {
 }
 
 class _MyProfilState extends State<MyProfil> {
+  String appshareurl =
+      "https://play.google.com/store/apps/details?id=com.bvnschool";
+
   var userdata;
   String token;
   @override
@@ -138,12 +144,7 @@ class _MyProfilState extends State<MyProfil> {
                           onPressed: () {
                             (userdata != null)
                                 ? {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (ctx) => ProfilEditScreen(
-                                                  editableData: userdata,
-                                                )))
+                                    Navigator.push(context, MaterialPageRoute(builder: (ctx) => ProfilEditScreen(editableData: userdata,))),
                                   }
                                 : null;
                           },
@@ -198,7 +199,12 @@ class _MyProfilState extends State<MyProfil> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => ChangePassword()));
+                    },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
                     color: Colors.white,
@@ -291,7 +297,14 @@ class _MyProfilState extends State<MyProfil> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      sendtoken(null);
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
                     color: Colors.white,
@@ -321,7 +334,13 @@ class _MyProfilState extends State<MyProfil> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final RenderBox box = context.findRenderObject();
+                      Share.share(appshareurl,
+                          //subject: ,
+                          sharePositionOrigin:
+                              box.localToGlobal(Offset.zero) & box.size);
+                    },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
                     color: Colors.white,
@@ -353,4 +372,6 @@ class _MyProfilState extends State<MyProfil> {
       //bottomNavigationBar: BottomNavigation(),
     );
   }
+//logout
+
 }

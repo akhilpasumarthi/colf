@@ -164,42 +164,7 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
-                child: Container(
-                  height: 50.0,
-                  child: Card(
-                    shape: const RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                    child: TextFormField(
-                      controller: email,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        border: new OutlineInputBorder(
-                          borderSide: new BorderSide(
-                            color: Colors.black,
-                          ),
-                        ),
-                        hoverColor: Colors.black,
-                        contentPadding: EdgeInsets.only(left: 15.0),
-                        prefixIcon: const Icon(
-                          Icons.email,
-                          color: Colors.black,
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                          ),
-                          borderRadius: BorderRadius.circular(7.0),
-                        ),
-                        hintText: "E-mail",
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              
               Padding(
                 padding: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
                 child: Container(
@@ -237,80 +202,9 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
                   ),
                 ),
               ),
+              
               Padding(
-                padding: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
-                child: Container(
-                  height: 50.0,
-                  child: Card(
-                    shape: const RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                    child: TextFormField(
-                      controller: address,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        border: new OutlineInputBorder(
-                          borderSide: new BorderSide(
-                            color: Colors.black,
-                          ),
-                        ),
-                        hoverColor: Colors.black,
-                        contentPadding: EdgeInsets.only(left: 15.0),
-                        prefixIcon: const Icon(
-                          Icons.location_city,
-                          color: Colors.black,
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                          ),
-                          borderRadius: BorderRadius.circular(7.0),
-                        ),
-                        hintText: "Address",
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
-                child: Container(
-                  height: 50.0,
-                  child: Card(
-                    shape: const RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                    child: TextFormField(
-                      controller: state,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        border: new OutlineInputBorder(
-                          borderSide: new BorderSide(
-                            color: Colors.black,
-                          ),
-                        ),
-                        hoverColor: Colors.black,
-                        contentPadding: EdgeInsets.only(left: 15.0),
-                        prefixIcon: const Icon(
-                          Icons.location_on,
-                          color: Colors.black,
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                          ),
-                          borderRadius: BorderRadius.circular(7.0),
-                        ),
-                        hintText: "State",
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 20.0),
+                padding: EdgeInsets.only(top: 80.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
