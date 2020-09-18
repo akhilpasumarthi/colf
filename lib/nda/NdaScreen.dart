@@ -1,26 +1,44 @@
 import 'package:bvm/Screen/BottomNavigation.dart';
+import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import '../Nda/NdaMathsScreen.dart';
 import 'NdaPhysicsScreen.dart';
 import 'NdaBuyScreen.dart';
 
 class NdaScreen extends StatefulWidget {
+  final coursedata;
+
   static const routeName = '/NdaScreen';
+
+  const NdaScreen({Key key, this.coursedata}) : super(key: key);
 
   @override
   _NdaScreenState createState() => _NdaScreenState();
 }
 
 class _NdaScreenState extends State<NdaScreen> {
+  var subjectsData;
+  var subjects;
+  @override
+  void initState() {
+    super.initState();
+    subjectsData = getsubDetails();
+  }
+
+  getsubDetails() async {
+    print(widget.coursedata["id"]);
+    var data = await getCourseSubjects(widget.coursedata["id"]);
+    setState(() {
+      subjects = data;
+    });
+    return data;
+  }
 
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-     color: Colors.black
-   ), 
+        leading: BackButton(color: Colors.black),
         //shadowColor: Colors.red,
         backgroundColor: Colors.white,
         elevation: 25.0,
@@ -77,6 +95,7 @@ class _NdaScreenState extends State<NdaScreen> {
                   child: Column(
                     children: [
                       Container(
+
                         height: 130,
                         width: MediaQuery.of(context).size.width * 1,
                         child: Image.asset(
@@ -88,7 +107,7 @@ class _NdaScreenState extends State<NdaScreen> {
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
                         child: Text(
-                          "NDA",
+                          widget.coursedata["title"],
                           style: TextStyle(
                             color: Colors.black87,
                             fontSize: 20.0,
@@ -102,10 +121,11 @@ class _NdaScreenState extends State<NdaScreen> {
               ),
               Container(
                 child: SingleChildScrollView(
+                  physics: ScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   child: Container(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 25.0),
+                      padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -114,7 +134,7 @@ class _NdaScreenState extends State<NdaScreen> {
                             Padding(
                               padding: EdgeInsets.only(top: 20.0),
                               child: Text(
-                                "Subject",
+                                "Subjects",
                                 style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
@@ -122,523 +142,500 @@ class _NdaScreenState extends State<NdaScreen> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 20.0),
-                              child: RaisedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (ctx) => NdaMathsScreen()));
+                            Container(
+                              height: MediaQuery.of(context).size.height*0.55,
+                              width: MediaQuery.of(context).size.width,
+                              child: FutureBuilder(
+                                future: subjectsData,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return(subjects["data"]["data"].length==0)?
+                                    Center(child: Text("No subjects found yet!"),): ListView.builder(
+                                      physics: ScrollPhysics(),
+                                      shrinkWrap: true,
+                                            itemCount:
+                                                subjects["data"]["data"].length,
+                                            itemBuilder: (context, index) {
+                                              return subjectListWidget(
+                                                  index, snapshot.data);
+                                            },
+                                          );
+                                  }
+                                  return Center(
+                                      child: CircularProgressIndicator());
                                 },
-                                color: Colors.white,
-                                child: Container(
-                                  height: 100.0,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 7.5),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50)),
-                                          ),
-                                          width: 130.0,
-                                          height: 85.0,
-                                          child: Image.asset(
-                                            "assets/images/nda.jpeg",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 25.0, top: 10.0),
-                                        child: Container(
-                                          //height: 70,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Maths",
-                                                textAlign: TextAlign.start,
-                                                style: TextStyle(
-                                                  color: Colors.black87,
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 5.0),
-                                                child: Text(
-                                                  "Total Lactures 30",
-                                                  style: TextStyle(
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 20.0),
-                              child: RaisedButton(
-                                color: Colors.white,
-                                onPressed: () {
-                                   
-                                },
-                                
-                                child: Container(
-                                  height: 100.0,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top:7.5,bottom: 7.5),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                        
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50)),
-                                          ),
-                                          width: 130.0,
-                                          height: 85.0,
-                                          child: Image.asset(
-                                            "assets/images/nda.jpeg",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 25.0),
-                                          child: Container(
-                                            //height: 70,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "General Ability",
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 5.0),
-                                                  child: Text(
-                                                    "Part(A)-English",
-                                                    style: TextStyle(
-                                                      fontSize: 10,
-                                                      color: Colors.grey[800],
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 5.0),
-                                                  child: Text(
-                                                    "Part(B)-GK",
-                                                    style: TextStyle(
-                                                      fontSize: 10,
-                                                      color: Colors.grey[800],
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 5.0),
-                                                  child: Text(
-                                                    "Total Lactures 30",
-                                                    style: TextStyle(
-                                                      color: Colors.grey[900],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 20.0),
-                              child: RaisedButton(
-                                color: Colors.white,
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (ctx) => NdaPhysicsScreen()));
-                                },
-                                child: Container(
-                                  height: 100.0,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: 7.5),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50)),
-                                          ),
-                                          width: 130.0,
-                                          height: 85.0,
-                                          child: Image.asset(
-                                            "assets/images/nda.jpeg",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 25.0),
-                                          child: Container(
-                                            //height: 70,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Physics",
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 5.0),
-                                                  child: Text("Total Lactures 30"),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 20.0),
-                              child: RaisedButton(
-                                color: Colors.white,
-                                onPressed: () {},
-                                child: Container(
-                                  height: 100.0,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: 7.5,bottom: 7.5),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50)),
-                                          ),
-                                          width: 130.0,
-                                          height: 85.0,
-                                          child: Image.asset(
-                                            "assets/images/nda.jpeg",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 25.0),
-                                          child: Container(
-                                            //height: 70,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Chemistry",
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 5.0),
-                                                  child: Text("Total Lactures 30"),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 20.0),
-                              child: RaisedButton(
-                                onPressed: () {},
-                                color: Colors.white,
-                                child: Container(
-                                  height: 100.0,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: 7.5,bottom: 7.5),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50)),
-                                          ),
-                                          width: 130.0,
-                                          height: 85.0,
-                                          child: Image.asset(
-                                            "assets/images/nda.jpeg",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 25.0),
-                                          child: Container(
-                                            //height: 70,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "GS",
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 5.0),
-                                                  child: Text("Total Lactures 30"),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 20.0),
-                              child: RaisedButton(
-                                onPressed: () {},
-                                color: Colors.white,
-                                child: Container(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: 7.5,bottom: 7.5),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50)),
-                                          ),
-                                          width: 130.0,
-                                          height: 85.0,
-                                          child: Image.asset(
-                                            "assets/images/nda.jpeg",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 25.0),
-                                          child: Container(
-                                            //height: 70,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "History",
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 5.0),
-                                                  child: Text("Total Lactures 30"),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 20.0),
-                              child: RaisedButton(
-                                onPressed: () {},
-                                color: Colors.white,
-                                child: Container(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: 7.5,bottom: 7.5),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50)),
-                                          ),
-                                          width: 130.0,
-                                          height: 85.0,
-                                          child: Image.asset(
-                                            "assets/images/nda.jpeg",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 25.0),
-                                          child: Container(
-                                            //height: 70,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Geography",
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 5.0),
-                                                  child: Text("Total Lactures 30"),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 20.0),
-                              child: RaisedButton(
-                                onPressed: () {},
-                                color: Colors.white,
-                                child: Container(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top:7.5,bottom: 7.5),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50)),
-                                          ),
-                                          width: 130.0,
-                                          height: 85.0,
-                                          child: Image.asset(
-                                            "assets/images/nda.jpeg",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 25.0),
-                                          child: Container(
-                                            //height: 70,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Current Affairs",
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 5.0),
-                                                  child: Text("Total Lactures 30"),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+
+                            // Padding(
+                            //   padding: EdgeInsets.only(top: 20.0),
+                            //   child: RaisedButton(
+                            //     color: Colors.white,
+                            //     onPressed: () {},
+                            //     child: Container(
+                            //       height: 100.0,
+                            //       child: Padding(
+                            //         padding:
+                            //             EdgeInsets.only(top: 7.5, bottom: 7.5),
+                            //         child: Row(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.start,
+                            //           crossAxisAlignment:
+                            //               CrossAxisAlignment.start,
+                            //           children: [
+                            //             Container(
+                            //               decoration: BoxDecoration(
+                            //                 borderRadius: BorderRadius.all(
+                            //                     Radius.circular(50)),
+                            //               ),
+                            //               width: 130.0,
+                            //               height: 85.0,
+                            //               child: Image.asset(
+                            //                 "assets/images/nda.jpeg",
+                            //                 fit: BoxFit.cover,
+                            //               ),
+                            //             ),
+                            //             Padding(
+                            //               padding: EdgeInsets.only(left: 25.0),
+                            //               child: Container(
+                            //                 //height: 70,
+                            //                 child: Column(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment.start,
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     Text(
+                            //                       "General Ability",
+                            //                       textAlign: TextAlign.start,
+                            //                       style: TextStyle(
+                            //                         color: Colors.black87,
+                            //                         fontSize: 20.0,
+                            //                         fontWeight: FontWeight.bold,
+                            //                       ),
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           EdgeInsets.only(top: 5.0),
+                            //                       child: Text(
+                            //                         "Part(A)-English",
+                            //                         style: TextStyle(
+                            //                           fontSize: 10,
+                            //                           color: Colors.grey[800],
+                            //                         ),
+                            //                       ),
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           EdgeInsets.only(top: 5.0),
+                            //                       child: Text(
+                            //                         "Part(B)-GK",
+                            //                         style: TextStyle(
+                            //                           fontSize: 10,
+                            //                           color: Colors.grey[800],
+                            //                         ),
+                            //                       ),
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           EdgeInsets.only(top: 5.0),
+                            //                       child: Text(
+                            //                         "Total Lactures 30",
+                            //                         style: TextStyle(
+                            //                           color: Colors.grey[900],
+                            //                         ),
+                            //                       ),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(top: 20.0),
+                            //   child: RaisedButton(
+                            //     color: Colors.white,
+                            //     onPressed: () {
+                            //       Navigator.push(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //               builder: (ctx) =>
+                            //                   NdaPhysicsScreen()));
+                            //     },
+                            //     child: Container(
+                            //       height: 100.0,
+                            //       child: Padding(
+                            //         padding: EdgeInsets.only(top: 7.5),
+                            //         child: Row(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.start,
+                            //           crossAxisAlignment:
+                            //               CrossAxisAlignment.start,
+                            //           children: [
+                            //             Container(
+                            //               decoration: BoxDecoration(
+                            //                 borderRadius: BorderRadius.all(
+                            //                     Radius.circular(50)),
+                            //               ),
+                            //               width: 130.0,
+                            //               height: 85.0,
+                            //               child: Image.asset(
+                            //                 "assets/images/nda.jpeg",
+                            //                 fit: BoxFit.cover,
+                            //               ),
+                            //             ),
+                            //             Padding(
+                            //               padding: EdgeInsets.only(left: 25.0),
+                            //               child: Container(
+                            //                 //height: 70,
+                            //                 child: Column(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment.start,
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     Text(
+                            //                       "Physics",
+                            //                       textAlign: TextAlign.start,
+                            //                       style: TextStyle(
+                            //                         color: Colors.black87,
+                            //                         fontSize: 20.0,
+                            //                         fontWeight: FontWeight.bold,
+                            //                       ),
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           EdgeInsets.only(top: 5.0),
+                            //                       child:
+                            //                           Text("Total Lactures 30"),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(top: 20.0),
+                            //   child: RaisedButton(
+                            //     color: Colors.white,
+                            //     onPressed: () {},
+                            //     child: Container(
+                            //       height: 100.0,
+                            //       child: Padding(
+                            //         padding:
+                            //             EdgeInsets.only(top: 7.5, bottom: 7.5),
+                            //         child: Row(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.start,
+                            //           crossAxisAlignment:
+                            //               CrossAxisAlignment.start,
+                            //           children: [
+                            //             Container(
+                            //               decoration: BoxDecoration(
+                            //                 borderRadius: BorderRadius.all(
+                            //                     Radius.circular(50)),
+                            //               ),
+                            //               width: 130.0,
+                            //               height: 85.0,
+                            //               child: Image.asset(
+                            //                 "assets/images/nda.jpeg",
+                            //                 fit: BoxFit.cover,
+                            //               ),
+                            //             ),
+                            //             Padding(
+                            //               padding: EdgeInsets.only(left: 25.0),
+                            //               child: Container(
+                            //                 //height: 70,
+                            //                 child: Column(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment.start,
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     Text(
+                            //                       "Chemistry",
+                            //                       textAlign: TextAlign.start,
+                            //                       style: TextStyle(
+                            //                         color: Colors.black87,
+                            //                         fontSize: 20.0,
+                            //                         fontWeight: FontWeight.bold,
+                            //                       ),
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           EdgeInsets.only(top: 5.0),
+                            //                       child:
+                            //                           Text("Total Lactures 30"),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(top: 20.0),
+                            //   child: RaisedButton(
+                            //     onPressed: () {},
+                            //     color: Colors.white,
+                            //     child: Container(
+                            //       height: 100.0,
+                            //       child: Padding(
+                            //         padding:
+                            //             EdgeInsets.only(top: 7.5, bottom: 7.5),
+                            //         child: Row(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.start,
+                            //           crossAxisAlignment:
+                            //               CrossAxisAlignment.start,
+                            //           children: [
+                            //             Container(
+                            //               decoration: BoxDecoration(
+                            //                 borderRadius: BorderRadius.all(
+                            //                     Radius.circular(50)),
+                            //               ),
+                            //               width: 130.0,
+                            //               height: 85.0,
+                            //               child: Image.asset(
+                            //                 "assets/images/nda.jpeg",
+                            //                 fit: BoxFit.cover,
+                            //               ),
+                            //             ),
+                            //             Padding(
+                            //               padding: EdgeInsets.only(left: 25.0),
+                            //               child: Container(
+                            //                 //height: 70,
+                            //                 child: Column(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment.start,
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     Text(
+                            //                       "GS",
+                            //                       textAlign: TextAlign.start,
+                            //                       style: TextStyle(
+                            //                         color: Colors.black87,
+                            //                         fontSize: 20.0,
+                            //                         fontWeight: FontWeight.bold,
+                            //                       ),
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           EdgeInsets.only(top: 5.0),
+                            //                       child:
+                            //                           Text("Total Lactures 30"),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(top: 20.0),
+                            //   child: RaisedButton(
+                            //     onPressed: () {},
+                            //     color: Colors.white,
+                            //     child: Container(
+                            //       child: Padding(
+                            //         padding:
+                            //             EdgeInsets.only(top: 7.5, bottom: 7.5),
+                            //         child: Row(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.start,
+                            //           crossAxisAlignment:
+                            //               CrossAxisAlignment.start,
+                            //           children: [
+                            //             Container(
+                            //               decoration: BoxDecoration(
+                            //                 borderRadius: BorderRadius.all(
+                            //                     Radius.circular(50)),
+                            //               ),
+                            //               width: 130.0,
+                            //               height: 85.0,
+                            //               child: Image.asset(
+                            //                 "assets/images/nda.jpeg",
+                            //                 fit: BoxFit.cover,
+                            //               ),
+                            //             ),
+                            //             Padding(
+                            //               padding: EdgeInsets.only(left: 25.0),
+                            //               child: Container(
+                            //                 //height: 70,
+                            //                 child: Column(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment.start,
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     Text(
+                            //                       "History",
+                            //                       textAlign: TextAlign.start,
+                            //                       style: TextStyle(
+                            //                         color: Colors.black87,
+                            //                         fontSize: 20.0,
+                            //                         fontWeight: FontWeight.bold,
+                            //                       ),
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           EdgeInsets.only(top: 5.0),
+                            //                       child:
+                            //                           Text("Total Lactures 30"),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(top: 20.0),
+                            //   child: RaisedButton(
+                            //     onPressed: () {},
+                            //     color: Colors.white,
+                            //     child: Container(
+                            //       child: Padding(
+                            //         padding:
+                            //             EdgeInsets.only(top: 7.5, bottom: 7.5),
+                            //         child: Row(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.start,
+                            //           crossAxisAlignment:
+                            //               CrossAxisAlignment.start,
+                            //           children: [
+                            //             Container(
+                            //               decoration: BoxDecoration(
+                            //                 borderRadius: BorderRadius.all(
+                            //                     Radius.circular(50)),
+                            //               ),
+                            //               width: 130.0,
+                            //               height: 85.0,
+                            //               child: Image.asset(
+                            //                 "assets/images/nda.jpeg",
+                            //                 fit: BoxFit.cover,
+                            //               ),
+                            //             ),
+                            //             Padding(
+                            //               padding: EdgeInsets.only(left: 25.0),
+                            //               child: Container(
+                            //                 //height: 70,
+                            //                 child: Column(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment.start,
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     Text(
+                            //                       "Geography",
+                            //                       textAlign: TextAlign.start,
+                            //                       style: TextStyle(
+                            //                         color: Colors.black87,
+                            //                         fontSize: 20.0,
+                            //                         fontWeight: FontWeight.bold,
+                            //                       ),
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           EdgeInsets.only(top: 5.0),
+                            //                       child:
+                            //                           Text("Total Lactures 30"),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(top: 20.0),
+                            //   child: RaisedButton(
+                            //     onPressed: () {},
+                            //     color: Colors.white,
+                            //     child: Container(
+                            //       child: Padding(
+                            //         padding:
+                            //             EdgeInsets.only(top: 7.5, bottom: 7.5),
+                            //         child: Row(
+                            //           mainAxisAlignment:
+                            //               MainAxisAlignment.start,
+                            //           crossAxisAlignment:
+                            //               CrossAxisAlignment.start,
+                            //           children: [
+                            //             Container(
+                            //               decoration: BoxDecoration(
+                            //                 borderRadius: BorderRadius.all(
+                            //                     Radius.circular(50)),
+                            //               ),
+                            //               width: 130.0,
+                            //               height: 85.0,
+                            //               child: Image.asset(
+                            //                 "assets/images/nda.jpeg",
+                            //                 fit: BoxFit.cover,
+                            //               ),
+                            //             ),
+                            //             Padding(
+                            //               padding: EdgeInsets.only(left: 25.0),
+                            //               child: Container(
+                            //                 //height: 70,
+                            //                 child: Column(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment.start,
+                            //                   crossAxisAlignment:
+                            //                       CrossAxisAlignment.start,
+                            //                   children: [
+                            //                     Text(
+                            //                       "Current Affairs",
+                            //                       textAlign: TextAlign.start,
+                            //                       style: TextStyle(
+                            //                         color: Colors.black87,
+                            //                         fontSize: 20.0,
+                            //                         fontWeight: FontWeight.bold,
+                            //                       ),
+                            //                     ),
+                            //                     Padding(
+                            //                       padding:
+                            //                           EdgeInsets.only(top: 5.0),
+                            //                       child:
+                            //                           Text("Total Lactures 30"),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                             Container(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -650,11 +647,11 @@ class _NdaScreenState extends State<NdaScreen> {
                                     child: RaisedButton(
                                       color: Colors.orange[800],
                                       onPressed: () {
-                                         Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (ctx) =>
-                                                             NdaBuyScreen()));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (ctx) =>
+                                                    NdaBuyScreen()));
                                       },
                                       child: Text(
                                         "Buy Now",
@@ -675,7 +672,8 @@ class _NdaScreenState extends State<NdaScreen> {
                                           TextSpan(
                                             children: <TextSpan>[
                                               new TextSpan(
-                                                text: '\₹5000',
+                                                text:
+                                                    '\₹${widget.coursedata["old_price"]}',
                                                 style: new TextStyle(
                                                   fontSize: 20.0,
                                                   color: Colors.black,
@@ -689,7 +687,7 @@ class _NdaScreenState extends State<NdaScreen> {
                                         Padding(
                                           padding: EdgeInsets.only(left: 10.0),
                                           child: Text(
-                                            "₹2499",
+                                            '\₹${widget.coursedata["price"]}',
                                             style: TextStyle(
                                               color: Colors.black87,
                                               fontSize: 20.0,
@@ -714,6 +712,72 @@ class _NdaScreenState extends State<NdaScreen> {
         ),
       ),
       //bottomNavigationBar: BottomNavigation(),
+    );
+  }
+
+  Widget subjectListWidget(int index, var subData) {
+    return Padding(
+      padding: EdgeInsets.only(top: 20.0),
+      child: RaisedButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (ctx) => NdaMathsScreen()));
+        },
+        color: Colors.white,
+        child: Container(
+          height: 100.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 7.5),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                  width: 130.0,
+                  height: 85.0,
+                  child: Image.asset(
+                    "assets/images/nda.jpeg",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 25.0, top: 10.0),
+                child: Container(
+                  //height: 70,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        subData["data"]["data"][index]["subject_name"],
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 5.0),
+                        child: Text(
+                          "Total Lectures: 0",
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
