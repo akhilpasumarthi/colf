@@ -1,19 +1,41 @@
+import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'NdaMathsLecturs.dart';
 
 class NdaMathsTopics extends StatefulWidget {
+  final String subject_name;
+  final id;
+
+  const NdaMathsTopics({Key key, this.subject_name, this.id}) : super(key: key);
   @override
   _NdaMathsTopicsState createState() => _NdaMathsTopicsState();
 }
 
 class _NdaMathsTopicsState extends State<NdaMathsTopics> {
+  var lectures_data;
+  var topics;
+  var count;
+  @override
+  void initState() {
+    lectures_data = getdata();
+    lectures_data = getSubjectDetails(widget.id);
+    super.initState();
+  }
+
+  getdata() async {
+    var data = await getSubjectDetails(widget.id);
+    setState(() {
+      count = data["data"]['data'].length;
+      topics = data;
+    });
+    return data;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-     color: Colors.black
-   ), 
+        leading: BackButton(color: Colors.black),
         backgroundColor: Colors.white,
         elevation: 25.0,
         title: Row(
@@ -83,92 +105,123 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20.0, left: 35.0),
+              padding: EdgeInsets.only(top: 20.0, left: 25.0),
               child: Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Lecturs",
+                      "Lectures of ${widget.subject_name}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25.0,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 20.0),
-                      child: Container(
-                        width: 190.0,
-                        child: RaisedButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (ctx) => NdaMathsLecturs()));
-                          },
-                          padding: EdgeInsets.only(
-                              top: 10.0, bottom: 10.0, left: 7.0),
-                          color: Colors.white,
-                          elevation: 30.0,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(left: 14.0),
-                                child: Text(
-                                  "Topic 1",
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 35.0),
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 17,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.45,
+                      padding: EdgeInsets.only(top: 10),
+                      child: FutureBuilder(
+                        future: lectures_data,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Center(child: Text(snapshot.error));
+                          }
+                          if (snapshot.hasData) {
+                            return (topics["data"]["data"].length == 0)
+                                ? Center(
+                                    child: Text("No Lectures found yet!"),
+                                  )
+                                : ListView.builder(
+                                    physics: ScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: topics["data"]["data"].length,
+                                    itemBuilder: (context, index) {
+                                      return topicListView(
+                                          index, snapshot.data);
+                                    },
+                                  );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 20.0),
-                      child: Container(
-                        width: 190.0,
-                        child: RaisedButton(
-                          onPressed: () {
-                          },
-                          padding: EdgeInsets.only(
-                              top: 10.0, bottom: 10.0, left: 7.0),
-                          color: Colors.white,
-                          elevation: 30.0,
-                          child: Row(
-                            children: [
-                              
-                              Padding(
-                                padding: EdgeInsets.only(left: 14.0),
-                                child: Text(
-                                  "Topic 2",
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 33.0),
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 17,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.only(top: 20.0),
+                    //   child: Container(
+                    //     width: 190.0,
+                    //     child: RaisedButton(
+                    //       onPressed: () {
+                    //         Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(
+                    //                 builder: (ctx) => NdaMathsLecturs()));
+                    //       },
+                    //       padding: EdgeInsets.only(
+                    //           top: 10.0, bottom: 10.0, left: 7.0),
+                    //       color: Colors.white,
+                    //       elevation: 30.0,
+                    //       child: Row(
+                    //         children: [
+                    //           Padding(
+                    //             padding: EdgeInsets.only(left: 14.0),
+                    //             child: Text(
+                    //               "Topic 1",
+                    //               style: TextStyle(
+                    //                 fontSize: 20.0,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           Padding(
+                    //             padding: EdgeInsets.only(left: 35.0),
+                    //             child: Icon(
+                    //               Icons.arrow_forward_ios,
+                    //               size: 17,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // Padding(
+                    //   padding: EdgeInsets.only(top: 20.0),
+                    //   child: Container(
+                    //     width: 190.0,
+                    //     child: RaisedButton(
+                    //       onPressed: () {
+                    //       },
+                    //       padding: EdgeInsets.only(
+                    //           top: 10.0, bottom: 10.0, left: 7.0),
+                    //       color: Colors.white,
+                    //       elevation: 30.0,
+                    //       child: Row(
+                    //         children: [
+
+                    //           Padding(
+                    //             padding: EdgeInsets.only(left: 14.0),
+                    //             child: Text(
+                    //               "Topic 2",
+                    //               style: TextStyle(
+                    //                 fontSize: 20.0,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           Padding(
+                    //             padding: EdgeInsets.only(left: 33.0),
+                    //             child: Icon(
+                    //               Icons.arrow_forward_ios,
+                    //               size: 17,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -176,7 +229,50 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
           ],
         ),
       ),
-       
+    );
+  }
+
+  Widget topicListView(int index, data) {
+    return Padding(
+      padding: EdgeInsets.only(top: 20.0, right: 50),
+      child: Container(
+        width: 190.0,
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (ctx) => NdaMathsLecturs(
+                          id: data["data"]["data"][index]["id"],
+                          topicName: data["data"]["data"][index]['title'],
+                        )));
+          },
+          padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 7.0),
+          color: Colors.white,
+          elevation: 30.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 14.0),
+                child: Text(
+                  data["data"]["data"][index]['title'],
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 5),
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 17,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

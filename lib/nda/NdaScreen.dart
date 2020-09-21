@@ -28,6 +28,7 @@ class _NdaScreenState extends State<NdaScreen> {
   getsubDetails() async {
     print(widget.coursedata["id"]);
     var data = await getCourseSubjects(widget.coursedata["id"]);
+    await Future.delayed(Duration(milliseconds: 1500));
     setState(() {
       subjects = data;
     });
@@ -95,7 +96,6 @@ class _NdaScreenState extends State<NdaScreen> {
                   child: Column(
                     children: [
                       Container(
-
                         height: 130,
                         width: MediaQuery.of(context).size.width * 1,
                         child: Image.asset(
@@ -143,16 +143,20 @@ class _NdaScreenState extends State<NdaScreen> {
                               ),
                             ),
                             Container(
-                              height: MediaQuery.of(context).size.height*0.55,
                               width: MediaQuery.of(context).size.width,
                               child: FutureBuilder(
                                 future: subjectsData,
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
-                                    return(subjects["data"]["data"].length==0)?
-                                    Center(child: Text("No subjects found yet!"),): ListView.builder(
-                                      physics: ScrollPhysics(),
-                                      shrinkWrap: true,
+                                    return (subjects["data"]["data"].length ==
+                                            0)
+                                        ? Center(
+                                            child:
+                                                Text("No subjects found yet!"),
+                                          )
+                                        : ListView.builder(
+                                            physics: ScrollPhysics(),
+                                            shrinkWrap: true,
                                             itemCount:
                                                 subjects["data"]["data"].length,
                                             itemBuilder: (context, index) {
@@ -721,7 +725,12 @@ class _NdaScreenState extends State<NdaScreen> {
       child: RaisedButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (ctx) => NdaMathsScreen()));
+              context,
+              MaterialPageRoute(
+                  builder: (ctx) => NdaMathsScreen(
+                        subject_name: subData["data"]["data"][index]["subject_name"],
+                        id: subData["data"]["data"][index]["id"],
+                      )));
         },
         color: Colors.white,
         child: Container(

@@ -4,20 +4,22 @@ import 'package:bvm/nda/NdaMathsTopics.dart';
 import 'package:flutter/material.dart';
 
 class NdaMathsScreen extends StatefulWidget {
+  final String subject_name;
+  final id;
   static const routeName = '/NdaMathsscreen';
+
+  const NdaMathsScreen({Key key, this.subject_name, this.id}) : super(key: key);
 
   @override
   _NdaMathsScreenState createState() => _NdaMathsScreenState();
 }
 
 class _NdaMathsScreenState extends State<NdaMathsScreen> {
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-     color: Colors.black
-   ), 
+        leading: BackButton(color: Colors.black),
         backgroundColor: Colors.white,
         elevation: 25.0,
         title: Row(
@@ -27,7 +29,7 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
             Padding(
               padding: EdgeInsets.all(0.0),
               child: Container(
-                               width: 35.0,
+                width: 35.0,
                 height: 35.0,
                 child: Image.asset(
                   "assets/images/img1.PNG",
@@ -94,7 +96,7 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Maths",
+                      widget.subject_name,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25.0,
@@ -109,7 +111,7 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (ctx) => NdaMathsTopics()));
+                                    builder: (ctx) => NdaMathsTopics(id:widget.id,subject_name:widget.subject_name)));
                           },
                           padding: EdgeInsets.only(
                               top: 10.0, bottom: 10.0, left: 7.0),
@@ -191,7 +193,6 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
           ],
         ),
       ),
-       
     );
   }
 }

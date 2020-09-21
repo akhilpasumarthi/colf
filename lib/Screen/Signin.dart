@@ -28,27 +28,29 @@ class _SigninState extends State<Signin> {
 //login code
 
   Future login() async {
-
     var response = await http.post('https://bilaltech.in/api/public/api/login',
         body: {"mobile": mobile.text, "password": password.text});
     var msg = json.decode(response.body);
     print(msg['success']);
-    if (msg['success'].toString() == "true") {
-
-      token = msg["data"]["token"];
-      _getint();
-      sendtoken(token);
-      print(json.decode(response.body));
-      return Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => BottomNavigation(),
-        ),
-      );
+    if (response.statusCode == 200) {
+      if (msg['success'].toString() == "true") {
+        token = msg["data"]["token"];
+        _getint();
+        sendtoken(token);
+        print(json.decode(response.body));
+        return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BottomNavigation(),
+          ),
+        );
+      } else {
+        print(json.decode(response.body));
+        showToast("Username and password invalid or contact support!",
+            duration: 4, gravity: Toast.CENTER);
+      }
     } else {
-      print(json.decode(response.body));
-      showToast("Username and password invalid or contact support!",
-          duration: 4, gravity: Toast.CENTER);
+      Toast.show("Error Occured!,Try again later!", context,duration: 4,gravity: Toast.CENTER);
     }
     //print(msg);
   }
@@ -188,12 +190,11 @@ class _SigninState extends State<Signin> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                     
                       Padding(
                         padding: EdgeInsets.only(top: 3.0),
                         child: InkWell(
                           onTap: () {
-                             Navigator.push(
+                            Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (ctx) => PasswordForgot()));
