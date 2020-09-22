@@ -6,6 +6,7 @@ import 'package:bvm/Screen/UserScreen.dart';
 import 'package:bvm/nda/NdaMathsNotesScreen.dart';
 import 'package:bvm/nda/NdaPhysicsLactures.dart';
 import 'package:bvm/nda/NdaPhysicsNotes.dart';
+import 'package:bvm/nda/video.dart';
 import './nda/NdaPhysicsScreen.dart';
 import 'package:flutter/material.dart';
 import './Nda/ndaScreen.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Montserrat-Light',
         //appBarTheme: AppBarTheme(color: Colors.black87),
       ),
-      home: Defence(),
+      home: video(),
       routes: {
         MoreCourseScreen.routeName: (context) => MoreCourseScreen(),
         FeaturesScreen.routeName: (context) => FeaturesScreen(),

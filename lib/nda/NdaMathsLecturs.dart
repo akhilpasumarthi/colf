@@ -1,3 +1,4 @@
+import 'package:bvm/nda/video.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import '../Screen/BottomNavigation.dart';
@@ -427,6 +428,7 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
             child: RaisedButton(
               onPressed: () {
                 print('video url:${data["data"]["data"][index]["video_link"]}');
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>video()));
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0.0),

@@ -30,7 +30,9 @@ dependencies:
   toast: ^0.1.5
   shared_preferences: ^0.5.10
   url_launcher: ^5.5.3
+  flutter_inappwebview: ^4.0.0+4
   liquid_progress_indicator: ^0.3.2
+  youtube_player_flutter: ^7.0.0+7
   sms_autofill: ^1.2.5
   share: ^0.6.5
   # The following adds the Cupertino Icons font to your application.
