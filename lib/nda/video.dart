@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class video extends StatefulWidget {
@@ -20,9 +21,16 @@ class _videoState extends State<video> {
       initialVideoId: YoutubePlayer.convertUrlToId(widget.url),
       flags: YoutubePlayerFlags(
         autoPlay: true,
-        mute: true,
+        mute: false,
       ),
     );
+    screen();
+  }
+
+
+  void screen()async{
+    await FlutterWindowManager.addFlags(
+        FlutterWindowManager.FLAG_SECURE);
   }
   @override
   Widget build(BuildContext context) {
