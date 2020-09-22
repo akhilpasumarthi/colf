@@ -427,8 +427,9 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
             padding: EdgeInsets.only(left: 30.0),
             child: RaisedButton(
               onPressed: () {
+                var url=data["data"]["data"][index]["video_link"];
                 print('video url:${data["data"]["data"][index]["video_link"]}');
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>video()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>video(url: url)));
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0.0),
