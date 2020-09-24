@@ -1,3 +1,4 @@
+import 'package:bvm/Screen/TestSerisscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'MyCourse.dart';
@@ -376,7 +377,12 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
                       width: 150,
                       child: RaisedButton(
                         color: Colors.white,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (ctx) => TestSeriesScreen()));
+                        },
                         elevation: 5.0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(7.0),
