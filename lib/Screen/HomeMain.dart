@@ -1,3 +1,4 @@
+import 'package:bvm/Screen/DemoClasses.dart';
 import 'package:bvm/Screen/TestSerisscreen.dart';
 import 'package:bvm/nda/NdaBuyScreen.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,7 @@ class _HomeMainState extends State<HomeMain> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Defence Academy",
+                "BVN Defence Academy",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0,
@@ -145,16 +146,16 @@ class _HomeMainState extends State<HomeMain> {
                                   //height: 200,
                                   //decoration: BoxDecoration(color: Colors.white70),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Container(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 10),
                                         height:
                                             MediaQuery.of(context).size.height *
-                                                0.8,
+                                                0.3,
                                         width:
                                             MediaQuery.of(context).size.width,
                                         child: FutureBuilder(
@@ -207,10 +208,10 @@ class _HomeMainState extends State<HomeMain> {
                                                             Padding(
                                                               padding: EdgeInsets
                                                                   .only(
-                                                                      top: 10),
+                                                                      top: 10,),
                                                               child: Container(
                                                                 //width: 170,
-                                                                height: 90,
+                                                                height: 100,
                                                                 decoration:
                                                                     BoxDecoration(
                                                                   image:
@@ -223,22 +224,19 @@ class _HomeMainState extends State<HomeMain> {
                                                                       //width: 170,
                                                                     ),
                                                                     fit: BoxFit
-                                                                        .fitWidth,
+                                                                        .fill,
                                                                   ),
                                                                 ),
                                                               ),
                                                             ),
                                                             Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .all(
-                                                                      10.0),
+                                                              padding:EdgeInsets.only(top: 10.0,bottom: 10.0),
                                                               child: Text(
                                                                 courseNameList[
                                                                     index],
                                                                 textAlign:
                                                                     TextAlign
-                                                                        .center,
+                                                                        .start,
                                                                 style:
                                                                     TextStyle(
                                                                   color: Colors
@@ -264,7 +262,7 @@ class _HomeMainState extends State<HomeMain> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(left: 25.0),
+                                        padding: EdgeInsets.only(left: 15.0,right: 20.0),
                                         child: Container(
                                           // height: 15.0,
                                           //width: 20.0,
@@ -345,7 +343,13 @@ class _HomeMainState extends State<HomeMain> {
                       width: 150,
                       child: RaisedButton(
                         color: Colors.white,
-                        onPressed: () {},
+                        onPressed: () {
+                            Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (ctx) =>
+                                                          DemoClasses()));
+                        },
                         elevation: 5.0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(7.0),

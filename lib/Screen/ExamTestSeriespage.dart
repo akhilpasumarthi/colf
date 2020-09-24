@@ -51,7 +51,7 @@ class _ExamTestSeriesPageState extends State<ExamTestSeriesPage> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 15.0),
               child: Text(
-                "BVM Defence Academy",
+                "BVN Defence Academy",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0,

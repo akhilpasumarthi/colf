@@ -34,7 +34,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Defence Academy",
+                "BVN Defence Academy",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0,

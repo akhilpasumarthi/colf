@@ -219,36 +219,7 @@ class _UserScreenState extends State<UserScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 25.0, left: 10.0, right: 10.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 1,
-                  child: RaisedButton(
-                    onPressed: () {},
-                    padding:
-                        EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
-                    color: Colors.white,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 40.0,
-                          width: 40.0,
-                          child: SvgPicture.asset("assets/images/setting.svg"),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 20.0),
-                          child: Text(
-                            "Settings",
-                            style: TextStyle(
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+             
               Padding(
                 padding: EdgeInsets.only(top: 25.0, left: 10.0, right: 10.0),
                 child: Container(

@@ -56,7 +56,7 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Defence Academy",
+                "BVN Defence Academy",
                 style: TextStyle(
                   color: Colors.black87,
                   fontSize: 20.0,
@@ -112,7 +112,7 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Lectures of ${widget.subject_name}",
+                      "Topics of ${widget.subject_name}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25.0,
@@ -149,79 +149,7 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
                         },
                       ),
                     ),
-                    // Padding(
-                    //   padding: EdgeInsets.only(top: 20.0),
-                    //   child: Container(
-                    //     width: 190.0,
-                    //     child: RaisedButton(
-                    //       onPressed: () {
-                    //         Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(
-                    //                 builder: (ctx) => NdaMathsLecturs()));
-                    //       },
-                    //       padding: EdgeInsets.only(
-                    //           top: 10.0, bottom: 10.0, left: 7.0),
-                    //       color: Colors.white,
-                    //       elevation: 30.0,
-                    //       child: Row(
-                    //         children: [
-                    //           Padding(
-                    //             padding: EdgeInsets.only(left: 14.0),
-                    //             child: Text(
-                    //               "Topic 1",
-                    //               style: TextStyle(
-                    //                 fontSize: 20.0,
-                    //               ),
-                    //             ),
-                    //           ),
-                    //           Padding(
-                    //             padding: EdgeInsets.only(left: 35.0),
-                    //             child: Icon(
-                    //               Icons.arrow_forward_ios,
-                    //               size: 17,
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // Padding(
-                    //   padding: EdgeInsets.only(top: 20.0),
-                    //   child: Container(
-                    //     width: 190.0,
-                    //     child: RaisedButton(
-                    //       onPressed: () {
-                    //       },
-                    //       padding: EdgeInsets.only(
-                    //           top: 10.0, bottom: 10.0, left: 7.0),
-                    //       color: Colors.white,
-                    //       elevation: 30.0,
-                    //       child: Row(
-                    //         children: [
-
-                    //           Padding(
-                    //             padding: EdgeInsets.only(left: 14.0),
-                    //             child: Text(
-                    //               "Topic 2",
-                    //               style: TextStyle(
-                    //                 fontSize: 20.0,
-                    //               ),
-                    //             ),
-                    //           ),
-                    //           Padding(
-                    //             padding: EdgeInsets.only(left: 33.0),
-                    //             child: Icon(
-                    //               Icons.arrow_forward_ios,
-                    //               size: 17,
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                   
                   ],
                 ),
               ),

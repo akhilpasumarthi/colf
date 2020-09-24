@@ -59,7 +59,7 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Defence Academy",
+                "BVN Defence Academy",
                 style: TextStyle(
                   color: Colors.black87,
                   fontSize: 20.0,
@@ -108,20 +108,20 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20.0, left: 10.0),
+                padding: EdgeInsets.only(top: 20.0, left: 25.0),
                 child: Container(
-                  child: Column(
-                    children: [
-                      Text(
+                     child: Text(
                         "lectures of ${widget.topicName}",
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                ),
+              ),
                       Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.545,
+                        width: MediaQuery.of(context).size.width*1,
+                        //height: MediaQuery.of(context).size.height *1 ,
                         padding: EdgeInsets.only(top: 10, left: 10),
                         child: FutureBuilder(
                           future: topic_data,
@@ -149,251 +149,12 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
                             );
                           },
                         ),
-                      ),
-                      // Padding(
-                      //   padding: EdgeInsets.only(top: 0.0),
-                      //   child: Row(
-                      //     children: [
-                      //       Container(
-                      //         height: 85,
-                      //         width: 100,
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           elevation: 30.0,
-                      //           color: Colors.white,
-                      //           child: Icon(
-                      //             Icons.play_arrow,
-                      //             color: Colors.red,
-                      //             size: 40,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //       Padding(
-                      //         padding: EdgeInsets.only(left: 30.0),
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           shape: RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.circular(0.0),
-                      //             side: BorderSide(color: Colors.grey[800]),
-                      //           ),
-                      //           elevation: 5.0,
-                      //           color: Colors.white,
-                      //           child: Text(
-                      //             "Lecture 1",
-                      //             style: TextStyle(
-                      //               fontSize: 18.0,
-                      //               color: Colors.black,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: EdgeInsets.only(top: 10.0),
-                      //   child: Row(
-                      //     children: [
-                      //       Container(
-                      //         height: 85,
-                      //         width: 100,
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           elevation: 30.0,
-                      //           color: Colors.white,
-                      //           child: Icon(
-                      //             Icons.play_arrow,
-                      //             color: Colors.red,
-                      //             size: 40,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //       Padding(
-                      //         padding: EdgeInsets.only(left: 30.0),
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           shape: RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.circular(0.0),
-                      //             side: BorderSide(color: Colors.grey[800]),
-                      //           ),
-                      //           elevation: 5.0,
-                      //           color: Colors.white,
-                      //           child: Text(
-                      //             "Lecture 2",
-                      //             style: TextStyle(
-                      //               fontSize: 18.0,
-                      //               color: Colors.black,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: EdgeInsets.only(top: 15.0),
-                      //   child: Row(
-                      //     children: [
-                      //       Container(
-                      //         height: 85,
-                      //         width: 100,
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           elevation: 30.0,
-                      //           color: Colors.white,
-                      //           child: Icon(
-                      //             Icons.play_arrow,
-                      //             color: Colors.red,
-                      //             size: 40,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //       Padding(
-                      //         padding: EdgeInsets.only(left: 30.0),
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           shape: RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.circular(0.0),
-                      //             side: BorderSide(color: Colors.grey[800]),
-                      //           ),
-                      //           elevation: 5.0,
-                      //           color: Colors.white,
-                      //           child: Text(
-                      //             "Lecture 3",
-                      //             style: TextStyle(
-                      //               fontSize: 18.0,
-                      //               color: Colors.black,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: EdgeInsets.only(top: 15.0),
-                      //   child: Row(
-                      //     children: [
-                      //       Container(
-                      //         height: 85,
-                      //         width: 100,
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           elevation: 30.0,
-                      //           color: Colors.white,
-                      //           child: Icon(
-                      //             Icons.play_arrow,
-                      //             color: Colors.red,
-                      //             size: 40,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //       Padding(
-                      //         padding: EdgeInsets.only(left: 30.0),
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           shape: RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.circular(0.0),
-                      //             side: BorderSide(color: Colors.grey[800]),
-                      //           ),
-                      //           elevation: 5.0,
-                      //           color: Colors.white,
-                      //           child: Text(
-                      //             "Lecture 4",
-                      //             style: TextStyle(
-                      //               fontSize: 18.0,
-                      //               color: Colors.black,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: EdgeInsets.only(top: 15.0),
-                      //   child: Row(
-                      //     children: [
-                      //       Container(
-                      //         height: 85,
-                      //         width: 100,
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           elevation: 30.0,
-                      //           color: Colors.white,
-                      //           child: Icon(
-                      //             Icons.play_arrow,
-                      //             color: Colors.red,
-                      //             size: 40,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //       Padding(
-                      //         padding: EdgeInsets.only(left: 30.0),
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           shape: RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.circular(0.0),
-                      //             side: BorderSide(color: Colors.grey[800]),
-                      //           ),
-                      //           elevation: 5.0,
-                      //           color: Colors.white,
-                      //           child: Text(
-                      //             "Lecture 5",
-                      //             style: TextStyle(
-                      //               fontSize: 18.0,
-                      //               color: Colors.black,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: EdgeInsets.only(top: 15.0, bottom: 20.0),
-                      //   child: Row(
-                      //     children: [
-                      //       Container(
-                      //         height: 85,
-                      //         width: 100,
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           elevation: 30.0,
-                      //           color: Colors.white,
-                      //           child: Icon(
-                      //             Icons.play_arrow,
-                      //             color: Colors.red,
-                      //             size: 40,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //       Padding(
-                      //         padding: EdgeInsets.only(left: 30.0),
-                      //         child: RaisedButton(
-                      //           onPressed: () {},
-                      //           shape: RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.circular(0.0),
-                      //             side: BorderSide(color: Colors.grey[800]),
-                      //           ),
-                      //           elevation: 5.0,
-                      //           color: Colors.white,
-                      //           child: Text(
-                      //             "Lecture 6",
-                      //             style: TextStyle(
-                      //               fontSize: 18.0,
-                      //               color: Colors.black,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                    ],
-                  ),
+                      
+                      
+                    
+                  
                 ),
-              ),
+              
             ],
           ),
         ),
@@ -404,49 +165,45 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
 
   Widget mediaListView(int index, data) {
     return Padding(
-      padding: EdgeInsets.only(top: 15.0, bottom: 20.0),
-      child: Row(
-        children: [
-          Container(
-            height: 85,
-            width: 100,
-            child: RaisedButton(
-              onPressed: () {
-                print('video url:${data["data"]["data"][index]["video_link"]}');
-              },
-              elevation: 30.0,
-              color: Colors.white,
-              child: Icon(
-                Icons.play_arrow,
-                color: Colors.red,
-                size: 40,
-              ),
-            ),
+      padding: EdgeInsets.only(top: 15.0, bottom: 20.0,right: 20.0,left: 10.0),
+      child: Container(
+        //height: 30.0,
+        //width: MediaQuery.of(context).size.width*1,
+        child: RaisedButton(
+          padding: EdgeInsets.only(top: 12.0,bottom: 12.0,),
+          onPressed: () {
+            var url=data["data"]["data"][index]["video_link"];
+            print('video url:${data["data"]["data"][index]["video_link"]}');
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>video(url: url)));
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0.0),
+            side: BorderSide(color: Colors.grey[800]),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 30.0),
-            child: RaisedButton(
-              onPressed: () {
-                var url=data["data"]["data"][index]["video_link"];
-                print('video url:${data["data"]["data"][index]["video_link"]}');
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>video(url: url)));
-              },
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0.0),
-                side: BorderSide(color: Colors.grey[800]),
-              ),
-              elevation: 5.0,
-              color: Colors.white,
-              child: Text(
-                data["data"]["data"][index]["title"],
-                style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.black,
+          elevation: 5.0,
+          color: Colors.white,
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 15.0),
+                child: Icon(Icons.play_arrow,
+                color: Colors.red[900],
+                size: 30.0,
                 ),
               ),
+                   Padding(
+                     padding: EdgeInsets.only(left: 20.0),
+                     child: Text(
+              data["data"]["data"][index]["title"],
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.black,
+              ),
             ),
+                   ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

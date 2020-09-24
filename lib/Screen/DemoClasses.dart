@@ -1,17 +1,17 @@
-import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
-import 'BottomNavigation.dart';
+import 'package:bvm/services/courses.dart';
 import '../nda/NdaScreen.dart';
+                                      
 
-class MoreCourseScreen extends StatefulWidget {
-  static const routeName = '/MoreCourseScreen';
 
+class DemoClasses extends StatefulWidget {
   @override
-  _MoreCourseScreenState createState() => _MoreCourseScreenState();
+  _DemoClassesState createState() => _DemoClassesState();
 }
 
-class _MoreCourseScreenState extends State<MoreCourseScreen> {
-  int _currentindex = 0;
+class _DemoClassesState extends State<DemoClasses> {
+
+ int _currentindex = 0;
   List courseNameList = [];
   var courseData;
   Map courses;
@@ -33,6 +33,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
     });
     return courses;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +71,12 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.star,
           children: [
             Padding(
               padding: EdgeInsetsDirectional.only(top: 17),
               child: Text(
-                "All Courses",
+                "Demo Classes",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0,

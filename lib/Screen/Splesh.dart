@@ -62,7 +62,7 @@ class _SpleshState extends State<Splesh> {
                         Padding(
                           padding: EdgeInsets.only(top: 30.0, bottom: 15.0),
                           child: Text(
-                            "BVM DEFENCE ACADMEY",
+                            "BVN DEFENCE ACADMEY",
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,

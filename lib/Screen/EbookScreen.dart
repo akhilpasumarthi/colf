@@ -36,7 +36,7 @@ class _EbookScreenState extends State<EbookScreen> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Defence Academy",
+                "BVN Defence Academy",
                 style: TextStyle(
                   color: Colors.black87,
                   fontSize: 20.0,
