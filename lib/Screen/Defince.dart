@@ -70,7 +70,7 @@ class _DefenceState extends State<Defence> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Text(
-                                  "BVM SR SEC SCHOOL",
+                                  "BVN SR SEC SCHOOL",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14.0,
@@ -86,7 +86,7 @@ class _DefenceState extends State<Defence> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(top:100.0),
+                padding: EdgeInsets.only(top:70.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -125,7 +125,7 @@ class _DefenceState extends State<Defence> {
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   child: Text(
-                                    "BVM DEFENCE ACADMEY",
+                                    "BVN DEFENCE ACADMEY",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.white,

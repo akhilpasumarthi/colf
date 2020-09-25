@@ -1,17 +1,18 @@
-import 'package:bvm/services/courses.dart';
+import 'package:bvm/Screen/pdfViewer.dart';
 import 'package:flutter/material.dart';
-import 'BottomNavigation.dart';
+import 'package:bvm/services/courses.dart';
 import '../nda/NdaScreen.dart';
 
-class MoreCourseScreen extends StatefulWidget {
-  static const routeName = '/MoreCourseScreen';
 
+class AllPdfNotes extends StatefulWidget {
   @override
-  _MoreCourseScreenState createState() => _MoreCourseScreenState();
+  _AllPdfNotesState createState() => _AllPdfNotesState();
 }
 
-class _MoreCourseScreenState extends State<MoreCourseScreen> {
-  int _currentindex = 0;
+class _AllPdfNotesState extends State<AllPdfNotes> {
+
+
+ int _currentindex = 0;
   List courseNameList = [];
   var courseData;
   Map courses;
@@ -70,11 +71,12 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.star,
           children: [
             Padding(
               padding: EdgeInsetsDirectional.only(top: 17),
               child: Text(
-                "All Courses",
+                "Pdf Courses",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0,
@@ -105,9 +107,8 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                             child: RaisedButton(
                               color: Colors.white,
                               onPressed: () {
-                                Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-                                  return NdaScreen(coursedata: courses["data"]["data"][index]);
-                                },));
+                              Navigator.push(
+          context, MaterialPageRoute(builder: (ctx) => PDFviewer()));
                               },
                               elevation: 5.0,
                               shape: RoundedRectangleBorder(

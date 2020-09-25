@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'MyCourse.dart';
+import 'TestSerisscreen.dart';
 
 class MyProfil extends StatefulWidget {
   @override
@@ -169,7 +170,13 @@ class _MyProfilState extends State<MyProfil> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                       Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TestSeriesScreen()));
+                    },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
                     color: Colors.white,
@@ -262,36 +269,7 @@ class _MyProfilState extends State<MyProfil> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 25.0, left: 10.0, right: 10.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 1,
-                  child: RaisedButton(
-                    onPressed: () {},
-                    padding:
-                        EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
-                    color: Colors.white,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 40.0,
-                          width: 40.0,
-                          child: SvgPicture.asset("assets/images/setting.svg"),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 20.0),
-                          child: Text(
-                            "Setting",
-                            style: TextStyle(
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              
               Padding(
                 padding: EdgeInsets.only(top: 25.0, left: 10.0, right: 10.0),
                 child: Container(

@@ -1,9 +1,10 @@
+import 'package:bvm/Screen/AllPdfNotes.dart';
 import 'package:bvm/Screen/TestSerisscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'MyCourse.dart';
 import 'MoreCourseScreen.dart';
-
+import 'DemoClasses.dart';
 class FeaturesScreen extends StatefulWidget {
   static const routeName = '/FeaturesScreenScreen';
 
@@ -43,7 +44,7 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Defence Academy",
+                "BVN Defence Academy",
                 style: TextStyle(
                   color: Colors.black87,
                   fontSize: 20.0,
@@ -123,7 +124,13 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
                       width: 150,
                       child: RaisedButton(
                         color: Colors.white,
-                        onPressed: () {},
+                        onPressed: () {
+                            Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (ctx) =>
+                                                          DemoClasses()));
+                        },
                         elevation: 5.0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(7.0),
@@ -211,7 +218,12 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
                       width: 150,
                       child: RaisedButton(
                         color: Colors.white,
-                        onPressed: () {},
+                        onPressed: () {
+                            Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => AllPdfNotes()));
+                        },
                         elevation: 5.0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(7.0),
