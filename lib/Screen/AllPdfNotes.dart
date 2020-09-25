@@ -122,7 +122,7 @@ class _AllPdfNotesState extends State<AllPdfNotes> {
                                     padding: EdgeInsets.only(top: 10),
                                     child: Container(
                                       //width: 170,
-                                      height: 105,
+                                      height: 85,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
