@@ -79,6 +79,7 @@ class _ChatbotState extends State<Chatbot> {
               child: ListTile(
 
                   leading: IconButton(
+                    onPressed: (){},
                     icon: Icon(Icons.camera_alt, color: Colors.indigo[800], size: 35,),
                   ),
 
