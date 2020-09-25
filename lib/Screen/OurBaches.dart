@@ -1,18 +1,16 @@
-import 'package:bvm/Screen/pdfViewer.dart';
 import 'package:flutter/material.dart';
 import 'package:bvm/services/courses.dart';
 import '../nda/NdaScreen.dart';
 
 
-class AllPdfNotes extends StatefulWidget {
+class OurBatches extends StatefulWidget {
   @override
-  _AllPdfNotesState createState() => _AllPdfNotesState();
+  _OurBatchesState createState() => _OurBatchesState();
 }
 
-class _AllPdfNotesState extends State<AllPdfNotes> {
+class _OurBatchesState extends State<OurBatches> {
 
-
- int _currentindex = 0;
+int _currentindex = 0;
   List courseNameList = [];
   var courseData;
   Map courses;
@@ -71,12 +69,11 @@ class _AllPdfNotesState extends State<AllPdfNotes> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.star,
           children: [
             Padding(
               padding: EdgeInsetsDirectional.only(top: 17),
               child: Text(
-                "Pdf Courses",
+                "Our Batches",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0,
@@ -107,8 +104,9 @@ class _AllPdfNotesState extends State<AllPdfNotes> {
                             child: RaisedButton(
                               color: Colors.white,
                               onPressed: () {
-                              Navigator.push(
-          context, MaterialPageRoute(builder: (ctx) => PDFviewer()));
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+                                  return NdaScreen(coursedata: courses["data"]["data"][index]);
+                                },));
                               },
                               elevation: 5.0,
                               shape: RoundedRectangleBorder(

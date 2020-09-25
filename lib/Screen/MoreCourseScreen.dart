@@ -84,7 +84,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height * 0.95,
               width: MediaQuery.of(context).size.width,
               child: FutureBuilder(
                 future: courseData,
@@ -101,7 +101,8 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                         return Padding(
                           padding: EdgeInsets.only(top: 17.0),
                           child: Container(
-                            width: 170,
+                            //height: 150.0 ,
+                            width: 130,
                             child: RaisedButton(
                               color: Colors.white,
                               onPressed: () {
@@ -114,21 +115,21 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                                 borderRadius: BorderRadius.circular(7.0),
                               ),
                               child: Column(
-                                //mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 //crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(top: 10),
                                     child: Container(
-                                      //width: 170,
-                                      height: 105,
+                                      width: 130,
+                                      height: 85,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
                                             "assets/images/img5.jpeg",
                                             //fit: BoxFit.fill,
                                             //height: 100,
-                                            //width: 170,
+                                            //width: 100,
                                           ),
                                           fit: BoxFit.fitWidth,
                                         ),

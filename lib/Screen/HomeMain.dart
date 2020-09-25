@@ -176,7 +176,7 @@ class _HomeMainState extends State<HomeMain> {
                                                     padding: EdgeInsets.only(
                                                         top: 17.0),
                                                     child: Container(
-                                                      width: 170,
+                                                      width: 130,
                                                       child: RaisedButton(
                                                         color: Colors.white,
                                                         onPressed: () {
@@ -210,8 +210,8 @@ class _HomeMainState extends State<HomeMain> {
                                                                   .only(
                                                                       top: 10,),
                                                               child: Container(
-                                                                //width: 170,
-                                                                height: 100,
+                                                                width: 130,
+                                                                height: 85,
                                                                 decoration:
                                                                     BoxDecoration(
                                                                   image:
@@ -236,7 +236,7 @@ class _HomeMainState extends State<HomeMain> {
                                                                     index],
                                                                 textAlign:
                                                                     TextAlign
-                                                                        .start,
+                                                                        .center,
                                                                 style:
                                                                     TextStyle(
                                                                   color: Colors

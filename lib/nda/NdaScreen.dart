@@ -199,39 +199,44 @@ class _NdaScreenState extends State<NdaScreen> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 135.0, bottom: 60.0),
-                                    child: Row(
-                                      children: [
-                                        Text.rich(
-                                          TextSpan(
-                                            children: <TextSpan>[
-                                              new TextSpan(
-                                                text:
-                                                    '\₹${widget.coursedata["old_price"]}',
-                                                style: new TextStyle(
-                                                  fontSize: 20.0,
-                                                  color: Colors.black,
-                                                  decoration: TextDecoration
-                                                      .lineThrough,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                          Padding(
+                                      padding: EdgeInsets.only(top: 10.0,
+                                          left: 13.0, bottom: 60.0),
+                                      child: Row(
+                                        children: [
+                                          Text.rich(
+                                            TextSpan(
+                                              children: <TextSpan>[
+                                                new TextSpan(
+                                                  text:
+                                                      '\₹${widget.coursedata["old_price"]}',
+                                                  style: new TextStyle(
+                                                    fontSize: 20.0,
+                                                    color: Colors.black,
+                                                    decoration: TextDecoration
+                                                        .lineThrough,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 10.0),
-                                          child: Text(
-                                            '\₹${widget.coursedata["price"]}',
-                                            style: TextStyle(
-                                              color: Colors.black87,
-                                              fontSize: 20.0,
+                                              ],
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 10.0),
+                                            child: Text(
+                                              '\₹${widget.coursedata["price"]}',
+                                              style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 20.0,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
+                                    ],
                                   ),
                                 ],
                               ),
