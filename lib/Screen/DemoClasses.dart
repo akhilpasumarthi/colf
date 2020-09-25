@@ -123,7 +123,7 @@ class _DemoClassesState extends State<DemoClasses> {
                                     padding: EdgeInsets.only(top: 10),
                                     child: Container(
                                       //width: 170,
-                                      height: 105,
+                                      height: 85,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
@@ -138,7 +138,7 @@ class _DemoClassesState extends State<DemoClasses> {
                                     ),
                                   ),
                                   Padding(
-                                    padding:EdgeInsets.only(top: 10.0,bottom: 10.0),
+                                    padding:EdgeInsets.only(top: 10.0,bottom: 2.0),
                                     child: Text(
                                       courseNameList[index],
                                       textAlign: TextAlign.center,

@@ -1,20 +1,17 @@
-import 'package:bvm/services/courses.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'BottomNavigation.dart';
+import 'package:bvm/services/courses.dart';
 import '../nda/NdaScreen.dart';
 
-class MoreCourseScreen extends StatefulWidget {
-  static const routeName = '/MoreCourseScreen';
 
+class OurBatches extends StatefulWidget {
   @override
-  _MoreCourseScreenState createState() => _MoreCourseScreenState();
+  _OurBatchesState createState() => _OurBatchesState();
 }
 
-class _MoreCourseScreenState extends State<MoreCourseScreen> {
-  int _currentindex = 0;
+class _OurBatchesState extends State<OurBatches> {
+
+int _currentindex = 0;
   List courseNameList = [];
-  List courseimageurl=[];
   var courseData;
   Map courses;
   @override
@@ -31,7 +28,6 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
       print(courses['success']);
       courses["data"]["data"].forEach((element) {
         courseNameList.add(element["title"]);
-        courseimageurl.add(element['course_image']);
       });
     });
     return courses;
@@ -77,7 +73,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
             Padding(
               padding: EdgeInsetsDirectional.only(top: 17),
               child: Text(
-                "All Courses",
+                "Our Batches",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0,
@@ -87,7 +83,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
-              height: MediaQuery.of(context).size.height * 0.95,
+              height: MediaQuery.of(context).size.height * 0.8,
               width: MediaQuery.of(context).size.width,
               child: FutureBuilder(
                 future: courseData,
@@ -97,15 +93,14 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                       itemCount: courseNameList.length,
                       physics: ScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 0.85,
+                          childAspectRatio: 1,
                           crossAxisSpacing: 15,
                           crossAxisCount: 2),
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(top: 17.0),
                           child: Container(
-                            //height: 150.0 ,
-                            width: 130,
+                            width: 170,
                             child: RaisedButton(
                               color: Colors.white,
                               onPressed: () {
@@ -118,18 +113,25 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                                 borderRadius: BorderRadius.circular(7.0),
                               ),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                //mainAxisAlignment: MainAxisAlignment.start,
                                 //crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(top: 10),
                                     child: Container(
-
                                       //width: 170,
-                                      //height: 105,
-                                      child: CachedNetworkImage(imageUrl: courseimageurl[index],
-                                        placeholder: (context, url) => CircularProgressIndicator(),),
-
+                                      height: 85,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            "assets/images/img5.jpeg",
+                                            //fit: BoxFit.fill,
+                                            //height: 100,
+                                            //width: 170,
+                                          ),
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   Padding(
