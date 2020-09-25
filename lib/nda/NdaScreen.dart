@@ -170,8 +170,6 @@ class _NdaScreenState extends State<NdaScreen> {
                                 },
                               ),
                             ),
-
-                            
                             Container(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -186,8 +184,10 @@ class _NdaScreenState extends State<NdaScreen> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (ctx) =>
-                                                    NdaBuyScreen(amount: num.parse(widget.coursedata["price"]),)));
+                                                builder: (ctx) => NdaBuyScreen(
+                                                      amount: num.parse(widget
+                                                          .coursedata["price"]),
+                                                    )));
                                       },
                                       child: Text(
                                         "Buy Now",
@@ -202,40 +202,43 @@ class _NdaScreenState extends State<NdaScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                          Padding(
-                                      padding: EdgeInsets.only(top: 10.0,
-                                          left: 13.0, bottom: 60.0),
-                                      child: Row(
-                                        children: [
-                                          Text.rich(
-                                            TextSpan(
-                                              children: <TextSpan>[
-                                                new TextSpan(
-                                                  text:
-                                                      '\₹${widget.coursedata["old_price"]}',
-                                                  style: new TextStyle(
-                                                    fontSize: 20.0,
-                                                    color: Colors.black,
-                                                    decoration: TextDecoration
-                                                        .lineThrough,
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 10.0,
+                                            left: 13.0,
+                                            bottom: 60.0),
+                                        child: Row(
+                                          children: [
+                                            Text.rich(
+                                              TextSpan(
+                                                children: <TextSpan>[
+                                                  new TextSpan(
+                                                    text:
+                                                        '\₹${widget.coursedata["old_price"]}',
+                                                    style: new TextStyle(
+                                                      fontSize: 20.0,
+                                                      color: Colors.black,
+                                                      decoration: TextDecoration
+                                                          .lineThrough,
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 10.0),
-                                            child: Text(
-                                              '\₹${widget.coursedata["price"]}',
-                                              style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 20.0,
+                                                ],
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 10.0),
+                                              child: Text(
+                                                '\₹${widget.coursedata["price"]}',
+                                                style: TextStyle(
+                                                  color: Colors.black87,
+                                                  fontSize: 20.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
                                     ],
                                   ),
                                 ],
@@ -265,7 +268,8 @@ class _NdaScreenState extends State<NdaScreen> {
               context,
               MaterialPageRoute(
                   builder: (ctx) => NdaMathsScreen(
-                        subject_name: subData["data"]["data"][index]["subject_name"],
+                        subject_name: subData["data"]["data"][index]
+                            ["subject_name"],
                         id: subData["data"]["data"][index]["id"],
                       )));
         },
@@ -282,7 +286,7 @@ class _NdaScreenState extends State<NdaScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                   ),
-                  width: 130.0,
+                  width: 110.0,
                   height: 85.0,
                   child: Image.asset(
                     "assets/images/nda.jpeg",
@@ -294,21 +298,23 @@ class _NdaScreenState extends State<NdaScreen> {
                 padding: EdgeInsets.only(left: 25.0, top: 0.0),
                 child: Container(
                   //height: 70,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        subData["data"]["data"][index]["subject_name"],
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width*.50,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          subData["data"]["data"][index]["subject_name"],
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                     
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

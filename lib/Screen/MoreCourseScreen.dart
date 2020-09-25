@@ -87,7 +87,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
-              height: MediaQuery.of(context).size.height * 0.95,
+              height: MediaQuery.of(context).size.height * 0.88,
               width: MediaQuery.of(context).size.width,
               child: FutureBuilder(
                 future: courseData,
@@ -97,14 +97,14 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                       itemCount: courseNameList.length,
                       physics: ScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 0.85,
+                          childAspectRatio: 1.0,
                           crossAxisSpacing: 15,
                           crossAxisCount: 2),
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(top: 17.0),
                           child: Container(
-                            //height: 150.0 ,
+                            height: 130.0 ,
                             width: 130,
                             child: RaisedButton(
                               color: Colors.white,
@@ -126,20 +126,20 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                                     child: Container(
 
                                       //width: 170,
-                                      //height: 105,
+                                      height: 100,
                                       child: CachedNetworkImage(imageUrl: courseimageurl[index],
                                         placeholder: (context, url) => CircularProgressIndicator(),),
 
                                     ),
                                   ),
                                   Padding(
-                                    padding:EdgeInsets.only(top: 10.0,bottom: 10.0),
+                                    padding:EdgeInsets.only(top: 10.0,bottom: 5.0),
                                     child: Text(
                                       courseNameList[index],
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18.0,
+                                        fontSize: 14.0,
                                       ),
                                     ),
                                   ),
@@ -156,7 +156,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                   );
                 },
               ),
-            )
+            ),
            
           ],
         ),

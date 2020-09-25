@@ -2,6 +2,7 @@ import 'package:bvm/Screen/pdfViewer.dart';
 import 'package:flutter/material.dart';
 import 'package:bvm/services/courses.dart';
 import '../nda/NdaScreen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 
 class AllPdfNotes extends StatefulWidget {
@@ -14,6 +15,8 @@ class _AllPdfNotesState extends State<AllPdfNotes> {
 
  int _currentindex = 0;
   List courseNameList = [];
+    List courseimageurl=[];
+
   var courseData;
   Map courses;
   @override
@@ -30,6 +33,8 @@ class _AllPdfNotesState extends State<AllPdfNotes> {
       print(courses['success']);
       courses["data"]["data"].forEach((element) {
         courseNameList.add(element["title"]);
+         courseimageurl.add(element['course_image']);
+
       });
     });
     return courses;
@@ -84,9 +89,9 @@ class _AllPdfNotesState extends State<AllPdfNotes> {
                 ),
               ),
             ),
-            Container(
+             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height * 0.88,
               width: MediaQuery.of(context).size.width,
               child: FutureBuilder(
                 future: courseData,
@@ -96,54 +101,49 @@ class _AllPdfNotesState extends State<AllPdfNotes> {
                       itemCount: courseNameList.length,
                       physics: ScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 1,
+                          childAspectRatio: 1.0,
                           crossAxisSpacing: 15,
                           crossAxisCount: 2),
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(top: 17.0),
                           child: Container(
-                            width: 170,
+                            height: 130.0 ,
+                            width: 130,
                             child: RaisedButton(
                               color: Colors.white,
                               onPressed: () {
-                              Navigator.push(
-          context, MaterialPageRoute(builder: (ctx) => PDFviewer()));
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+                                  return NdaScreen(coursedata: courses["data"]["data"][index]);
+                                },));
                               },
                               elevation: 5.0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(7.0),
                               ),
                               child: Column(
-                                //mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 //crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(top: 10),
                                     child: Container(
+
                                       //width: 170,
-                                      height: 85,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                            "assets/images/img5.jpeg",
-                                            //fit: BoxFit.fill,
-                                            //height: 100,
-                                            //width: 170,
-                                          ),
-                                          fit: BoxFit.fitWidth,
-                                        ),
-                                      ),
+                                      height: 100,
+                                      child: CachedNetworkImage(imageUrl: courseimageurl[index],
+                                        placeholder: (context, url) => CircularProgressIndicator(),),
+
                                     ),
                                   ),
                                   Padding(
-                                    padding:EdgeInsets.only(top: 10.0,bottom: 10.0),
+                                    padding:EdgeInsets.only(top: 10.0,bottom: 5.0),
                                     child: Text(
                                       courseNameList[index],
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18.0,
+                                        fontSize: 14.0,
                                       ),
                                     ),
                                   ),
@@ -160,7 +160,7 @@ class _AllPdfNotesState extends State<AllPdfNotes> {
                   );
                 },
               ),
-            )
+            ),
            
           ],
         ),
