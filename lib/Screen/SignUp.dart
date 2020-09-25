@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'package:bvm/Screen/HomeMain.dart';
 import 'package:bvm/Screen/otp.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:toast/toast.dart';
 import 'BottomNavigation.dart';
 import 'package:bvm/Screen/Signin.dart';
@@ -290,6 +291,7 @@ class _SignUpState extends State<SignUp> {
                     ],
                   ),
                 ),
+
               ],
             ),
           ),
