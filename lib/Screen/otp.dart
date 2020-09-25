@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bvm/Screen/BottomNavigation.dart';
 import 'package:sms_autofill/sms_autofill.dart';
@@ -23,7 +24,7 @@ class Otp extends StatefulWidget {
   @override
   _OTpState createState() => _OTpState();
 }
-
+bool _spincontorller=false;
 class _OTpState extends State<Otp> {
   TextEditingController otpController = TextEditingController();
 
@@ -142,7 +143,11 @@ class _OTpState extends State<Otp> {
                   child: SvgPicture.asset("assets/images/otp10.svg"),
                 ),
               ),
-              
+              SpinKitRing(
+                color: Colors.blue,
+                size: _spincontorller?50:0,
+              )
+              ,
             ],
           ),
         ),
@@ -156,10 +161,14 @@ class _OTpState extends State<Otp> {
 
   void verifyOtp() async {
     var queryParams = {
+
       'mobile': "91" + widget.mobile,
       'otp': '${otpController.text}',
       'authkey': "326864A92hJb2My5ea005a9P1",
     };
+    setState(() {
+      _spincontorller=!_spincontorller;
+    });
     var uri = Uri.parse("https://api.msg91.com/api/v5/otp/verify");
     uri = uri.replace(queryParameters: queryParams);
     var verifyOtpResponse = await http.post(uri);
@@ -168,6 +177,9 @@ class _OTpState extends State<Otp> {
       otpController.clear();
       showToast("Otp verified Succesfully", duration: 3, gravity: Toast.TOP);
       register();
+      setState(() {
+        _spincontorller=!_spincontorller;
+      });
     } else {
       showToast("Error Occured, Try again.", duration: 3, gravity: Toast.TOP);
       Navigator.pop(context);

@@ -3,6 +3,7 @@ import 'package:bvm/Screen/HomeMain.dart';
 import 'package:bvm/Screen/PasswordForgot.dart';
 import 'package:bvm/services/usertoken.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'LoginSigninScreen.dart';
 import 'SignUp.dart';
@@ -20,18 +21,28 @@ class Signin extends StatefulWidget {
 List userData;
 Map data;
 String token;
+bool _spincontorller=false;
 
 class _SigninState extends State<Signin> {
+  double  sizes=10;
   TextEditingController mobile = TextEditingController();
   TextEditingController password = TextEditingController();
+
 
 //login code
 
   Future login() async {
+
+   setState(() {
+     _spincontorller=!_spincontorller;
+   });
     var response = await http.post('https://bilaltech.in/api/public/api/login',
         body: {"mobile": mobile.text, "password": password.text});
     var msg = json.decode(response.body);
     print(msg['success']);
+   setState(() {
+     _spincontorller=!_spincontorller;
+   });
     if (response.statusCode == 200) {
       if (msg['success'].toString() == "true") {
         token = msg["data"]["token"];
@@ -214,7 +225,12 @@ class _SigninState extends State<Signin> {
                     ],
                   ),
                 ),
-              ],
+             SpinKitRing(
+        color: Colors.blue,
+            size: _spincontorller? 50:0
+        ),
+
+        ],
             ),
           ),
         ),
