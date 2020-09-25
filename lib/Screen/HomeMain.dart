@@ -1,4 +1,5 @@
 import 'package:bvm/Screen/DemoClasses.dart';
+import 'package:bvm/Screen/ExamTestSeriespage.dart';
 import 'package:bvm/Screen/TestSerisscreen.dart';
 import 'package:bvm/nda/NdaBuyScreen.dart';
 import 'package:flutter/material.dart';
@@ -168,7 +169,7 @@ class _HomeMainState extends State<HomeMain> {
                                                 physics: ScrollPhysics(),
                                                 gridDelegate:
                                                     SliverGridDelegateWithFixedCrossAxisCount(
-                                                        childAspectRatio: 1,
+                                                        childAspectRatio: 0.85,
                                                         crossAxisSpacing: 15,
                                                         crossAxisCount: 2),
                                                 itemBuilder: (context, index) {
@@ -206,9 +207,11 @@ class _HomeMainState extends State<HomeMain> {
                                                           //crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
                                                             Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      top: 10,),
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .only(
+                                                                top: 10,
+                                                              ),
                                                               child: Container(
                                                                 //width: 170,
                                                                 height: 100,
@@ -230,7 +233,11 @@ class _HomeMainState extends State<HomeMain> {
                                                               ),
                                                             ),
                                                             Padding(
-                                                              padding:EdgeInsets.only(top: 10.0,bottom: 10.0),
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 10.0,
+                                                                      bottom:
+                                                                          10.0),
                                                               child: Text(
                                                                 courseNameList[
                                                                     index],
@@ -262,7 +269,8 @@ class _HomeMainState extends State<HomeMain> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(left: 15.0,right: 20.0),
+                                        padding: EdgeInsets.only(
+                                            left: 15.0, right: 20.0),
                                         child: Container(
                                           // height: 15.0,
                                           //width: 20.0,
@@ -344,11 +352,10 @@ class _HomeMainState extends State<HomeMain> {
                       child: RaisedButton(
                         color: Colors.white,
                         onPressed: () {
-                            Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (ctx) =>
-                                                          DemoClasses()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (ctx) => DemoClasses()));
                         },
                         elevation: 5.0,
                         shape: RoundedRectangleBorder(
