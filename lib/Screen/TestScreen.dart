@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -14,6 +13,7 @@ class TestScreen extends StatefulWidget {
 
 class _TestScreenState extends State<TestScreen> {
   var qsndata, tempData;
+  List<bool> checklist = [];
   @override
   void initState() {
     qsndata = getdata(widget.id);
@@ -25,6 +25,11 @@ class _TestScreenState extends State<TestScreen> {
     setState(() {
       tempData = data;
     });
+    for (var i = 0; i < tempData["data"].length; i++) {
+      setState(() {
+        checklist.add(false);
+      });
+    }
     return data;
   }
 
@@ -95,15 +100,14 @@ class _TestScreenState extends State<TestScreen> {
         col_3 = Colors.grey,
         col_4 = Colors.grey;
     var count = tempdata["data"].length;
-    // List answer = [];
-    // for (var j = 0; j < count; j++) {
-    //   for (var i = 0; i < 4; i++) {
-    //     if (tempdata["data"][j]["options"][i]["correct"] == 1.toString()) {
-    //       answer[j] = 1;
-    //       break;
-    //     }
-    //   }
-    // }
+
+    var answerList = [], keyList = [];
+    for (var i = 0; i < count; i++) {
+      for (var j = 0; j < 4; j++) {
+        if (tempdata["data"][i]["options"][j]["correct"] == "1") keyList.add(j);
+      }
+    }
+    print(keyList);
     return Swiper(
       pagination: new SwiperPagination(),
       control: new SwiperControl(),
@@ -133,7 +137,7 @@ class _TestScreenState extends State<TestScreen> {
                     RaisedButton(
                       color: col_1,
                       onPressed: () {
-                        showanswer();
+                        showanswer(index);
                         if (tempdata["data"][index]["options"][0]["correct"] ==
                             1.toString()) {
                           setState(() {
@@ -147,7 +151,7 @@ class _TestScreenState extends State<TestScreen> {
                     RaisedButton(
                       color: col_2,
                       onPressed: () {
-                        showanswer();
+                        showanswer(index);
                         if (tempdata["data"][index]["options"][1]["correct"] ==
                             1.toString()) {
                           setState(() {
@@ -167,7 +171,7 @@ class _TestScreenState extends State<TestScreen> {
                     RaisedButton(
                       color: col_3,
                       onPressed: () {
-                        showanswer();
+                        showanswer(index);
                         if (tempdata["data"][index]["options"][2]["correct"] ==
                             1.toString()) {
                           setState(() {
@@ -181,7 +185,7 @@ class _TestScreenState extends State<TestScreen> {
                     RaisedButton(
                       color: col_4,
                       onPressed: () {
-                        showanswer();
+                        showanswer(index);
                         if (tempdata["data"][index]["options"][2]["correct"] ==
                             1.toString()) {
                           setState(() {
@@ -195,7 +199,15 @@ class _TestScreenState extends State<TestScreen> {
                   ],
                 ),
                 new SizedBox(height: 10),
-                new Text("Correct Option is: "),
+                (checklist[index])
+                    ? Text(
+                        "Correct Option is: ${tempdata["data"][index]["options"][keyList[index]]["option_text"]}")
+                    : SizedBox(),
+                new SizedBox(height: 10),
+                (checklist[index])
+                    ? Text(
+                        "Explaination is: ${tempdata["data"][index]["options"][keyList[index]]["explanation"]}")
+                    : SizedBox(),
               ],
             ),
           ),
@@ -204,5 +216,9 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  void showanswer() {}
+  void showanswer(index) {
+    setState(() {
+      checklist[index] = true;
+    });
+  }
 }
