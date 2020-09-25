@@ -11,6 +11,7 @@ Future<Map> getcourses() async {
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
   Map data = jsonDecode(response.body);
+  print(data);
   return data;
 }
 
@@ -22,6 +23,7 @@ Future<Map> getCourseSubjects(var id) async {
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
   Map data = jsonDecode(response.body);
+  print(data);
   return data;
 }
 

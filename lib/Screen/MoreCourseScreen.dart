@@ -1,4 +1,5 @@
 import 'package:bvm/services/courses.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'BottomNavigation.dart';
 import '../nda/NdaScreen.dart';
@@ -13,6 +14,7 @@ class MoreCourseScreen extends StatefulWidget {
 class _MoreCourseScreenState extends State<MoreCourseScreen> {
   int _currentindex = 0;
   List courseNameList = [];
+  List courseimageurl=[];
   var courseData;
   Map courses;
   @override
@@ -29,6 +31,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
       print(courses['success']);
       courses["data"]["data"].forEach((element) {
         courseNameList.add(element["title"]);
+        courseimageurl.add(element['course_image']);
       });
     });
     return courses;
@@ -122,17 +125,8 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                                     child: Container(
                                       //width: 170,
                                       height: 105,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                            "assets/images/img5.jpeg",
-                                            //fit: BoxFit.fill,
-                                            //height: 100,
-                                            //width: 170,
-                                          ),
-                                          fit: BoxFit.fitWidth,
-                                        ),
-                                      ),
+                                      child: CachedNetworkImage(imageUrl: courseimageurl[index],
+                                        placeholder: (context, url) => CircularProgressIndicator(),),
                                     ),
                                   ),
                                   Padding(
