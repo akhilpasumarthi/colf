@@ -97,7 +97,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                       itemCount: courseNameList.length,
                       physics: ScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 1,
+                          childAspectRatio: 0.85,
                           crossAxisSpacing: 15,
                           crossAxisCount: 2),
                       itemBuilder: (context, index) {

@@ -80,3 +80,13 @@ Future<Map> getExamSeriesTest(var id) async{
   Map data = jsonDecode(response.body);
   return data;
 }
+
+Future<Map> getTestQsns(var id) async{
+  var token = await gettoken();
+  var uri = Uri.parse("https://bilaltech.in/api/public/api/getQuestions?test_id=$id");
+  var response = await http
+      .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
+  print(response.statusCode);
+  Map data = jsonDecode(response.body);
+  return data;
+}
