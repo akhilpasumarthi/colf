@@ -30,7 +30,7 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
 
   void openCheckOut() async {
     var options = {
-      'key': '', //enter your key form razorpay account.
+      'key': 'rzp_test_l0Dmpg9h9w6ZhD', //enter your key form razorpay account.
       'amount': widget.amount.toInt() * 100,
       'name': 'Course Payment',
       'description': 'To Buy the Course',
