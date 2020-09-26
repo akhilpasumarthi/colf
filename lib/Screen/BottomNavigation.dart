@@ -69,7 +69,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         color: Colors.white,
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.blueAccent[700],
         height: 50.0,
         items: <Widget>[
           Icon(

@@ -2,7 +2,7 @@ import 'package:bvm/Screen/BottomNavigation.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import '../Nda/NdaMathsScreen.dart';
-import 'NdaPhysicsScreen.dart';
+
 import 'NdaBuyScreen.dart';
 
 class NdaScreen extends StatefulWidget {
@@ -182,7 +182,7 @@ class _NdaScreenState extends State<NdaScreen> {
                                     padding:
                                         EdgeInsets.only(left: 10.0, top: 22.0),
                                     child: RaisedButton(
-                                      color: Colors.indigo[800],
+                                      color: Colors.blueAccent[700],
                                       onPressed: () {
                                         Navigator.push(
                                             context,
