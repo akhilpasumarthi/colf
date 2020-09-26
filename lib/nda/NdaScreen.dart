@@ -30,6 +30,7 @@ class _NdaScreenState extends State<NdaScreen> {
 
   getsubDetails() async {
     print(widget.coursedata["id"]);
+
     var data = await getCourseSubjects(widget.coursedata["id"]);
     await Future.delayed(Duration(milliseconds: 1500));
     
@@ -102,11 +103,13 @@ class _NdaScreenState extends State<NdaScreen> {
                       Container(
                         height: 130,
                         width: MediaQuery.of(context).size.width * 1,
-                        child: Image.asset(
-                          "assets/images/nda.jpeg",
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width * 1,
-                        ),
+                        child: CachedNetworkImage(imageUrl: widget.coursedata['course_image'],
+                        fit: BoxFit.fill,
+                        placeholder: (context,url)=>Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: CircularProgressIndicator()
+                        ),)
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
