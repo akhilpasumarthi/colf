@@ -1,6 +1,7 @@
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'NdaMathsLecturs.dart';
+import 'NdaMathsScreen.dart';
 
 
 class NdaMathsTopics extends StatefulWidget {
@@ -173,12 +174,19 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
           children: [
             RaisedButton(
             onPressed: () {
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (ctx) => NdaMathsLecturs(
+              //               id: data["data"]["data"][index]["id"],
+              //               topicName: data["data"]["data"][index]['title'],
+              //             )));
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (ctx) => NdaMathsLecturs(
+                      builder: (ctx) => NdaMathsScreen(
                             id: data["data"]["data"][index]["id"],
-                            topicName: data["data"]["data"][index]['title'],
+                            subject_name: data["data"]["data"][index]['title'],
                           )));
             },
             padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 7.0),

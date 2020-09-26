@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../Nda/NdaMathsScreen.dart';
 
 import 'NdaBuyScreen.dart';
+import 'NdaMathsTopics.dart';
 
 class NdaScreen extends StatefulWidget {
   final coursedata;
@@ -271,10 +272,18 @@ class _NdaScreenState extends State<NdaScreen> {
       padding: EdgeInsets.only(top: 20.0),
       child: RaisedButton(
         onPressed: () {
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (ctx) => NdaMathsScreen(
+          //               subject_name: subData["data"]["data"][index]
+          //                   ["subject_name"],
+          //               id: subData["data"]["data"][index]["id"],
+          //             )));
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (ctx) => NdaMathsScreen(
+                  builder: (ctx) => NdaMathsTopics(
                         subject_name: subData["data"]["data"][index]
                             ["subject_name"],
                         id: subData["data"]["data"][index]["id"],

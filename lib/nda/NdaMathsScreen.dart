@@ -108,10 +108,17 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
                         width: 190.0,
                         child: RaisedButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (ctx) => NdaMathsTopics(id:widget.id,subject_name:widget.subject_name)));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (ctx) => NdaMathsTopics(id:widget.id,subject_name:widget.subject_name)));
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (ctx) {
+                              return NdaMathsLecturs(
+                                id: widget.id,
+                                topicName: widget.subject_name,
+                              );
+                            }));
                           },
                           padding: EdgeInsets.only(
                               top: 10.0, bottom: 10.0, left: 7.0),
@@ -153,7 +160,7 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (ctx) => NdaNotesScreen()));
+                                    builder: (ctx) => NdaNotesScreen(id:widget.id)));
                           },
                           padding: EdgeInsets.only(
                               top: 10.0, bottom: 10.0, left: 7.0),
