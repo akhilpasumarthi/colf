@@ -1,20 +1,30 @@
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'NdaMathsLecturs.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import '../Screen/MoreCourseScreen.dart';
+
 
 
 class NdaMathsTopics extends StatefulWidget {
   final String subject_name;
   final id;
+   final coursedata;
+  const NdaMathsTopics({Key key, this.subject_name, this.id,this.coursedata}) : super(key: key);
+    
+    
 
-  const NdaMathsTopics({Key key, this.subject_name, this.id}) : super(key: key);
+  
+
   @override
   _NdaMathsTopicsState createState() => _NdaMathsTopicsState();
 }
 
 class _NdaMathsTopicsState extends State<NdaMathsTopics> {
   var lectures_data;
+  var subjectsData;
   List courseimageurl = [];
+  var subjects;
 
   var topics;
   var count;
@@ -34,6 +44,20 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
     return data;
     
   }
+
+  getsubDetails() async {
+    print(widget.coursedata["id"]);
+
+    var data = await getCourseSubjects(widget.coursedata["id"]);
+    await Future.delayed(Duration(milliseconds: 1500));
+    
+    setState(() {
+      subjects = data;
+    });
+    return data;
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -96,14 +120,16 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
                 child: Column(
                   children: [
                     Container(
-                      height: 160,
-                      width: MediaQuery.of(context).size.width * 1,
-                      child: Image.asset(
-                        "assets/images/nda.jpeg",
-                        fit: BoxFit.cover,
+                        height: 130,
                         width: MediaQuery.of(context).size.width * 1,
+                        child: CachedNetworkImage(imageUrl: widget.coursedata['course_image'],
+                        fit: BoxFit.fill,
+                        placeholder: (context,url)=>Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: CircularProgressIndicator()
+                        ),),
                       ),
-                    ),
                   ],
                 ),
               ),
@@ -227,4 +253,6 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
       ),
     );
   }
-}
+
+
+  }

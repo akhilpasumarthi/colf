@@ -1,4 +1,3 @@
-import 'package:bvm/Screen/BottomNavigation.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +84,7 @@ class _NdaScreenState extends State<NdaScreen> {
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 10.0),
+                padding: EdgeInsets.only(top: 0.0),
                 child: Container(
                   decoration: BoxDecoration(color: Colors.white,
                       //shape: .circle,
@@ -96,12 +95,12 @@ class _NdaScreenState extends State<NdaScreen> {
                           spreadRadius: 2.0,
                         ),
                       ]),
-                  height: 170,
+                  height: 200,
                   width: MediaQuery.of(context).size.width * 1,
                   child: Column(
                     children: [
                       Container(
-                        height: 130,
+                        height: 160,
                         width: MediaQuery.of(context).size.width * 1,
                         child: CachedNetworkImage(imageUrl: widget.coursedata['course_image'],
                         fit: BoxFit.fill,
@@ -109,7 +108,7 @@ class _NdaScreenState extends State<NdaScreen> {
                             height: 30.0,
                             width: 30.0,
                             child: CircularProgressIndicator()
-                        ),)
+                        ),),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
