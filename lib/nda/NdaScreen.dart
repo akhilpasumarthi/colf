@@ -19,6 +19,8 @@ class NdaScreen extends StatefulWidget {
 class _NdaScreenState extends State<NdaScreen> {
   var subjectsData;
   var subjects;
+  List courseimageurl = [];
+
   @override
   void initState() {
     super.initState();
@@ -29,6 +31,7 @@ class _NdaScreenState extends State<NdaScreen> {
     print(widget.coursedata["id"]);
     var data = await getCourseSubjects(widget.coursedata["id"]);
     await Future.delayed(Duration(milliseconds: 1500));
+    
     setState(() {
       subjects = data;
     });

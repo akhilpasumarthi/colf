@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bvm/services/courses.dart';
 import '../nda/NdaScreen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+  List courseimageurl=[];
 
 
 class SearchScreen extends StatefulWidget {
@@ -14,6 +16,8 @@ class _SearchScreenState extends State<SearchScreen> {
   
   int _currentindex = 0;
   List courseNameList = [];
+  List courseimageurl=[];
+
   var courseData;
   Map courses;
   @override
@@ -30,6 +34,8 @@ class _SearchScreenState extends State<SearchScreen> {
       print(courses['success']);
       courses["data"]["data"].forEach((element) {
         courseNameList.add(element["title"]);
+        courseimageurl.add(element['course_image']);
+
       });
     });
     return courses;
@@ -113,9 +119,18 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
               ),
-             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              height: MediaQuery.of(context).size.height * 0.8,
+            Container(
+                                  //width: 170,
+                                  //height: 200,
+                                  //decoration: BoxDecoration(color: Colors.white70),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                       Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: MediaQuery.of(context).size.height * 1.0,
               width: MediaQuery.of(context).size.width,
               child: FutureBuilder(
                 future: courseData,
@@ -125,15 +140,17 @@ class _SearchScreenState extends State<SearchScreen> {
                       itemCount: courseNameList.length,
                       physics: ScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 1,
-                          crossAxisSpacing: 15,
+                          //childAspectRatio: 1.0,
+                          crossAxisSpacing: 20,
                           crossAxisCount: 2),
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(top: 17.0),
                           child: Container(
-                            width: 170,
+                            //height: 100.0 ,
+                            width: 130,
                             child: RaisedButton(
+                              padding: EdgeInsets.only(top: 0.0,left: 0.0,right: 0.0),
                               color: Colors.white,
                               onPressed: () {
                                 Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
@@ -142,38 +159,36 @@ class _SearchScreenState extends State<SearchScreen> {
                               },
                               elevation: 5.0,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7.0),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Column(
-                                //mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 //crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(top: 10),
+                                    padding: EdgeInsets.only(top: 0.0),
                                     child: Container(
-                                      //width: 170,
-                                      height: 105,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                            "assets/images/img5.jpeg",
-                                            //fit: BoxFit.fill,
-                                            //height: 100,
-                                            //width: 170,
-                                          ),
-                                          fit: BoxFit.fitWidth,
-                                        ),
-                                      ),
+
+                                      width: 170,
+                                      height: 100,
+                                      child: CachedNetworkImage(imageUrl: courseimageurl[index],
+                                      fit: BoxFit.fill,
+                                     // height: 100.0,
+                                        placeholder: (context, url) => Container(
+                                          height: 30.0,
+                                          width: 30.0,
+                                          child: CircularProgressIndicator()),),
+
                                     ),
                                   ),
                                   Padding(
-                                    padding:EdgeInsets.only(top: 10.0,bottom: 10.0),
+                                    padding:EdgeInsets.only(top: 12.0,bottom: 5.0),
                                     child: Text(
                                       courseNameList[index],
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18.0,
+                                        fontSize: 14.0,
                                       ),
                                     ),
                                   ),
@@ -186,13 +201,19 @@ class _SearchScreenState extends State<SearchScreen> {
                     );
                   }
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: Container(
+                      width: 30.0,
+                      height: 40.0,
+                      child: CircularProgressIndicator()),
                   );
                 },
               ),
             ),
             ],
           ),
+        ),
+            ],
+      ),
         ),
       ),
     );

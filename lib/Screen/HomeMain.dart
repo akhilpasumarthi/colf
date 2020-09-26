@@ -155,7 +155,7 @@ class _HomeMainState extends State<HomeMain> {
                                         CrossAxisAlignment.center,
                                     children: [
                                        Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               height: MediaQuery.of(context).size.height * 0.25,
               width: MediaQuery.of(context).size.width,
               child: FutureBuilder(
@@ -166,16 +166,17 @@ class _HomeMainState extends State<HomeMain> {
                       itemCount: courseNameList.length,
                       physics: ScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 1.0,
-                          crossAxisSpacing: 15,
+                          //childAspectRatio: 1.0,
+                          crossAxisSpacing: 20,
                           crossAxisCount: 2),
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(top: 17.0),
                           child: Container(
-                            height: 130.0 ,
+                            //height: 100.0 ,
                             width: 130,
                             child: RaisedButton(
+                              padding: EdgeInsets.only(top: 0.0,left: 0.0,right: 0.0),
                               color: Colors.white,
                               onPressed: () {
                                 Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
@@ -184,25 +185,30 @@ class _HomeMainState extends State<HomeMain> {
                               },
                               elevation: 5.0,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(7.0),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 //crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(top: 10),
+                                    padding: EdgeInsets.only(top: 0.0),
                                     child: Container(
 
-                                      //width: 170,
+                                      width: 170,
                                       height: 100,
                                       child: CachedNetworkImage(imageUrl: courseimageurl[index],
-                                        placeholder: (context, url) => CircularProgressIndicator(),),
+                                      fit: BoxFit.fill,
+                                     // height: 100.0,
+                                        placeholder: (context, url) => Container(
+                                          height: 30.0,
+                                          width: 30.0,
+                                          child: CircularProgressIndicator()),),
 
                                     ),
                                   ),
                                   Padding(
-                                    padding:EdgeInsets.only(top: 10.0,bottom: 5.0),
+                                    padding:EdgeInsets.only(top: 12.0,bottom: 5.0),
                                     child: Text(
                                       courseNameList[index],
                                       textAlign: TextAlign.center,
@@ -221,7 +227,10 @@ class _HomeMainState extends State<HomeMain> {
                     );
                   }
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: Container(
+                      width: 30.0,
+                      height: 40.0,
+                      child: CircularProgressIndicator()),
                   );
                 },
               ),
@@ -268,7 +277,7 @@ class _HomeMainState extends State<HomeMain> {
                           children: [
                             Container(
                               width: MediaQuery.of(context).size.width * 1,
-                              height: 100,
+                              height: 130,
                               child: Image.asset(
                                 "assets/images/img2.jpeg",
                                 fit: BoxFit.fitWidth,
@@ -276,7 +285,7 @@ class _HomeMainState extends State<HomeMain> {
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width * 1,
-                              height: 100,
+                              height: 130,
                               child: Image.asset(
                                 "assets/images/img3.jpg",
                                 fit: BoxFit.fitWidth,
@@ -284,7 +293,7 @@ class _HomeMainState extends State<HomeMain> {
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width * 1,
-                              height: 100,
+                              height: 130,
                               child: Image.asset(
                                 "assets/images/img4.jpg",
                                 fit: BoxFit.fitWidth,

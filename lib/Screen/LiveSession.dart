@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../nda/NdaScreen.dart';
 
-
-class OurBatches extends StatefulWidget {
+class LiveSession extends StatefulWidget {
   @override
-  _OurBatchesState createState() => _OurBatchesState();
+  _LiveSessionState createState() => _LiveSessionState();
 }
 
-class _OurBatchesState extends State<OurBatches> {
+class _LiveSessionState extends State<LiveSession> {
 
-int _currentindex = 0;
+ int _currentindex = 0;
   List courseNameList = [];
   List courseimageurl=[];
-
   var courseData;
   Map courses;
   @override
@@ -33,7 +30,6 @@ int _currentindex = 0;
       courses["data"]["data"].forEach((element) {
         courseNameList.add(element["title"]);
         courseimageurl.add(element['course_image']);
-
       });
     });
     return courses;
@@ -77,9 +73,9 @@ int _currentindex = 0;
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.only(top: 17),
+              padding: EdgeInsetsDirectional.only(top: 17,bottom: 5.0),
               child: Text(
-                "Our Batches",
+                "Courses for Live Session",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0,
@@ -87,7 +83,7 @@ int _currentindex = 0;
                 ),
               ),
             ),
-             Padding(
+            Padding(
               padding: EdgeInsets.only(bottom: 20.0),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
