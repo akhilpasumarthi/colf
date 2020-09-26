@@ -1,5 +1,6 @@
 import 'package:bvm/Screen/BottomNavigation.dart';
 import 'package:bvm/services/courses.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../Nda/NdaMathsScreen.dart';
 
@@ -285,6 +286,7 @@ class _NdaScreenState extends State<NdaScreen> {
             children: [
               Padding(
                 padding: EdgeInsets.only(top: 7.5),
+<<<<<<< HEAD
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
@@ -294,6 +296,17 @@ class _NdaScreenState extends State<NdaScreen> {
                   child: Image.asset(
                     "assets/images/nda.jpeg",
                     fit: BoxFit.cover,
+=======
+                child: Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Container(
+
+                    //width: 170,
+                    //height: 105,
+                    child: CachedNetworkImage(imageUrl:subData["data"]["data"][index]["image"],
+                      placeholder: (context, url) => CircularProgressIndicator(),),
+
+>>>>>>> 29c0654d5d126f3bcf7e6c3fd78340054df05675
                   ),
                 ),
               ),
