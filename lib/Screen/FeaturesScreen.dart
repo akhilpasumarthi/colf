@@ -1,4 +1,5 @@
 import 'package:bvm/Screen/AllPdfNotes.dart';
+import 'package:bvm/Screen/LiveSession.dart';
 import 'package:bvm/Screen/OurBaches.dart';
 import 'package:bvm/Screen/TestSerisscreen.dart';
 import 'package:bvm/Screen/chatbot.dart';
@@ -484,7 +485,13 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
                       width: 150,
                       child: RaisedButton(
                         color: Colors.white,
-                        onPressed: () {},
+                        onPressed: () {
+                             Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => LiveSession()));
+
+                        },
                         elevation: 5.0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(7.0),

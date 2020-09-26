@@ -9,6 +9,7 @@ import 'package:bvm/nda/NdaScreen.dart';
 import 'BottomNavigation.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeMain extends StatefulWidget {
   static const routeName = '/HomeMain';
@@ -20,6 +21,7 @@ class HomeMain extends StatefulWidget {
 class _HomeMainState extends State<HomeMain> {
   int _currentindex = 0;
   List courseNameList = [];
+  List courseimageurl = [];
   var courseData;
   Map courses;
   @override
@@ -36,6 +38,7 @@ class _HomeMainState extends State<HomeMain> {
       print(courses['success']);
       courses["data"]["data"].forEach((element) {
         courseNameList.add(element["title"]);
+        courseimageurl.add(element['course_image']);
       });
     });
     return courses;
@@ -93,7 +96,7 @@ class _HomeMainState extends State<HomeMain> {
                           children: [
                             Container(
                               width: MediaQuery.of(context).size.width * 1,
-                              height: 130,
+                              height: 160,
                               child: Image.asset(
                                 "assets/images/img2.jpeg",
                                 fit: BoxFit.fitWidth,
@@ -101,7 +104,7 @@ class _HomeMainState extends State<HomeMain> {
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width * 1,
-                              height: 180,
+                              height: 160,
                               child: Image.asset(
                                 "assets/images/img3.jpg",
                                 fit: BoxFit.fitWidth,
@@ -109,7 +112,7 @@ class _HomeMainState extends State<HomeMain> {
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width * 1,
-                              height: 130,
+                              height: 160,
                               child: Image.asset(
                                 "assets/images/img4.jpg",
                                 fit: BoxFit.fitWidth,
@@ -151,123 +154,87 @@ class _HomeMainState extends State<HomeMain> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.3,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: FutureBuilder(
-                                          future: courseData,
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasData) {
-                                              return GridView.builder(
-                                                itemCount:
-                                                    courseNameList.length,
-                                                physics: ScrollPhysics(),
-                                                gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                        childAspectRatio: 0.85,
-                                                        crossAxisSpacing: 15,
-                                                        crossAxisCount: 2),
-                                                itemBuilder: (context, index) {
-                                                  return Padding(
-                                                    padding: EdgeInsets.only(
-                                                        top: 17.0),
-                                                    child: Container(
-                                                      width: 130,
-                                                      child: RaisedButton(
-                                                        color: Colors.white,
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .push(
-                                                                  new MaterialPageRoute(
-                                                            builder: (context) {
-                                                              return NdaScreen(
-                                                                  coursedata: courses[
-                                                                              "data"]
-                                                                          [
-                                                                          "data"]
-                                                                      [index]);
-                                                            },
-                                                          ));
-                                                        },
-                                                        elevation: 5.0,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      7.0),
-                                                        ),
-                                                        child: Column(
-                                                          //mainAxisAlignment: MainAxisAlignment.start,
-                                                          //crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .only(
-                                                                top: 10,
-                                                              ),
-                                                              child: Container(
-                                                                width: 130,
-                                                                height: 85,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  image:
-                                                                      DecorationImage(
-                                                                    image:
-                                                                        AssetImage(
-                                                                      "assets/images/img5.jpeg",
-                                                                      //fit: BoxFit.fill,
-                                                                      //height: 100,
-                                                                      //width: 170,
-                                                                    ),
-                                                                    fit: BoxFit
-                                                                        .fill,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      top: 10.0,
-                                                                      bottom:
-                                                                          10.0),
-                                                              child: Text(
-                                                                courseNameList[
-                                                                    index],
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      18.0,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            }
-                                            return Center(
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            );
-                                          },
-                                        ),
+                                       Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: MediaQuery.of(context).size.height * 0.25,
+              width: MediaQuery.of(context).size.width,
+              child: FutureBuilder(
+                future: courseData,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return GridView.builder(
+                      itemCount: courseNameList.length,
+                      physics: ScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          //childAspectRatio: 1.0,
+                          crossAxisSpacing: 20,
+                          crossAxisCount: 2),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.only(top: 17.0),
+                          child: Container(
+                            //height: 100.0 ,
+                            width: 130,
+                            child: RaisedButton(
+                              padding: EdgeInsets.only(top: 0.0,left: 0.0,right: 0.0),
+                              color: Colors.white,
+                              onPressed: () {
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+                                  return NdaScreen(coursedata: courses["data"]["data"][index]);
+                                },));
+                              },
+                              elevation: 5.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                //crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 0.0),
+                                    child: Container(
+
+                                      width: 170,
+                                      height: 100,
+                                      child: CachedNetworkImage(imageUrl: courseimageurl[index],
+                                      fit: BoxFit.fill,
+                                     // height: 100.0,
+                                        placeholder: (context, url) => Container(
+                                          height: 30.0,
+                                          width: 30.0,
+                                          child: CircularProgressIndicator()),),
+
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:EdgeInsets.only(top: 12.0,bottom: 5.0),
+                                    child: Text(
+                                      courseNameList[index],
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14.0,
                                       ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  return Center(
+                    child: Container(
+                      width: 30.0,
+                      height: 40.0,
+                      child: CircularProgressIndicator()),
+                  );
+                },
+              ),
+            ),
                                       Padding(
                                         padding: EdgeInsets.only(
                                             left: 15.0, right: 20.0),
@@ -303,38 +270,39 @@ class _HomeMainState extends State<HomeMain> {
                                 ),
                               ),
                             ),
+                            SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                        child: Row(
+                          children: [
                             Container(
                               width: MediaQuery.of(context).size.width * 1,
-                              height: 110.0,
-                              child: Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/img8.jpeg",
-                                    fit: BoxFit.cover,
-                                    width:
-                                        MediaQuery.of(context).size.width * 1,
-                                    height: 110.0,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 5.0),
-                                        child: Text(
-                                          "Education is not preparation for life Education is life itself.",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 15.0,
-                                            color: Colors.black87,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                              height: 130,
+                              child: Image.asset(
+                                "assets/images/img2.jpeg",
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 1,
+                              height: 130,
+                              child: Image.asset(
+                                "assets/images/img3.jpg",
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 1,
+                              height: 130,
+                              child: Image.asset(
+                                "assets/images/img4.jpg",
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
                           ],
                         ),
                       ),

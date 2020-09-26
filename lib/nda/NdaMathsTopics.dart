@@ -119,7 +119,7 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width*1,
                       height: MediaQuery.of(context).size.height * 0.45,
                       padding: EdgeInsets.only(top: 10),
                       child: FutureBuilder(
@@ -164,41 +164,61 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
     return Padding(
       padding: EdgeInsets.only(top: 20.0, right: 50),
       child: Container(
-        width: 190.0,
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (ctx) => NdaMathsLecturs(
-                          id: data["data"]["data"][index]["id"],
-                          topicName: data["data"]["data"][index]['title'],
-                        )));
-          },
-          padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 7.0),
-          color: Colors.white,
-          elevation: 30.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 14.0),
-                child: Text(
-                  data["data"]["data"][index]['title'],
-                  style: TextStyle(
-                    fontSize: 20.0,
+       width:MediaQuery.of(context).size.width*1,
+        child: Row(
+          children: [
+            RaisedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (ctx) => NdaMathsLecturs(
+                            id: data["data"]["data"][index]["id"],
+                            topicName: data["data"]["data"][index]['title'],
+                          )));
+            },
+            padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 7.0),
+            color: Colors.white,
+            elevation: 30.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+          width:MediaQuery.of(context).size.width*0.70,
+
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                      padding: EdgeInsets.only(left: 14.0),
+                      child: Text(
+                        data["data"]["data"][index]['title'],
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                    ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 5),
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 17,
+                Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                      padding: EdgeInsets.only(right: 5),
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 17,
+                      ),
+                    ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
+          ],
         ),
       ),
     );

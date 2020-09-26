@@ -110,51 +110,45 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
               Padding(
                 padding: EdgeInsets.only(top: 20.0, left: 25.0),
                 child: Container(
-                     child: Text(
-                        "lectures of ${widget.topicName}",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                  child: Text(
+                    "Lectures of ${widget.topicName}",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
-                      Container(
-                        width: MediaQuery.of(context).size.width*1,
-                        //height: MediaQuery.of(context).size.height *1 ,
-                        padding: EdgeInsets.only(top: 10, left: 10),
-                        child: FutureBuilder(
-                          future: topic_data,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return Center(child: Text(snapshot.error));
-                            }
-                            if (snapshot.hasData) {
-                              return (topics["data"]["data"].length == 0)
-                                  ? Center(
-                                      child: Text("No Lectures found yet!"),
-                                    )
-                                  : ListView.builder(
-                                      physics: ScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemCount: topics["data"]["data"].length,
-                                      itemBuilder: (context, index) {
-                                        return mediaListView(
-                                            index, snapshot.data);
-                                      },
-                                    );
-                            }
-                            return Center(
-                              child: CircularProgressIndicator(),
+              Container(
+                width: MediaQuery.of(context).size.width * 1,
+                //height: MediaQuery.of(context).size.height *1 ,
+                padding: EdgeInsets.only(top: 10, left: 10),
+                child: FutureBuilder(
+                  future: topic_data,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(child: Text(snapshot.error));
+                    }
+                    if (snapshot.hasData) {
+                      return (topics["data"]["data"].length == 0)
+                          ? Center(
+                              child: Text("No Lectures found yet!"),
+                            )
+                          : ListView.builder(
+                              physics: ScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: topics["data"]["data"].length,
+                              itemBuilder: (context, index) {
+                                return mediaListView(index, snapshot.data);
+                              },
                             );
-                          },
-                        ),
-                      
-                      
-                    
-                  
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
                 ),
-              
+              ),
             ],
           ),
         ),
@@ -165,16 +159,21 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
 
   Widget mediaListView(int index, data) {
     return Padding(
-      padding: EdgeInsets.only(top: 15.0, bottom: 20.0,right: 20.0,left: 10.0),
+      padding:
+          EdgeInsets.only(top: 15.0, bottom: 20.0, right: 20.0, left: 10.0),
       child: Container(
         //height: 30.0,
         //width: MediaQuery.of(context).size.width*1,
         child: RaisedButton(
-          padding: EdgeInsets.only(top: 12.0,bottom: 12.0,),
+          padding: EdgeInsets.only(
+            top: 12.0,
+            bottom: 12.0,
+          ),
           onPressed: () {
-            var url=data["data"]["data"][index]["video_link"];
+            var url = data["data"]["data"][index]["video_link"];
             print('video url:${data["data"]["data"][index]["video_link"]}');
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>video(url: url)));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => video(url: url)));
           },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0.0),
@@ -184,23 +183,36 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
           color: Colors.white,
           child: Row(
             children: [
-              Padding(
-                padding: EdgeInsets.only(left: 15.0),
-                child: Icon(Icons.play_arrow,
-                color: Colors.red[900],
-                size: 30.0,
+              Column(
+                children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: Icon(
+                    Icons.play_arrow,
+                    color: Colors.red[900],
+                    size: 40.0,
+                  ),
                 ),
+                ],
               ),
-                   Padding(
-                     padding: EdgeInsets.only(left: 20.0),
-                     child: Text(
-              data["data"]["data"][index]["title"],
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.black,
+              Column(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width*0.75,
+                    child: Padding(
+                    padding: EdgeInsets.only(left: 10.0),
+                    child: Text(
+                      data["data"]["data"][index]["title"],
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                ),
+                  ),
+                ],
               ),
-            ),
-                   ),
             ],
           ),
         ),
