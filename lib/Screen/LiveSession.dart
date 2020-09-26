@@ -160,7 +160,7 @@ class _LiveSessionState extends State<LiveSession> {
                         return Center(
                           child: Container(
                             width: 30.0,
-                            height: 40.0,
+                            height: 30.0,
                             child: CircularProgressIndicator()),
                         );
                       },

@@ -164,7 +164,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                         return Center(
                           child: Container(
                             width: 30.0,
-                            height: 40.0,
+                            height: 30.0,
                             child: CircularProgressIndicator()),
                         );
                       },

@@ -135,30 +135,7 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentindex,
-        items: [
-          BottomNavigationBarItem(
-              backgroundColor: Colors.indigo[800],
-              icon: Icon(Icons.home),
-              title: Text("Home")),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            title: Text("Favorite"),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.book), title: Text("E-Book")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search), title: Text("Search")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.supervised_user_circle), title: Text("User")),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentindex = index;
-          });
-        },
-      ),
+     
     );
   }
 }
