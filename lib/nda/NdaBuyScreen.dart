@@ -103,7 +103,104 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    
+                    Text(
+                      "Select Payment Option",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.0),
+                      child: Divider(
+                        color: Colors.white,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30.0),
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 40.0,
+                              width: 70.0,
+                              child:
+                                  SvgPicture.asset("assets/images/paytm.svg"),
+                            ),
+                            RaisedButton(
+                              onPressed: () {},
+                              color: Colors.white,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Pay Now",
+                                    style: TextStyle(
+                                      color: Colors.blueAccent[700],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 5.0),
+                                    child: Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 10.0,
+                                      color: Colors.blueAccent[700],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 70.0,
+                            width: 70.0,
+                            child:
+                                SvgPicture.asset("assets/images/GooglePay.svg"),
+                          ),
+                          RaisedButton(
+                            onPressed: () {},
+                            color: Colors.white,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Pay Now",
+                                  style: TextStyle(
+                                    color: Colors.blueAccent[700],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 5.0),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 10.0,
+                                    color: Colors.blueAccent[700],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 5.0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

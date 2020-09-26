@@ -3,7 +3,7 @@ import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../Nda/NdaMathsScreen.dart';
-
+import 'NdaPhysicsScreen.dart';
 import 'NdaBuyScreen.dart';
 
 class NdaScreen extends StatefulWidget {
@@ -186,7 +186,7 @@ class _NdaScreenState extends State<NdaScreen> {
                                     padding:
                                         EdgeInsets.only(left: 10.0, top: 22.0),
                                     child: RaisedButton(
-                                      color: Colors.blueAccent[700],
+                                      color: Colors.indigo[800],
                                       onPressed: () {
                                         Navigator.push(
                                             context,
@@ -282,17 +282,19 @@ class _NdaScreenState extends State<NdaScreen> {
         },
         color: Colors.white,
         child: Container(
-          height: 110.0,
+          height: 100.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+              Padding(
+                padding: EdgeInsets.only(top: 7.5),
+
+                child: Padding(
+                  padding: EdgeInsets.only(top: 10),
                   child: Container(
 
-                    width: 130,
+                    //width: 170,
                     //height: 105,
                     child: CachedNetworkImage(imageUrl:subData["data"]["data"][index]["image"],
                       placeholder: (context, url) => CircularProgressIndicator(),),
@@ -300,13 +302,13 @@ class _NdaScreenState extends State<NdaScreen> {
 
                   ),
                 ),
-
+              ),
               Padding(
-                padding: EdgeInsets.only(left: 15.0, top: 0.0),
+                padding: EdgeInsets.only(left: 25.0, top: 0.0),
                 child: Container(
                   //height: 70,
                   child: Container(
-                    width: MediaQuery.of(context).size.width*.45,
+                    width: MediaQuery.of(context).size.width*.50,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -62,7 +62,7 @@ class _DefenceState extends State<Defence> {
                             Padding(
                               padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
                               child: RaisedButton(
-                                color: Colors.blueAccent[700],
+                                color: Colors.blue[600],
                                 onPressed: () {
                                   _launchURL();
                                 },
@@ -116,7 +116,7 @@ class _DefenceState extends State<Defence> {
                               Padding(
                                 padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
                                 child: RaisedButton(
-                                  color: Colors.blueAccent[700],
+                                  color: Colors.blue[600],
                                   onPressed: () {
                                     Navigator.push(context,
                               MaterialPageRoute(builder: (ctx) => Splesh()));

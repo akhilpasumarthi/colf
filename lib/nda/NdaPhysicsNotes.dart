@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class NdaNotesScreen extends StatefulWidget {
-  static const routeName = '/NdaMathsNotesscreen';
+class NdaPhysicsNotes extends StatefulWidget {
+    static const routeName = '/NdaPhysicsNotes';
 
   @override
-  _NdaNotesScreenState createState() => _NdaNotesScreenState();
+  _NdaPhysicsNotesState createState() => _NdaPhysicsNotesState();
 }
 
-class _NdaNotesScreenState extends State<NdaNotesScreen> {
+class _NdaPhysicsNotesState extends State<NdaPhysicsNotes> {
     int _currentindex = 0;
 
   @override
@@ -88,7 +88,7 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
               Padding(
                 padding: EdgeInsets.only(top: 27.0, left: 25.0),
                 child: Text(
-                  "Maths(Notes)",
+                  "Physics(Notes)",
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
