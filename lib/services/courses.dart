@@ -34,8 +34,10 @@ Future<Map> getSubjectDetails(var id) async {
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
+
   if (response.statusCode == 200) {
     Map data = jsonDecode(response.body);
+    print(data);
     return data;
   }
 }

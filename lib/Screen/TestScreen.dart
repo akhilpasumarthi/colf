@@ -1,4 +1,4 @@
-import 'dart:html';
+
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
