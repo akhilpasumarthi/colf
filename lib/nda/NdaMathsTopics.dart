@@ -2,6 +2,7 @@ import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'NdaMathsLecturs.dart';
 
+
 class NdaMathsTopics extends StatefulWidget {
   final String subject_name;
   final id;
@@ -13,6 +14,8 @@ class NdaMathsTopics extends StatefulWidget {
 
 class _NdaMathsTopicsState extends State<NdaMathsTopics> {
   var lectures_data;
+  List courseimageurl = [];
+
   var topics;
   var count;
   @override
@@ -29,6 +32,7 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
       topics = data;
     });
     return data;
+    
   }
 
   @override

@@ -279,43 +279,31 @@ class _NdaScreenState extends State<NdaScreen> {
         },
         color: Colors.white,
         child: Container(
-          height: 100.0,
+          height: 110.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(top: 7.5),
-<<<<<<< HEAD
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),
-                  width: 110.0,
-                  height: 85.0,
-                  child: Image.asset(
-                    "assets/images/nda.jpeg",
-                    fit: BoxFit.cover,
-=======
-                child: Padding(
-                  padding: EdgeInsets.only(top: 10),
+              
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
                   child: Container(
 
-                    //width: 170,
+                    width: 130,
                     //height: 105,
                     child: CachedNetworkImage(imageUrl:subData["data"]["data"][index]["image"],
                       placeholder: (context, url) => CircularProgressIndicator(),),
 
->>>>>>> 29c0654d5d126f3bcf7e6c3fd78340054df05675
+
                   ),
                 ),
-              ),
+
               Padding(
-                padding: EdgeInsets.only(left: 25.0, top: 0.0),
+                padding: EdgeInsets.only(left: 15.0, top: 0.0),
                 child: Container(
                   //height: 70,
                   child: Container(
-                    width: MediaQuery.of(context).size.width*.50,
+                    width: MediaQuery.of(context).size.width*.45,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
