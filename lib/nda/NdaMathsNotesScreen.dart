@@ -1,13 +1,16 @@
-import 'package:bvm/Screen/webViewScreen.dart';
+import 'package:bvm/Screen/pdfViewScreen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../services/courses.dart';
 
 class NdaNotesScreen extends StatefulWidget {
+  final imageurl;
   final id;
   static const routeName = '/NdaMathsNotesscreen';
 
-  const NdaNotesScreen({Key key, this.id}) : super(key: key);
+  const NdaNotesScreen({Key key, this.id, this.imageurl}) : super(key: key);
 
   @override
   _NdaNotesScreenState createState() => _NdaNotesScreenState();
@@ -27,7 +30,7 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
     setState(() {
       tempdata = _data;
     });
-    print(tempdata["data"]["data"][0]['file_path']);
+    print(tempdata["data"]["data"]);
     return tempdata;
   }
 
@@ -47,10 +50,14 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
               child: Container(
                 width: 35.0,
                 height: 35.0,
-                child: Image.asset(
-                  "assets/images/img1.PNG",
-                  fit: BoxFit.fill,
-                ),
+                child: CachedNetworkImage(
+                        imageUrl: widget.imageurl,
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) => Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: CircularProgressIndicator()),
+                      ),
               ),
             ),
             Padding(
@@ -94,11 +101,14 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
                       Container(
                         height: 160,
                         width: MediaQuery.of(context).size.width * 1,
-                        child: Image.asset(
-                          "assets/images/nda.jpeg",
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width * 1,
-                        ),
+                        child:CachedNetworkImage(
+                        imageUrl: widget.imageurl,
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) => Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: Center(child: CircularProgressIndicator())),
+                      ),
                       ),
                     ],
                   ),
@@ -139,11 +149,11 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
                                       child: Text(tempdata["data"]["data"]
                                           [index]['title']),
                                     ),
-                                    onPressed: () {
-                                      Navigator.push(context,
-                                          new MaterialPageRoute(
+                                    onPressed: () async {
+                                      Navigator.of(context)
+                                          .push(new MaterialPageRoute(
                                         builder: (context) {
-                                          return web_viewpage(
+                                          return PdfView(
                                             url: tempdata["data"]["data"][index]
                                                 ['file_path'],
                                           );

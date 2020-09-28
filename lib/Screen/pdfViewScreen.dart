@@ -1,19 +1,15 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pdf_flutter/pdf_flutter.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
-class web_viewpage extends StatefulWidget {
-  var url;
-  web_viewpage({this.url});
+class PdfView extends StatefulWidget {
+  final String url;
+
+  const PdfView({Key key, this.url}) : super(key: key);
   @override
-  _web_viewpageState createState() => _web_viewpageState();
+  _PdfViewState createState() => _PdfViewState();
 }
 
-class _web_viewpageState extends State<web_viewpage> {
-  final Completer<WebViewController> _controller =
-      Completer<WebViewController>();
-
+class _PdfViewState extends State<PdfView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,19 +46,21 @@ class _web_viewpageState extends State<web_viewpage> {
           ],
         ),
       ),
-      // body: WebView(
-      //   javascriptMode: JavascriptMode.unrestricted,
-      //   initialUrl: widget.url,
-      //   onWebViewCreated: (WebViewController _webviewcontroller) {
-      //     _controller.complete(_webviewcontroller);
-      //   },
-      // ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: Colors.blue,
+        child: Center(
           child: PDF.network(
-        widget.url,
-        height: MediaQuery.of(context).size.width,
-        width: MediaQuery.of(context).size.height,
-      )),
+            widget.url,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            placeHolder: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
