@@ -30,31 +30,21 @@ class _ExamSeriesPageState extends State<ExamSeriesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
+        leading: BackButton(color: Colors.white),
         //shadowColor: Colors.red,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
           //crossAxisAlignment: CrossAxisAlignment.start,
           //mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 0.0),
-              child: Container(
-                width: 35.0,
-                height: 35.0,
-                child: Image.asset(
-                  "assets/images/img1.PNG",
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+            
             Padding(
               padding: EdgeInsetsDirectional.only(start: 15.0),
               child: Text(
-                "BVN Defence Academy",
+                "BVN Academy",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),

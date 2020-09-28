@@ -23,60 +23,78 @@ class _DefenceState extends State<Defence> {
   String phonenumber = "";
   String _url = "https://play.google.com/store/apps/details?id=com.bvnschool";
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-              child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
+      body: Container(
+        height: MediaQuery.of(context).size.height * 1,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 70.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 90.0, left: 0.0, right: 0.0),
+                    padding: EdgeInsets.only(top: 00.0, left: 0.0, right: 0.0),
                     child: RaisedButton(
                       elevation: 0.0,
-                      padding:
-                          EdgeInsets.only(top: 15.0, left: 20.0, right: 20.0),
+                      padding: EdgeInsets.only(top: 0.0, left: 5.0, right: 5.0),
                       color: Colors.white24,
                       onPressed: () {
-                        _launchURL();
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (ctx) => Splesh()));
                       },
                       child: Container(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              width: 120.0,
+                              width: 170.0,
                               height: 120.0,
                               child: Image.asset(
-                                "assets/images/bvm.PNG",
+                                "assets/images/img1.PNG",
                                 fit: BoxFit.fill,
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
-                              child: RaisedButton(
-                                color: Colors.blueAccent[700],
-                                onPressed: () {
-                                  _launchURL();
-                                },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: Text(
-                                  "BVN SR SEC SCHOOL",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14.0,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    top: 20.0,
+                                    bottom: 10.0,
+                                  ),
+                                  child: RaisedButton(
+                                    padding: EdgeInsets.only(
+                                        top: 10.0,
+                                        bottom: 10.0,
+                                        left: 20.0,
+                                        right: 20.0),
+                                    color: Colors.indigo[800],
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (ctx) => Splesh()));
+                                    },
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    child: Text(
+                                      "BVN ACADEMEY",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.0,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ],
                         ),
@@ -85,48 +103,53 @@ class _DefenceState extends State<Defence> {
                   ),
                 ],
               ),
-              Padding(
-                padding: EdgeInsets.only(top:70.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 60.0, left: 0.0, right: 0.0),
-                      child: RaisedButton(
-                        elevation: 0.0,
-                        padding: EdgeInsets.only(top: 0.0, left: 5.0, right: 5.0),
-                        color: Colors.white24,
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (ctx) => Splesh()));
-                        },
-                        child: Container(
-                          child: Column(
-                            //crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 00.0, left: 0.0, right: 0.0),
+                  child: RaisedButton(
+                    elevation: 0.0,
+                    padding:
+                        EdgeInsets.only(top: 15.0, left: 20.0, right: 20.0),
+                    color: Colors.white24,
+                    onPressed: () {
+                      _launchURL();
+                    },
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 170.0,
+                            height: 170.0,
+                            child: Image.asset(
+                              "assets/images/bvm.PNG",
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          Row(
                             children: [
-                              Container(
-                                width: 120.0,
-                                height: 120.0,
-                                child: Image.asset(
-                                  "assets/images/img1.PNG",
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
                               Padding(
-                                padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
+                                padding:
+                                    EdgeInsets.only(top: 10.0, bottom: 15.0),
                                 child: RaisedButton(
-                                  color: Colors.blueAccent[700],
+                                  padding: EdgeInsets.only(
+                                      top: 10.0,
+                                      bottom: 10.0,
+                                      left: 20.0,
+                                      right: 20.0),
+                                  color: Colors.indigo[800],
                                   onPressed: () {
-                                    Navigator.push(context,
-                              MaterialPageRoute(builder: (ctx) => Splesh()));
+                                    _launchURL();
                                   },
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   child: Text(
-                                    "BVN DEFENCE ACADMEY",
-                                    textAlign: TextAlign.center,
+                                    "BVN SR SEC SCHOOL",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 14.0,
@@ -136,27 +159,25 @@ class _DefenceState extends State<Defence> {
                               ),
                             ],
                           ),
-                        ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-             
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 
- 
-_launchURL() async {
-  const url = 'https://play.google.com/store/apps/details?id=com.bvnschool';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+  _launchURL() async {
+    const url = 'https://play.google.com/store/apps/details?id=com.bvnschool';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
-}
 }

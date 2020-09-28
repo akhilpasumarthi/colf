@@ -1,17 +1,12 @@
-import 'dart:convert';
-import 'dart:io';
-
+import 'Defince.dart';
 import 'package:bvm/Screen/HomeMain.dart';
 import 'package:bvm/Screen/MyCourse.dart';
 import 'package:bvm/Screen/SearchScreen.dart';
 import 'package:bvm/Screen/EbookScreen.dart';
 import 'package:bvm/Screen/UserScreen.dart';
-import 'package:http/http.dart' as http;
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toast/toast.dart';
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -64,45 +59,88 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _showpage,
-      bottomNavigationBar: CurvedNavigationBar(
-        key: _bottomNavigationKey,
-        color: Colors.white,
-        backgroundColor: Colors.blueAccent[700],
-        height: 50.0,
-        items: <Widget>[
-          Icon(
-            Icons.home,
-            size: 25,
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+          child: Scaffold(
+        body: _showpage,
+        bottomNavigationBar: CurvedNavigationBar(
+          key: _bottomNavigationKey,
+          color: Colors.pink[400],
+          backgroundColor: Colors.white,
+          height: 50.0,
+          items: <Widget>[
+            Icon(
+              Icons.home,
+              size: 25,
+              color: Colors.white,
+            ),
+            Icon(
+              Icons.library_books,
+              color: Colors.white,
+              size: 25,
+            ),
+            Icon(
+              Icons.collections_bookmark,
+              size: 25,
+              color: Colors.white,
+            ),
+            Icon(
+              Icons.search,
+              size: 25,
+              color: Colors.white,
+            ),
+            Icon(
+              Icons.supervised_user_circle,
+              size: 25,
+              color: Colors.white,
+            ),
+          ],
+          animationDuration: Duration(
+            milliseconds: 400,
           ),
-          Icon(
-            Icons.library_books,
-            size: 25,
-          ),
-          Icon(
-            Icons.collections_bookmark,
-            size: 25,
-          ),
-          Icon(
-            Icons.search,
-            size: 25,
-          ),
-          Icon(
-            Icons.supervised_user_circle,
-            size: 25,
-          ),
-        ],
-        animationDuration: Duration(
-          milliseconds: 400,
+          index: 0,
+          onTap: (index) {
+            setState(() {
+              _showpage = _pagechooser(index);
+            });
+          },
         ),
-        index: 0,
-        onTap: (index) {
-          setState(() {
-            _showpage = _pagechooser(index);
-          });
-        },
       ),
     );
+  }
+  Future<bool> _onBackPressed() {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to exit an App'),
+            actions: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: new GestureDetector(
+                      onTap: () => Navigator.of(context).pop(false),
+                      child: Text("NO"),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding:
+                        EdgeInsets.only(left: 20.0, bottom: 10.0, right: 20.0),
+                    child: new GestureDetector(
+                      onTap: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (ctx) => Defence())),
+                      child: Text("YES"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ) ??
+        false;
   }
 }

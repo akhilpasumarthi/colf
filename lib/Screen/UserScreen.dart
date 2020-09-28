@@ -85,7 +85,7 @@ class _UserScreenState extends State<UserScreen> {
                         child: Container(
                           height: 60.0,
                           width: 60.0,
-                          child: SvgPicture.asset("assets/images/user.svg"),
+                          child: Image.asset("assets/images/img1.PNG"),
                         ),
                       ),
                       Container(
@@ -97,7 +97,7 @@ class _UserScreenState extends State<UserScreen> {
                             Padding(
                               padding: EdgeInsets.only(top: 30.0, left: 20.0),
                               child: Text(
-                                "Hello",
+                                "BVN Academy",
                                 style: TextStyle(
                                   fontSize: 28.0,
                                 ),

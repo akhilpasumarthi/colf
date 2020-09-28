@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+
 import 'package:toast/toast.dart';
 
 class NdaBuyScreen extends StatefulWidget {
@@ -61,30 +62,20 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
-        backgroundColor: Colors.white,
+        leading: BackButton(color: Colors.white),
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
           //crossAxisAlignment: CrossAxisAlignment.center,
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Container(
-                width: 35.0,
-                height: 35.0,
-                child: Image.asset(
-                  "assets/images/img1.PNG",
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+            
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Defence Academy",
+                "BVM Academy",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 20.0,
                   //fontWeight: FontWeight.bold,
                 ),
@@ -121,13 +112,13 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
                           onPressed: () {
                             openCheckOut();
                           },
-                          color: Colors.white,
+                          color: Colors.black,
                           child: Row(
                             children: [
                               Text(
                                 "Pay Now",
                                 style: TextStyle(
-                                  color: Colors.blueAccent[700],
+                                  color: Colors.indigo[800],
                                 ),
                               ),
                               Padding(
@@ -135,7 +126,7 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
                                 child: Icon(
                                   Icons.arrow_forward_ios,
                                   size: 10.0,
-                                  color: Colors.blueAccent[700],
+                                  color: Colors.indigo[800],
                                 ),
                               ),
                             ],

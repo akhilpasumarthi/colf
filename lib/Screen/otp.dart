@@ -42,9 +42,9 @@ class _OTpState extends State<Otp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
                Padding(
-                padding: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
+                padding: EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
                 child: Container(
-                  height: 350.0,
+                  height: MediaQuery.of(context).size.height*0.30,
                   width: 250.0,
                   child: SvgPicture.asset("assets/images/otp1.svg"),
                 ),

@@ -1,3 +1,5 @@
+
+
 import 'package:bvm/Screen/Defince.dart';
 import 'package:bvm/Screen/DemoClasses.dart';
 import 'package:bvm/Screen/ExamTestSeriespage.dart';
@@ -7,10 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:bvm/Screen/MoreCourseScreen.dart';
 import 'package:bvm/Screen/FeaturesScreen.dart';
 import 'package:bvm/nda/NdaScreen.dart';
-import 'BottomNavigation.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class HomeMain extends StatefulWidget {
   static const routeName = '/HomeMain';
@@ -49,31 +51,22 @@ class _HomeMainState extends State<HomeMain> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
-          child: Scaffold(
+      child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          leading: BackButton(color: Colors.white),
+          backgroundColor: Colors.pink[400],
           elevation: 25.0,
           title: Row(
             //mainAxisAlignment: MainAxisAlignment.center,
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: EdgeInsets.all(0.0),
-                child: Container(
-                  width: 35.0,
-                  height: 35.0,
-                  child: Image.asset(
-                    "assets/images/img1.PNG",
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
+              
               Padding(
                 padding: EdgeInsetsDirectional.only(start: 12.0),
                 child: Text(
-                  "BVN Defence Academy",
+                  "BVN Academy",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -93,38 +86,44 @@ class _HomeMainState extends State<HomeMain> {
                     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Container(
-                          child: Row(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width * 1,
-                                height: 160,
-                                child: Image.asset(
-                                  "assets/images/img2.jpeg",
-                                  fit: BoxFit.fitWidth,
+                                scrollDirection: Axis.horizontal,
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                1,
+                                        height: 130,
+                                        child: Image.asset(
+                                          "assets/images/img2.jpeg",
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                1,
+                                        height: 130,
+                                        child: Image.asset(
+                                          "assets/images/img3.jpg",
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                1,
+                                        height: 130,
+                                        child: Image.asset(
+                                          "assets/images/img4.jpg",
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              Container(
-                                width: MediaQuery.of(context).size.width * 1,
-                                height: 160,
-                                child: Image.asset(
-                                  "assets/images/img3.jpg",
-                                  fit: BoxFit.fitWidth,
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width * 1,
-                                height: 160,
-                                child: Image.asset(
-                                  "assets/images/img4.jpg",
-                                  fit: BoxFit.fitWidth,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                       SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Container(
@@ -133,45 +132,48 @@ class _HomeMainState extends State<HomeMain> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                   Padding(
-                                  padding: EdgeInsets.only(top: 15.0, left: 25.0,bottom: 0.0),
-                                  child: Text(
-                                    "Courses",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 25.0,
-                                      //fontWeight: FontWeight.bold,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 15.0, left: 25.0, bottom: 0.0),
+                                    child: Text(
+                                      "Courses",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 25.0,
+                                        //fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 15.0,right: 20.0),
-                                  child: RaisedButton(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10.0),
-                                                ),
-                                                elevation: 0.0,
-                                                color: Colors.blueAccent[700],
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (ctx) =>
-                                                              MoreCourseScreen()));
-                                                },
-                                                child: Text(
-                                                  "See all",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15,
-                                                  ),
-                                                ),
-                                              ),
-                                ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 15.0, right: 20.0),
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      elevation: 0.0,
+                                      color: Colors.indigo[800],
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (ctx) =>
+                                                    MoreCourseScreen()));
+                                      },
+                                      child: Text(
+                                        "See all",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                               SingleChildScrollView(
@@ -183,130 +185,189 @@ class _HomeMainState extends State<HomeMain> {
                                     //height: 200,
                                     //decoration: BoxDecoration(color: Colors.white70),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                         Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                height: MediaQuery.of(context).size.height * 0.25,
-                width: MediaQuery.of(context).size.width,
-                child: FutureBuilder(
-                  future: courseData,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return GridView.builder(
-                        itemCount: courseNameList.length,
-                        physics: ScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            //childAspectRatio: 1.0,
-                            crossAxisSpacing: 20,
-                            crossAxisCount: 2),
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(top: 17.0),
-                            child: Container(
-                              //height: 100.0 ,
-                              width: 130,
-                              child: RaisedButton(
-                                padding: EdgeInsets.only(top: 0.0,left: 0.0,right: 0.0),
-                                color: Colors.white,
-                                onPressed: () {
-                                  Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-                                    return NdaScreen(coursedata: courses["data"]["data"][index]);
-                                  },));
-                                },
-                                elevation: 5.0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  //crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 0.0),
-                                      child: Container(
-                                         
-                                        width: 170,
-                                        height: 100,
-                                        child: CachedNetworkImage(imageUrl: courseimageurl[index],
-                                        fit: BoxFit.fill,
-                                       // height: 100.0,
-                                          placeholder: (context, url) => Container(
-                                            height: 30.0,
-                                            width: 30.0,
-                                            child: CircularProgressIndicator()),),
-
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:EdgeInsets.only(top: 12.0,bottom: 5.0),
-                                      child: Text(
-                                        courseNameList[index],
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14.0,
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.25,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: FutureBuilder(
+                                            future: courseData,
+                                            builder: (context, snapshot) {
+                                              if (snapshot.hasData) {
+                                                return GridView.builder(
+                                                  itemCount:
+                                                      courseNameList.length,
+                                                  physics: ScrollPhysics(),
+                                                  gridDelegate:
+                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                          //childAspectRatio: 1.0,
+                                                          crossAxisSpacing: 20,
+                                                          crossAxisCount: 2),
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 17.0),
+                                                      child: Container(
+                                                        //height: 100.0 ,
+                                                        width: 130,
+                                                        child: RaisedButton(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  top: 0.0,
+                                                                  left: 0.0,
+                                                                  right: 0.0),
+                                                          color: Colors.white,
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .push(
+                                                                    new MaterialPageRoute(
+                                                              builder:
+                                                                  (context) {
+                                                                return NdaScreen(
+                                                                    coursedata: courses["data"]
+                                                                            [
+                                                                            "data"]
+                                                                        [
+                                                                        index]);
+                                                              },
+                                                            ));
+                                                          },
+                                                          elevation: 5.0,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.0),
+                                                          ),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            //crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            0.0),
+                                                                child:
+                                                                    Container(
+                                                                  width: 170,
+                                                                  height: 100,
+                                                                  child:
+                                                                      CachedNetworkImage(
+                                                                    imageUrl:
+                                                                        courseimageurl[
+                                                                            index],
+                                                                    fit: BoxFit
+                                                                        .fill,
+                                                                    // height: 100.0,
+                                                                    placeholder: (context, url) => Container(
+                                                                        height:
+                                                                            30.0,
+                                                                        width:
+                                                                            30.0,
+                                                                        child:
+                                                                            CircularProgressIndicator()),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            12.0,
+                                                                        bottom:
+                                                                            5.0),
+                                                                child: Text(
+                                                                  courseNameList[
+                                                                      index],
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        14.0,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              }
+                                              return Center(
+                                                child: Container(
+                                                    width: 30.0,
+                                                    height: 30.0,
+                                                    child:
+                                                        CircularProgressIndicator()),
+                                              );
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    }
-                    return Center(
-                      child: Container(
-                        width: 30.0,
-                        height: 30.0,
-                        child: CircularProgressIndicator()),
-                    );
-                  },
-                ),
-              ),
-                                        
                                       ],
                                     ),
                                   ),
                                 ),
                               ),
                               SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Container(
-                          child: Row(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width * 1,
-                                height: 130,
-                                child: Image.asset(
-                                  "assets/images/img2.jpeg",
-                                  fit: BoxFit.fitWidth,
+                                scrollDirection: Axis.horizontal,
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                1,
+                                        height: 130,
+                                        child: Image.asset(
+                                          "assets/images/img2.jpeg",
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                1,
+                                        height: 130,
+                                        child: Image.asset(
+                                          "assets/images/img3.jpg",
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                1,
+                                        height: 130,
+                                        child: Image.asset(
+                                          "assets/images/img4.jpg",
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width * 1,
-                                height: 130,
-                                child: Image.asset(
-                                  "assets/images/img3.jpg",
-                                  fit: BoxFit.fitWidth,
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width * 1,
-                                height: 130,
-                                child: Image.asset(
-                                  "assets/images/img4.jpg",
-                                  fit: BoxFit.fitWidth,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
+                              )
                             ],
                           ),
                         ),
@@ -427,8 +488,8 @@ class _HomeMainState extends State<HomeMain> {
                                 child: Container(
                                   //width: 170,
                                   height: 80,
-                                  child:
-                                      SvgPicture.asset("assets/images/live.svg"),
+                                  child: SvgPicture.asset(
+                                      "assets/images/live.svg"),
                                 ),
                               ),
                               Padding(
@@ -511,7 +572,7 @@ class _HomeMainState extends State<HomeMain> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         elevation: 18.0,
-                        color: Colors.blueAccent[700],
+                        color: Colors.indigo[800],
                         child: Row(
                           children: [
                             Text(
@@ -543,40 +604,40 @@ class _HomeMainState extends State<HomeMain> {
       ),
     );
   }
+
   Future<bool> _onBackPressed() {
-  return showDialog(
-    context: context,
-    builder: (context) => new AlertDialog(
-      title: new Text('Are you sure?'),
-      content: new Text('Do you want to exit an App'),
-      actions: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-        Padding(
-          padding: EdgeInsets.only(bottom: 10.0),
-          child: new GestureDetector(
-            onTap: () => Navigator.of(context).pop(false),
-            child: Text("NO"),
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to exit an App'),
+            actions: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: new GestureDetector(
+                      onTap: () => Navigator.of(context).pop(false),
+                      child: Text("NO"),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding:
+                        EdgeInsets.only(left: 20.0, bottom: 10.0, right: 20.0),
+                    child: new GestureDetector(
+                      onTap: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (ctx) => Defence())),
+                      child: Text("YES"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ),
-        SizedBox(height: 20),
-        Padding(
-          padding: EdgeInsets.only(left: 20.0,bottom: 10.0,right: 20.0),
-          child: new GestureDetector(
-            onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (ctx) => Defence())),
-            child: Text("YES"),
-          ),
-        ),
-          ],
-        ),
-      ],
-    ),
-  ) ??
-      false;
-}
+        ) ??
+        false;
+  }
 }

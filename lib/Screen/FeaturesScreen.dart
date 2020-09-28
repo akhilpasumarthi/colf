@@ -1,4 +1,3 @@
-import 'package:bvm/Screen/AllPdfNotes.dart';
 import 'package:bvm/Screen/LiveSession.dart';
 import 'package:bvm/Screen/OurBaches.dart';
 import 'package:bvm/Screen/TestSerisscreen.dart';
@@ -25,31 +24,21 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
     return Scaffold(
     appBar: AppBar(
       leading: BackButton(
-     color: Colors.black
+     color: Colors.white,
    ), 
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
          //crossAxisAlignment: CrossAxisAlignment.start,
          // mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Container(
-                width: 35.0,
-                height: 35.0,
-                child: Image.asset(
-                  "assets/images/img1.PNG",
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+            
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Defence Academy",
+                "BVN Academy",
                 style: TextStyle(
-                  color: Colors.black87,
+                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -216,49 +205,44 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 17.0),
-                    child: Container(
-                      width: 150,
-                      child: RaisedButton(
-                        color: Colors.white,
-                        onPressed: () {
-                            Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (ctx) => AllPdfNotes()));
-                        },
-                        elevation: 5.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7.0),
-                        ),
-                        child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.start,
-                          //crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Container(
-                                //width: 170,
-                                height: 80,
-                               child: SvgPicture.asset("assets/images/allnotes.svg"),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                "All Notes PDF",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 13.0,
+                      padding: EdgeInsets.only(top: 17.0),
+                      child: Container(
+                        width: 150,
+                        child: RaisedButton(
+                          color: Colors.white,
+                          onPressed: () {},
+                          elevation: 5.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7.0),
+                          ),
+                          child: Column(
+                            //mainAxisAlignment: MainAxisAlignment.start,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Container(
+                                  //width: 170,
+                                  height: 80,
+                                  child: SvgPicture.asset("assets/images/assignment.svg"),
                                 ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  "Assignments",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 13.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
               Row(
@@ -464,7 +448,7 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+                              padding: EdgeInsets.only(top: 5.0,bottom: 5.0),
                               child: Text(
                                 "Performance & result",
                                 textAlign: TextAlign.center,
@@ -526,143 +510,64 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 17.0),
-                    child: Container(
-                      width: 150,
-                      child: RaisedButton(
-                        color: Colors.white,
-                        onPressed: () {
-                          Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (ctx) => Chatbot()));
-                        },
-                        elevation: 5.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7.0),
-                        ),
-                        child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.start,
-                          //crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Container(
-                                //width: 170,
-                                height: 80,
-                               child: SvgPicture.asset("assets/images/doubts.svg"),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                "Message Doubts",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 13.0,
+              Padding(
+                padding: EdgeInsets.only(bottom: 40.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 17.0),
+                      child: Container(
+                        width: 150,
+                        child: RaisedButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (ctx) => Chatbot()));
+                          },
+                          elevation: 5.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7.0),
+                          ),
+                          child: Column(
+                            //mainAxisAlignment: MainAxisAlignment.start,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Container(
+                                  //width: 170,
+                                  height: 80,
+                                 child: SvgPicture.asset("assets/images/doubts.svg"),
                                 ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  "Message Doubts",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 13.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 17.0),
-                    child: Container(
-                      width: 150,
-                      child: RaisedButton(
-                        color: Colors.white,
-                        onPressed: () {},
-                        elevation: 5.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7.0),
-                        ),
-                        child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.start,
-                          //crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Container(
-                                //width: 170,
-                                height: 80,
-                                child: SvgPicture.asset("assets/images/assignment.svg"),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                "Assignments",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 13.0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 17.0,bottom: 30.0),
-                    child: Container(
-                      width: 150,
-                      child: RaisedButton(
-                        color: Colors.white,
-                        onPressed: () {},
-                        elevation: 5.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7.0),
-                        ),
-                        child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.start,
-                          //crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Container(
-                                //width: 170,
-                                height: 80,
-                               child: SvgPicture.asset("assets/images/timetable.svg"),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                "Time Table",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 13.0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  
-                ],
-              ),
+                    
+             
             ],
           ),
         ),
+            ],
       ),
+        ),
+       ),
       //bottomNavigationBar: BottomNavigation(),
     );
   }

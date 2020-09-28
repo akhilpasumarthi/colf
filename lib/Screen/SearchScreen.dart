@@ -48,30 +48,19 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
          leading: BackButton(
-     color: Colors.black
+     color: Colors.white,
    ), 
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Container(
-                width: 35.0,
-                height: 35.0,
-                child: Image.asset(
-                  "assets/images/img1.PNG",
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Defence Academy",
+                "BVN Academy",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 20.0,
                   //fontWeight: FontWeight.bold,
                 ),

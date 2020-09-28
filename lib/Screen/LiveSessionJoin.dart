@@ -10,8 +10,8 @@ class _LiveSessionJoinState extends State<LiveSessionJoin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
-        backgroundColor: Colors.white,
+        leading: BackButton(color: Colors.white),
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
           children: [
@@ -31,7 +31,7 @@ class _LiveSessionJoinState extends State<LiveSessionJoin> {
               child: Text(
                 "BVN Defence Academy",
                 style: TextStyle(
-                  color: Colors.black87,
+                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
