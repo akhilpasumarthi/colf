@@ -178,20 +178,14 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
 
   Widget topicListView(int index, data) {
     return Padding(
-      padding: EdgeInsets.only(top: 20.0, right: 50),
+      padding: EdgeInsets.only(top: 20.0, right: 2.0),
       child: Container(
         width: MediaQuery.of(context).size.width * 1,
         child: Row(
           children: [
             RaisedButton(
               onPressed: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (ctx) => NdaMathsLecturs(
-                //               id: data["data"]["data"][index]["id"],
-                //               topicName: data["data"]["data"][index]['title'],
-                //             )));
+                
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -206,7 +200,7 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
               color: Colors.white,
               elevation: 30.0,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.70,

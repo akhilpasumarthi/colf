@@ -259,6 +259,7 @@ class _NdaScreenState extends State<NdaScreen> {
     return Padding(
       padding: EdgeInsets.only(top: 20.0),
       child: RaisedButton(
+        elevation: 0.0,
         onPressed: () {
           // Navigator.push(
           //     context,
@@ -279,7 +280,7 @@ class _NdaScreenState extends State<NdaScreen> {
                       
                       )));
         },
-        color: Colors.white,
+        color: Colors.white24,
         child: Container(
           height: 110.0,
           child: Row(
@@ -289,22 +290,23 @@ class _NdaScreenState extends State<NdaScreen> {
               Padding(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Container(
-                  width: 130,
-                  //height: 105,
+                  width: 110,
+                  height: 80,
                   child: CachedNetworkImage(
                     imageUrl: subData["data"]["data"][index]["image"],
+                    fit: BoxFit.fill,
                     placeholder: (context, url) => CircularProgressIndicator(),
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15.0, top: 0.0),
+                padding: EdgeInsets.only(left: 15.0, top: 15.0),
                 child: Container(
                   //height: 70,
                   child: Container(
-                    width: MediaQuery.of(context).size.width * .45,
+                    width: MediaQuery.of(context).size.width * .54,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                     // mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
