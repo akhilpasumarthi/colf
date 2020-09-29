@@ -2,6 +2,7 @@ import 'package:bvm/Nda/NdaMathsLecturs.dart';
 import 'package:bvm/Screen/BottomNavigation.dart';
 import 'package:bvm/Screen/HomeMain.dart';
 import 'package:bvm/Screen/LoginSigninScreen.dart';
+import 'package:bvm/Screen/MainSplash.dart';
 import 'package:bvm/Screen/UserScreen.dart';
 import 'package:bvm/nda/NdaMathsNotesScreen.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Montserrat-Light',
         //appBarTheme: AppBarTheme(color: Colors.black87),
       ),
-      home: Defence(),
+      home: MainSplash(),
       routes: {
         MoreCourseScreen.routeName: (context) => MoreCourseScreen(),
         FeaturesScreen.routeName: (context) => FeaturesScreen(),

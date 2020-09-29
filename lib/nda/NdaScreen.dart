@@ -1,8 +1,6 @@
-import 'package:bvm/Screen/BottomNavigation.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../Nda/NdaMathsScreen.dart';
 
 import 'NdaBuyScreen.dart';
 import 'NdaMathsTopics.dart';
@@ -45,31 +43,21 @@ class _NdaScreenState extends State<NdaScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
+        leading: BackButton(color: Colors.white),
         //shadowColor: Colors.red,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
           //crossAxisAlignment: CrossAxisAlignment.start,
           //mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Container(
-                width: 35.0,
-                height: 35.0,
-                child: Image.asset(
-                  "assets/images/img1.PNG",
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+            
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Defence Academy",
+                "BVN Academy",
                 style: TextStyle(
-                  color: Colors.black87,
+                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -86,7 +74,7 @@ class _NdaScreenState extends State<NdaScreen> {
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 10.0),
+                padding: EdgeInsets.only(top: 0.0),
                 child: Container(
                   decoration: BoxDecoration(color: Colors.white,
                       //shape: .circle,
@@ -97,21 +85,20 @@ class _NdaScreenState extends State<NdaScreen> {
                           spreadRadius: 2.0,
                         ),
                       ]),
-                  height: 170,
+                  height: 200,
                   width: MediaQuery.of(context).size.width * 1,
                   child: Column(
                     children: [
                       Container(
-                        height: 130,
+                        height: 160,
                         width: MediaQuery.of(context).size.width * 1,
-                        child: CachedNetworkImage(
-                          imageUrl: widget.coursedata['course_image'],
-                          fit: BoxFit.fill,
-                          placeholder: (context, url) => Container(
-                              height: 30.0,
-                              width: 30.0,
-                              child: CircularProgressIndicator()),
-                        ),
+                        child: CachedNetworkImage(imageUrl: widget.coursedata['course_image'],
+                        fit: BoxFit.fill,
+                        placeholder: (context,url)=>Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: CircularProgressIndicator()
+                        ),),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
@@ -188,7 +175,7 @@ class _NdaScreenState extends State<NdaScreen> {
                                     padding:
                                         EdgeInsets.only(left: 10.0, top: 22.0),
                                     child: RaisedButton(
-                                      color: Colors.blueAccent[700],
+                                      color: Colors.indigo[800],
                                       onPressed: () {
                                         Navigator.push(
                                             context,
@@ -289,6 +276,7 @@ class _NdaScreenState extends State<NdaScreen> {
                         subject_name: subData["data"]["data"][index]
                             ["subject_name"],
                         id: subData["data"]["data"][index]["id"],
+                      
                       )));
         },
         color: Colors.white,

@@ -1,10 +1,10 @@
 import 'package:bvm/Screen/pdfViewScreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../services/courses.dart';
 
+ 
 class NdaNotesScreen extends StatefulWidget {
   final imageurl;
   final id;
@@ -38,34 +38,22 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
-        backgroundColor: Colors.white,
+        leading: BackButton(
+     color: Colors.white,
+   ), 
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
           //mainAxisAlignment: MainAxisAlignment.start,
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Container(
-                width: 35.0,
-                height: 35.0,
-                child: CachedNetworkImage(
-                        imageUrl: widget.imageurl,
-                        fit: BoxFit.fill,
-                        placeholder: (context, url) => Container(
-                            height: 30.0,
-                            width: 30.0,
-                            child: CircularProgressIndicator()),
-                      ),
-              ),
-            ),
+            
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Defence Academy",
+                "BVM Academy",
                 style: TextStyle(
-                  color: Colors.black87,
+                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -100,6 +88,7 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
                     children: [
                       Container(
                         height: 160,
+                        
                         width: MediaQuery.of(context).size.width * 1,
                         child:CachedNetworkImage(
                         imageUrl: widget.imageurl,
@@ -124,53 +113,68 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
                   ),
                 ),
               ),
-              Container(
-                child: FutureBuilder(
-                  future: data,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return (tempdata["data"]["data"].length != 0)
-                          ? ListView.builder(
-                              shrinkWrap: true,
-                              physics: BouncingScrollPhysics(),
-                              itemCount: tempdata["data"]["data"].length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 20),
-                                  child: RaisedButton(
-                                    elevation: 5,
-                                    color: Colors.white,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: Text(tempdata["data"]["data"]
-                                          [index]['title']),
-                                    ),
-                                    onPressed: () async {
-                                      Navigator.of(context)
-                                          .push(new MaterialPageRoute(
-                                        builder: (context) {
-                                          return PdfView(
-                                            url: tempdata["data"]["data"][index]
-                                                ['file_path'],
-                                          );
-                                        },
-                                      ));
-                                    },
-                                  ),
-                                );
-                              },
-                            )
-                          : emptyNotesWidget();
-                    }
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
+              Padding(
+                padding: EdgeInsets.only(top: 20.0, left: 0.0),
+                child: Container(
+                  //height: 95,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                               Padding(
+                          padding: EdgeInsets.only(top: 0.00, left: 0.0),
+                          child: Container(
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 200,
+                                  height: 200,
+                                  child: SvgPicture.asset("assets/images/error.svg"),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                  child: Padding(
+                  padding: EdgeInsets.only(top: 30.0, left: 0.0),
+                  child: Text("Oops! Currently there is no Notes ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color:Colors.black,
+                    fontSize: 20.0,
+                  ),
+                  ),
+                ),
+                    ),
+                ],
+              ),
+               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                  child: Padding(
+                  padding: EdgeInsets.only(top: 10.0, left: 00.0),
+                  child: Text("Available",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color:Colors.black,
+                    fontSize: 20.0,
+                  ),
+                  ),
+                ),
+                    ),
+                ],
               ),
             ],
           ),

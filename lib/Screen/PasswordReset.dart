@@ -25,7 +25,7 @@ class _PaswordResetState extends State<PaswordReset> {
                         children: [
                           Container(
                             width: 120.0,
-                            height: 130.0,
+                            height: MediaQuery.of(context).size.height*.40,
                             child: Image.asset(
                               "assets/images/img1.PNG",
                               fit: BoxFit.fill,

@@ -40,30 +40,20 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
-        backgroundColor: Colors.white,
+        leading: BackButton(color: Colors.white),
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
           //mainAxisAlignment: MainAxisAlignment.start,
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Container(
-                width: 35.0,
-                height: 35.0,
-                child: Image.asset(
-                  "assets/images/img1.PNG",
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+            
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Defence Academy",
+                "BVN Academy",
                 style: TextStyle(
-                  color: Colors.black87,
+                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -205,22 +195,23 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
                   Container(
                     width: MediaQuery.of(context).size.width * 0.75,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 10.0),
-                      child: Text(
-                        data["data"]["data"][index]["title"],
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.black,
-                        ),
+                    padding: EdgeInsets.only(left: 10.0),
+                    child: Text(
+                      data["data"]["data"][index]["title"],
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.black,
                       ),
                     ),
                   ),
-                ],
+                
               ),
             ],
           ),
+            ],
         ),
+      ),
       ),
     );
   }

@@ -45,14 +45,14 @@ class _SpleshState extends State<Splesh> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 70.0, left: 0.0, right: 0.0),
+                  padding: EdgeInsets.only(top: 150.0, left: 0.0, right: 0.0),
                   child: Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: 140.0,
+                          width: 180.0,
                           height: 130.0,
                           child: Image.asset(
                             "assets/images/img1.PNG",
@@ -76,7 +76,7 @@ class _SpleshState extends State<Splesh> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 200.0, left: 20.0, right: 20.0),
+              padding: EdgeInsets.only(top: 150.0, left: 20.0, right: 20.0),
               child: Container(
                 height: 90.0,
                 child: Stack(

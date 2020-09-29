@@ -2,22 +2,32 @@ import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'NdaMathsLecturs.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import '../Screen/MoreCourseScreen.dart';
 import 'NdaMathsScreen.dart';
+
+
 
 class NdaMathsTopics extends StatefulWidget {
   final data;
   final String subject_name;
   final id;
+   final coursedata;
+  const NdaMathsTopics({Key key, this.subject_name, this.id,this.coursedata}) : super(key: key);
+    
+    
 
-  const NdaMathsTopics({Key key, this.subject_name, this.id, this.data})
-      : super(key: key);
+  
+
   @override
   _NdaMathsTopicsState createState() => _NdaMathsTopicsState();
 }
 
 class _NdaMathsTopicsState extends State<NdaMathsTopics> {
   var lectures_data;
+  var subjectsData;
   List courseimageurl = [];
+  var subjects;
 
   var topics;
   var count;
@@ -37,34 +47,38 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
     return data;
   }
 
+  getsubDetails() async {
+    print(widget.coursedata["id"]);
+
+    var data = await getCourseSubjects(widget.coursedata["id"]);
+    await Future.delayed(Duration(milliseconds: 1500));
+    
+    setState(() {
+      subjects = data;
+    });
+    return data;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
-        backgroundColor: Colors.white,
+        leading: BackButton(color: Colors.white),
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
           //mainAxisAlignment: MainAxisAlignment.start,
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Container(
-                width: 35.0,
-                height: 35.0,
-                child: Image.asset(
-                  "assets/images/img1.PNG",
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+            
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Defence Academy",
+                "BVN Academy",
                 style: TextStyle(
-                  color: Colors.black87,
+                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -97,18 +111,15 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
                 width: MediaQuery.of(context).size.width * 1,
                 child: Column(
                   children: [
-                    Container(
-                      height: 160,
-                      width: MediaQuery.of(context).size.width * 1,
-                      child: CachedNetworkImage(
-                        imageUrl: widget.data['image'],
-                        fit: BoxFit.fill,
-                        placeholder: (context, url) => Container(
-                            height: 30.0,
-                            width: 30.0,
-                            child: CircularProgressIndicator()),
+                     Container(
+                        height: 160,
+                        width: MediaQuery.of(context).size.width * 1,
+                        child: Image.asset(
+                          "assets/images/nda.jpeg",
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width * 1,
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
@@ -239,4 +250,6 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
       ),
     );
   }
-}
+
+
+  }
