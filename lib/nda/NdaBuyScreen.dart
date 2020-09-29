@@ -112,13 +112,13 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
                           onPressed: () {
                             openCheckOut();
                           },
-                          color: Colors.black,
+                          color: Colors.indigo[800],
                           child: Row(
                             children: [
                               Text(
                                 "Pay Now",
                                 style: TextStyle(
-                                  color: Colors.indigo[800],
+                                  color: Colors.white,
                                 ),
                               ),
                               Padding(
@@ -126,7 +126,7 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
                                 child: Icon(
                                   Icons.arrow_forward_ios,
                                   size: 10.0,
-                                  color: Colors.indigo[800],
+                                  color: Colors.white,
                                 ),
                               ),
                             ],

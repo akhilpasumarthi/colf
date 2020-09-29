@@ -272,7 +272,7 @@ class _NdaScreenState extends State<NdaScreen> {
               context,
               MaterialPageRoute(
                   builder: (ctx) => NdaMathsTopics(
-                        data: subData["data"]["data"][index],
+                        //data: subData["data"]["data"][index],
                         subject_name: subData["data"]["data"][index]
                             ["subject_name"],
                         id: subData["data"]["data"][index]["id"],

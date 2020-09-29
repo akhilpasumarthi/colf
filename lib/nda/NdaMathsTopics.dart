@@ -1,9 +1,7 @@
 import 'package:bvm/services/courses.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'NdaMathsLecturs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../Screen/MoreCourseScreen.dart';
 import 'NdaMathsScreen.dart';
 
 
@@ -12,13 +10,12 @@ class NdaMathsTopics extends StatefulWidget {
   final data;
   final String subject_name;
   final id;
-   final coursedata;
-  const NdaMathsTopics({Key key, this.subject_name, this.id,this.coursedata}) : super(key: key);
-    
-    
-
+  final  coursedata;
   
+ const NdaMathsTopics({Key key, this.subject_name, this.id, this.data,this.coursedata})
+      : super(key: key);
 
+    
   @override
   _NdaMathsTopicsState createState() => _NdaMathsTopicsState();
 }
@@ -251,5 +248,4 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
     );
   }
 
-
-  }
+}
