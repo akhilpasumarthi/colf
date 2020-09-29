@@ -1,14 +1,17 @@
 import 'package:bvm/Nda/NdaMathsLecturs.dart';
 import 'package:bvm/nda/NdaMathsNotesScreen.dart';
 import 'package:bvm/nda/NdaMathsTopics.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class NdaMathsScreen extends StatefulWidget {
+  final data;
   final String subject_name;
   final id;
   static const routeName = '/NdaMathsscreen';
 
-  const NdaMathsScreen({Key key, this.subject_name, this.id}) : super(key: key);
+  const NdaMathsScreen({Key key, this.subject_name, this.id, this.data})
+      : super(key: key);
 
   @override
   _NdaMathsScreenState createState() => _NdaMathsScreenState();
@@ -78,10 +81,13 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
                     Container(
                       height: 160,
                       width: MediaQuery.of(context).size.width * 1,
-                      child: Image.asset(
-                        "assets/images/nda.jpeg",
-                        fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width * 1,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.data['lesson_image'],
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) => Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: Center(child: CircularProgressIndicator())),
                       ),
                     ),
                   ],
@@ -108,10 +114,18 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
                         width: 190.0,
                         child: RaisedButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (ctx) => NdaMathsTopics(id:widget.id,subject_name:widget.subject_name)));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (ctx) => NdaMathsTopics(id:widget.id,subject_name:widget.subject_name)));
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (ctx) {
+                              return NdaMathsLecturs(
+                                imageurl: widget.data['lesson_image'],
+                                id: widget.id,
+                                topicName: widget.subject_name,
+                              );
+                            }));
                           },
                           padding: EdgeInsets.only(
                               top: 10.0, bottom: 10.0, left: 7.0),
@@ -153,7 +167,10 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (ctx) => NdaNotesScreen()));
+                                    builder: (ctx) => NdaNotesScreen(
+                                          id: widget.id,
+                                          imageurl:widget.data['lesson_image'],
+                                        )));
                           },
                           padding: EdgeInsets.only(
                               top: 10.0, bottom: 10.0, left: 7.0),
