@@ -29,7 +29,7 @@ class _MainSplashState extends State<MainSplash> {
                 padding: EdgeInsets.only(top: 30.0),
                 child: Container(
                   height: 250.0,
-                  width: 330.0,
+                  width: 360.0,
                   child: Image.asset(
                     "assets/images/splash.PNG",
                     fit: BoxFit.fill,

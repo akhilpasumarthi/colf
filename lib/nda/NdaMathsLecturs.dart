@@ -1,14 +1,16 @@
 import 'package:bvm/nda/video.dart';
 import 'package:bvm/services/courses.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../Screen/BottomNavigation.dart';
 
 class NdaMathsLecturs extends StatefulWidget {
+  final String imageurl;
   final String topicName;
   final id;
   static const routeName = '/NdaMathsLecturs';
 
-  const NdaMathsLecturs({Key key, this.topicName, this.id}) : super(key: key);
+  const NdaMathsLecturs({Key key, this.topicName, this.id, this.imageurl}) : super(key: key);
 
   @override
   _NdaMathsLectursState createState() => _NdaMathsLectursState();
@@ -87,11 +89,14 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
                       Container(
                         height: 160,
                         width: MediaQuery.of(context).size.width * 1,
-                        child: Image.asset(
-                          "assets/images/nda.jpeg",
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width * 1,
-                        ),
+                        child: CachedNetworkImage(
+                        imageUrl: widget.imageurl,
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) => Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: CircularProgressIndicator()),
+                      ),
                       ),
                     ],
                   ),
@@ -175,20 +180,20 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
             children: [
               Column(
                 children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 15.0),
-                  child: Icon(
-                    Icons.play_arrow,
-                    color: Colors.red[900],
-                    size: 40.0,
+                  Padding(
+                    padding: EdgeInsets.only(left: 15.0),
+                    child: Icon(
+                      Icons.play_arrow,
+                      color: Colors.red[900],
+                      size: 40.0,
+                    ),
                   ),
-                ),
                 ],
               ),
               Column(
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width*0.75,
+                    width: MediaQuery.of(context).size.width * 0.75,
                     child: Padding(
                     padding: EdgeInsets.only(left: 10.0),
                     child: Text(
@@ -199,13 +204,14 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
                         color: Colors.black,
                       ),
                     ),
-                ),
                   ),
-                ],
+                
               ),
             ],
           ),
+            ],
         ),
+      ),
       ),
     );
   }

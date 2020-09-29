@@ -1,9 +1,9 @@
 import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../Nda/NdaMathsScreen.dart';
 
 import 'NdaBuyScreen.dart';
+import 'NdaMathsTopics.dart';
 
 class NdaScreen extends StatefulWidget {
   final coursedata;
@@ -32,7 +32,7 @@ class _NdaScreenState extends State<NdaScreen> {
 
     var data = await getCourseSubjects(widget.coursedata["id"]);
     await Future.delayed(Duration(milliseconds: 1500));
-    
+
     setState(() {
       subjects = data;
     });
@@ -260,10 +260,19 @@ class _NdaScreenState extends State<NdaScreen> {
       padding: EdgeInsets.only(top: 20.0),
       child: RaisedButton(
         onPressed: () {
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (ctx) => NdaMathsScreen(
+          //               subject_name: subData["data"]["data"][index]
+          //                   ["subject_name"],
+          //               id: subData["data"]["data"][index]["id"],
+          //             )));
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (ctx) => NdaMathsScreen(
+                  builder: (ctx) => NdaMathsTopics(
+                        data: subData["data"]["data"][index],
                         subject_name: subData["data"]["data"][index]
                             ["subject_name"],
                         id: subData["data"]["data"][index]["id"],
@@ -277,26 +286,23 @@ class _NdaScreenState extends State<NdaScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
-                  child: Container(
-
-                    width: 130,
-                    //height: 105,
-                    child: CachedNetworkImage(imageUrl:subData["data"]["data"][index]["image"],
-                      placeholder: (context, url) => CircularProgressIndicator(),),
-
-
+              Padding(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                child: Container(
+                  width: 130,
+                  //height: 105,
+                  child: CachedNetworkImage(
+                    imageUrl: subData["data"]["data"][index]["image"],
+                    placeholder: (context, url) => CircularProgressIndicator(),
                   ),
                 ),
-
+              ),
               Padding(
                 padding: EdgeInsets.only(left: 15.0, top: 0.0),
                 child: Container(
                   //height: 70,
                   child: Container(
-                    width: MediaQuery.of(context).size.width*.45,
+                    width: MediaQuery.of(context).size.width * .45,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,

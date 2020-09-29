@@ -1,15 +1,38 @@
+import 'package:bvm/Screen/pdfViewScreen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+
  
 class NdaNotesScreen extends StatefulWidget {
+  final imageurl;
+  final id;
   static const routeName = '/NdaMathsNotesscreen';
+
+  const NdaNotesScreen({Key key, this.id, this.imageurl}) : super(key: key);
 
   @override
   _NdaNotesScreenState createState() => _NdaNotesScreenState();
 }
 
 class _NdaNotesScreenState extends State<NdaNotesScreen> {
-    int _currentindex = 0;
+  int _currentindex = 0;
+  var data, tempdata;
+  @override
+  void initState() {
+    super.initState();
+    data = getdata();
+  }
+
+  getdata() async {
+    var _data = await getLecturesMedia(widget.id, 1);
+    setState(() {
+      tempdata = _data;
+    });
+    print(tempdata["data"]["data"]);
+    return tempdata;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +90,14 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
                         height: 160,
                         
                         width: MediaQuery.of(context).size.width * 1,
-                        child: Image.asset(
-                          "assets/images/nda.jpeg",
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width * 1,
-                        ),
+                        child:CachedNetworkImage(
+                        imageUrl: widget.imageurl,
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) => Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: Center(child: CircularProgressIndicator())),
+                      ),
                       ),
                     ],
                   ),
@@ -154,7 +180,50 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
           ),
         ),
       ),
-     
+    );
+  }
+
+  Widget emptyNotesWidget() {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: 20.0, left: 0.0),
+          child: Container(
+            //height: 95,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 30, left: 140),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 130,
+                          height: 130,
+                          child: Image.asset(
+                            "assets/images/oops.jpg",
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 30.0, left: 20.0),
+          child: Text(
+            "Oops! Currently there is no Notes Available",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20.0,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
