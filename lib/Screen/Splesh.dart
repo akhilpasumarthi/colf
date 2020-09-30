@@ -88,10 +88,10 @@ class _SpleshState extends State<Splesh> {
                       child: LiquidLinearProgressIndicator(
                       
                         value: _initial, // Defaults to 0.5.
-                        valueColor: AlwaysStoppedAnimation(Colors.blueAccent[700]), // Defaults to the current Theme's accentColor.
+                        valueColor: AlwaysStoppedAnimation(Colors.indigo[800]), // Defaults to the current Theme's accentColor.
                         backgroundColor: Colors
                             .white, // Defaults to the current Theme's backgroundColor.
-                        borderColor: Colors.blueAccent[700],
+                        borderColor: Colors.indigo[800],
                         borderWidth: 2.0,
                         borderRadius: 5.0,
                         direction: Axis

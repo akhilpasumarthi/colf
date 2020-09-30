@@ -63,9 +63,10 @@ Future<Map> getExams() async {
   return data;
 }
 
-Future<Map> getExamSeries(var id) async{
+Future<Map> getExamSeries(var id) async {
   var token = await gettoken();
-  var uri = Uri.parse("https://bilaltech.in/api/public/api/getExamSeries?exam_id=$id");
+  var uri = Uri.parse(
+      "https://bilaltech.in/api/public/api/getExamSeries?exam_id=$id");
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
@@ -73,9 +74,10 @@ Future<Map> getExamSeries(var id) async{
   return data;
 }
 
-Future<Map> getExamSeriesTest(var id) async{
+Future<Map> getExamSeriesTest(var id) async {
   var token = await gettoken();
-  var uri = Uri.parse("https://bilaltech.in/api/public/api/getTest?exam_test_series_id=$id");
+  var uri = Uri.parse(
+      "https://bilaltech.in/api/public/api/getTest?exam_test_series_id=$id");
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
@@ -83,12 +85,25 @@ Future<Map> getExamSeriesTest(var id) async{
   return data;
 }
 
-Future<Map> getTestQsns(var id) async{
+Future<Map> getTestQsns(var id) async {
   var token = await gettoken();
-  var uri = Uri.parse("https://bilaltech.in/api/public/api/getQuestions?test_id=$id");
+  var uri =
+      Uri.parse("https://bilaltech.in/api/public/api/getQuestions?test_id=$id");
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
   Map data = jsonDecode(response.body);
+  return data;
+}
+
+Future<Map> getliveclasses() async {
+  var token = await gettoken();
+  var uri = Uri.parse("https://bilaltech.in/api/public/api/getClasses");
+  var response = await http
+      .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
+  print(response.statusCode);
+  Map data = jsonDecode(response.body);
+  print(data);
+
   return data;
 }

@@ -41,7 +41,7 @@ class _ChatbotState extends State<Chatbot> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigo[900],
+        backgroundColor: Colors.pink[400],
         title: Text(
           "Message Doubt",
           style: TextStyle(

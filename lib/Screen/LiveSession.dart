@@ -2,37 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-
 class LiveSession extends StatefulWidget {
   @override
   _LiveSessionState createState() => _LiveSessionState();
 }
 
 class _LiveSessionState extends State<LiveSession> {
-
- int _currentindex = 0;
+  int _currentindex = 0;
   List courseNameList = [];
-  List courseimageurl=[];
-  var courseData;
+  List courseimageurl = [];
+  var livedata;
   Map courses;
+  List url = [];
+  DateTime data;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    courseData = courselist();
+    livedata = getliveclasses();
   }
 
-  courselist() async {
-    Map course1 = await getcourses();
+  getliveclasses() async {
+    Map course1 = await getliveclasses();
     setState(() {
-      courses = course1;
-      print(courses['success']);
-      courses["data"]["data"].forEach((element) {
+      livedata = course1;
+      //print(course1);
+      //print(courses['success']);
+      livedata["data"]["data"].forEach((element) {
         courseNameList.add(element["title"]);
         courseimageurl.add(element['course_image']);
+        url.add(element['link']);
+        data.add(element['start_data_time']);
       });
     });
-    return courses;
+    return course1;
   }
 
   @override
@@ -44,7 +47,6 @@ class _LiveSessionState extends State<LiveSession> {
         elevation: 25.0,
         title: Row(
           children: [
-            
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
@@ -62,107 +64,82 @@ class _LiveSessionState extends State<LiveSession> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsetsDirectional.only(top: 17,bottom: 5.0),
-              child: Text(
-                "Courses for Live Session",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                              child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    height: MediaQuery.of(context).size.height * 1.0,
-                    width: MediaQuery.of(context).size.width,
-                    child: FutureBuilder(
-                      future: courseData,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return GridView.builder(
-                            itemCount: courseNameList.length,
-                            physics: ScrollPhysics(),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1.0,
-                  crossAxisSpacing: 20,
-                  crossAxisCount: 2),
-                            itemBuilder: (context, index) {
-                              return Padding(
-                  padding: EdgeInsets.only(top: 17.0),
-                  child:  Container(
-                    //height: 100.0 ,
-                    //width: 130,
-                    child: RaisedButton(
-                padding: EdgeInsets.only(top: 0.0,left: 0.0,right: 0.0),
-                color: Colors.white,
-                onPressed: () {
-                 
-                },
-                elevation: 5.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  //crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 0.0),
-                      child: Container(
-
-                        width: 170,
-                        height: 95,
-                        child: CachedNetworkImage(imageUrl: courseimageurl[index],
-                        fit: BoxFit.fill,
-                       // height: 100.0,
-                          placeholder: (context, url) => Container(
-                            height: 30.0,
-                            width: 30.0,
-                            child: CircularProgressIndicator()),),
-
-                      ),
-                    ),
-                    Padding(
-                      padding:EdgeInsets.only(top: 12.0,bottom: 5.0),
-                      child: Text(
-                        courseNameList[index],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.only(top: 20, bottom: 5.0),
+                  child: Text(
+                    "Live Classes",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                              );
-                            },
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 1,
+                  height: 50.0,
+                  padding: EdgeInsets.only(top: 15.0),
+                  child: FutureBuilder(
+                      future: livedata,
+                      builder: (context, snapshot) {
+                        //print(snapshot.data);
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text(snapshot.error.toString()),
                           );
                         }
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              physics: ScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: livedata['data']["data"].length,
+                              itemBuilder: (context, index) {
+                                return LiveClassesWidget(index, snapshot.data);
+                              });
+                        }
                         return Center(
-                          child: Container(
-                            width: 30.0,
-                            height: 30.0,
-                            child: CircularProgressIndicator()),
+                          child: CircularProgressIndicator(),
                         );
-                      },
-                    ),
-                  ),
-              ),
+                      }),
+                ),
+              ],
             ),
-           
           ],
         ),
       ),
       // bottomNavigationBar: BottomNavigation(),
+    );
+  }
+
+  Widget LiveClassesWidget(int index, var subdata) {
+    return Padding(
+      padding: EdgeInsets.only(top: 20.0),
+      child: Container(
+        height: 50.0,
+        width: MediaQuery.of(context).size.width * 1,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    subdata['data']['data'][index]['start_data_time'],
+                    style: TextStyle(fontSize: 20.0, color: Colors.black),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
