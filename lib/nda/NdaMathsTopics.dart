@@ -1,31 +1,22 @@
 import 'package:bvm/services/courses.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'NdaMathsLecturs.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'NdaMathsScreen.dart';
-
-
 
 class NdaMathsTopics extends StatefulWidget {
   final data;
   final String subject_name;
   final id;
-  final  coursedata;
-  
- const NdaMathsTopics({Key key, this.subject_name, this.id, this.data,this.coursedata})
-      : super(key: key);
 
-    
+  const NdaMathsTopics({Key key, this.subject_name, this.id, this.data})
+      : super(key: key);
   @override
   _NdaMathsTopicsState createState() => _NdaMathsTopicsState();
 }
 
 class _NdaMathsTopicsState extends State<NdaMathsTopics> {
   var lectures_data;
-  var subjectsData;
-  List courseimageurl = [];
-  var subjects;
-
   var topics;
   var count;
   @override
@@ -44,20 +35,6 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
     return data;
   }
 
-  getsubDetails() async {
-    print(widget.coursedata["id"]);
-
-    var data = await getCourseSubjects(widget.coursedata["id"]);
-    await Future.delayed(Duration(milliseconds: 1500));
-    
-    setState(() {
-      subjects = data;
-    });
-    return data;
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +52,7 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
               child: Text(
                 "BVN Academy",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.pink[400],
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -108,15 +85,18 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
                 width: MediaQuery.of(context).size.width * 1,
                 child: Column(
                   children: [
-                     Container(
-                        height: 160,
-                        width: MediaQuery.of(context).size.width * 1,
-                        child: Image.asset(
-                          "assets/images/nda.jpeg",
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width * 1,
-                        ),
+                    Container(
+                      height: 160,
+                      width: MediaQuery.of(context).size.width * 1,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.data['image'],
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) => Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: CircularProgressIndicator()),
                       ),
+                    ),
                   ],
                 ),
               ),
@@ -178,19 +158,25 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
 
   Widget topicListView(int index, data) {
     return Padding(
-      padding: EdgeInsets.only(top: 20.0, right: 2.0),
+      padding: EdgeInsets.only(top: 20.0, right: 50),
       child: Container(
         width: MediaQuery.of(context).size.width * 1,
         child: Row(
           children: [
             RaisedButton(
               onPressed: () {
-                
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (ctx) => NdaMathsLecturs(
+                //               id: data["data"]["data"][index]["id"],
+                //               topicName: data["data"]["data"][index]['title'],
+                //             )));
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (ctx) => NdaMathsScreen(
-                          data:data["data"]["data"][index],
+                              data: data["data"]["data"][index],
                               id: data["data"]["data"][index]["id"],
                               subject_name: data["data"]["data"][index]
                                   ['title'],
@@ -200,7 +186,7 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
               color: Colors.white,
               elevation: 30.0,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.70,
@@ -241,5 +227,4 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
       ),
     );
   }
-
 }

@@ -2,6 +2,7 @@ import 'package:bvm/nda/video.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import '../Screen/BottomNavigation.dart';
 
 class NdaMathsLecturs extends StatefulWidget {
   final String imageurl;
@@ -9,8 +10,7 @@ class NdaMathsLecturs extends StatefulWidget {
   final id;
   static const routeName = '/NdaMathsLecturs';
 
-  const NdaMathsLecturs({Key key, this.topicName, this.id, this.imageurl})
-      : super(key: key);
+  const NdaMathsLecturs({Key key, this.topicName, this.id, this.imageurl}) : super(key: key);
 
   @override
   _NdaMathsLectursState createState() => _NdaMathsLectursState();
@@ -20,20 +20,10 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
   int _currentindex = 0;
   var topic_data;
   var topics;
-  var tempdata;
   @override
   void initState() {
     topic_data = gettopicdata();
     super.initState();
-  }
-
-  getdata() async {
-    var _data = await getLecturesMedia(widget.id, 1);
-    setState(() {
-      tempdata = _data;
-    });
-    print(tempdata["data"]["data"]);
-    return tempdata;
   }
 
   gettopicdata() async {
@@ -50,8 +40,8 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.white),
-        backgroundColor: Colors.pink[400],
+        leading: BackButton(color: Colors.black),
+        backgroundColor: Colors.white,
         elevation: 25.0,
         title: Row(
           //mainAxisAlignment: MainAxisAlignment.start,
@@ -99,13 +89,13 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
                         height: 160,
                         width: MediaQuery.of(context).size.width * 1,
                         child: CachedNetworkImage(
-                          imageUrl: widget.imageurl,
-                          fit: BoxFit.fill,
-                          placeholder: (context, url) => Container(
-                              height: 30.0,
-                              width: 30.0,
-                              child: CircularProgressIndicator()),
-                        ),
+                        imageUrl: widget.imageurl,
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) => Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: CircularProgressIndicator()),
+                      ),
                       ),
                     ],
                   ),
@@ -209,7 +199,7 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
                         data["data"]["data"][index]["title"],
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 16.0,
                           color: Colors.black,
                         ),
                       ),

@@ -1,13 +1,14 @@
+import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-
 import 'package:toast/toast.dart';
 
 class NdaBuyScreen extends StatefulWidget {
   final amount;
+  final courseid;
 
-  const NdaBuyScreen({Key key, this.amount}) : super(key: key);
+  const NdaBuyScreen({Key key, this.amount,this.courseid}) : super(key: key);
   @override
   _NdaBuyScreenState createState() => _NdaBuyScreenState();
 }
@@ -17,6 +18,8 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
   @override
   void initState() {
     super.initState();
+    print(widget.amount);
+    print(widget.courseid);
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -30,6 +33,7 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
   }
 
   void openCheckOut() async {
+    await orderRequest("2",widget.amount,"id","1","test");
     var options = {
       'key': 'rzp_test_l0Dmpg9h9w6ZhD', //enter your key form razorpay account.
       'amount': widget.amount.toInt() * 100,
@@ -47,6 +51,7 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     Toast.show('Success, PaymentID:${response.paymentId}', context);
+    
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -62,20 +67,30 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.white),
-        backgroundColor: Colors.pink[400],
+        leading: BackButton(color: Colors.black),
+        backgroundColor: Colors.white,
         elevation: 25.0,
         title: Row(
           //crossAxisAlignment: CrossAxisAlignment.center,
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            
+            Padding(
+              padding: EdgeInsets.all(0.0),
+              child: Container(
+                width: 35.0,
+                height: 35.0,
+                child: Image.asset(
+                  "assets/images/img1.PNG",
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Academy",
+                "BVM Defence Academy",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 20.0,
                   //fontWeight: FontWeight.bold,
                 ),
@@ -94,7 +109,104 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    
+                    Text(
+                      "Select Payment Option",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.0),
+                      child: Divider(
+                        color: Colors.white,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30.0),
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 40.0,
+                              width: 70.0,
+                              child:
+                                  SvgPicture.asset("assets/images/paytm.svg"),
+                            ),
+                            RaisedButton(
+                              onPressed: () {},
+                              color: Colors.white,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Pay Now",
+                                    style: TextStyle(
+                                      color: Colors.blueAccent[700],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 5.0),
+                                    child: Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 10.0,
+                                      color: Colors.blueAccent[700],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 70.0,
+                            width: 70.0,
+                            child:
+                                SvgPicture.asset("assets/images/GooglePay.svg"),
+                          ),
+                          RaisedButton(
+                            onPressed: () {},
+                            color: Colors.white,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Pay Now",
+                                  style: TextStyle(
+                                    color: Colors.blueAccent[700],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 5.0),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 10.0,
+                                    color: Colors.blueAccent[700],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 5.0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -112,13 +224,13 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
                           onPressed: () {
                             openCheckOut();
                           },
-                          color: Colors.indigo[800],
+                          color: Colors.white,
                           child: Row(
                             children: [
                               Text(
                                 "Pay Now",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.blueAccent[700],
                                 ),
                               ),
                               Padding(
@@ -126,7 +238,7 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
                                 child: Icon(
                                   Icons.arrow_forward_ios,
                                   size: 10.0,
-                                  color: Colors.white,
+                                  color: Colors.blueAccent[700],
                                 ),
                               ),
                             ],

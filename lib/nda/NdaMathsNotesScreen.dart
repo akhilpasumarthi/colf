@@ -7,26 +7,18 @@ import '../services/courses.dart';
 
 class NdaNotesScreen extends StatefulWidget {
   final imageurl;
-  final data;
-  final String subject_name;
-  final  coursedata;
   final id;
   static const routeName = '/NdaMathsNotesscreen';
 
-  const NdaNotesScreen({Key key, this.id, this.imageurl,this.subject_name,this.coursedata,this.data}) : super(key: key);
+  const NdaNotesScreen({Key key, this.id, this.imageurl}) : super(key: key);
 
   @override
   _NdaNotesScreenState createState() => _NdaNotesScreenState();
 }
 
 class _NdaNotesScreenState extends State<NdaNotesScreen> {
-  int _currentindex = 1 ;
+  int _currentindex = 0;
   var data, tempdata;
-  var subjects;
-var topics;
-  var count;
-
-
   @override
   void initState() {
     super.initState();
@@ -34,33 +26,13 @@ var topics;
   }
 
   getdata() async {
-    var _data = await getLecturesMedia(widget.id, 0);
+    var _data = await getLecturesMedia(widget.id, 1);
     setState(() {
       tempdata = _data;
-        count = data["data"]['data'].length;
-      topics = data;
     });
     print(tempdata["data"]["data"]);
     return tempdata;
   }
-  
-  
-
-
-  getsubDetails() async {
-    print(widget.coursedata["id"]);
-
-    var data = await getCourseSubjects(widget.coursedata["id"]);
-    await Future.delayed(Duration(milliseconds: 1500));
-    
-    setState(() {
-      subjects = data;
-    });
-    return data;
-  }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +45,27 @@ var topics;
           //mainAxisAlignment: MainAxisAlignment.start,
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           
+            Padding(
+              padding: EdgeInsets.all(0.0),
+              child: Container(
+                width: 35.0,
+                height: 35.0,
+                child: CachedNetworkImage(
+                  imageUrl: widget.imageurl,
+                  fit: BoxFit.fill,
+                  placeholder: (context, url) => Container(
+                      height: 30.0,
+                      width: 30.0,
+                      child: CircularProgressIndicator()),
+                ),
+              ),
+            ),
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Defence Academy",
+                "BVM Academy",
                 style: TextStyle(
-                  color: Colors.black87,
+                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -115,14 +101,15 @@ var topics;
                       Container(
                         height: 160,
                         width: MediaQuery.of(context).size.width * 1,
-                        child:CachedNetworkImage(
-                        imageUrl: widget.imageurl,
-                        fit: BoxFit.fill,
-                        placeholder: (context, url) => Container(
-                            height: 30.0,
-                            width: 30.0,
-                            child: Center(child: CircularProgressIndicator())),
-                      ),
+                        child: CachedNetworkImage(
+                          imageUrl: widget.imageurl,
+                          fit: BoxFit.fill,
+                          placeholder: (context, url) => Container(
+                              height: 30.0,
+                              width: 30.0,
+                              child:
+                                  Center(child: CircularProgressIndicator())),
+                        ),
                       ),
                     ],
                   ),
@@ -131,7 +118,7 @@ var topics;
               Padding(
                 padding: EdgeInsets.only(top: 27.0, left: 25.0),
                 child: Text(
-                  "(Notes)",
+                  "Maths(Notes)",
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -189,6 +176,30 @@ var topics;
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentindex,
+        items: [
+          BottomNavigationBarItem(
+              backgroundColor: Colors.indigo[800],
+              icon: Icon(Icons.home),
+              title: Text("Home")),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            title: Text("Favorite"),
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.book), title: Text("E-Book")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search), title: Text("Search")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.supervised_user_circle), title: Text("User")),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentindex = index;
+          });
+        },
       ),
     );
   }
