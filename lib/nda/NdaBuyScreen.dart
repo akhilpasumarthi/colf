@@ -1,3 +1,4 @@
+import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -5,8 +6,9 @@ import 'package:toast/toast.dart';
 
 class NdaBuyScreen extends StatefulWidget {
   final amount;
+  final courseid;
 
-  const NdaBuyScreen({Key key, this.amount}) : super(key: key);
+  const NdaBuyScreen({Key key, this.amount,this.courseid}) : super(key: key);
   @override
   _NdaBuyScreenState createState() => _NdaBuyScreenState();
 }
@@ -16,6 +18,8 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
   @override
   void initState() {
     super.initState();
+    print(widget.amount);
+    print(widget.courseid);
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -29,6 +33,7 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
   }
 
   void openCheckOut() async {
+    await orderRequest("2",widget.amount,"id","1","test");
     var options = {
       'key': 'rzp_test_l0Dmpg9h9w6ZhD', //enter your key form razorpay account.
       'amount': widget.amount.toInt() * 100,
