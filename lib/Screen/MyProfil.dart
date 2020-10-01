@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:bvm/Screen/ChangePasswordReset.dart';
 import 'package:bvm/services/usertoken.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bvm/Screen/ChangePassword.dart';
@@ -210,7 +211,7 @@ class _MyProfilState extends State<MyProfil> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (ctx) => ChangePassword()));
+                              builder: (ctx) => ChangePasswordResset()));
                     },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),

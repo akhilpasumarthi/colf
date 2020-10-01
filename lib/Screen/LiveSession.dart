@@ -1,3 +1,5 @@
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:flutter/material.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,30 +14,37 @@ class _LiveSessionState extends State<LiveSession> {
   List courseNameList = [];
   List courseimageurl = [];
   var livedata;
+  var courseData;
+
   Map courses;
   List url = [];
-  DateTime data;
-  @override
+  List coursedataurl=[];
+   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    livedata = getliveclasses();
+    livedata = courselist();
   }
 
-  getliveclasses() async {
+  courselist() async {
     Map course1 = await getliveclasses();
+
     setState(() {
-      livedata = course1;
-      //print(course1);
+      courses = course1;
+      print(courses);
       //print(courses['success']);
-      livedata["data"]["data"].forEach((element) {
+      courses["data"]["data"].forEach((element) {
         courseNameList.add(element["title"]);
-        courseimageurl.add(element['course_image']);
-        url.add(element['link']);
-        data.add(element['start_data_time']);
+        courseimageurl.add(element['link']);
+        coursedataurl.add(element['start_date_time']);
+
       });
-    });
-    return course1;
+      print(coursedataurl);
+      print(courseNameList);
+      print(courseimageurl);
+          });
+    return courses;
+  
   }
 
   @override
@@ -80,12 +89,16 @@ class _LiveSessionState extends State<LiveSession> {
                 ),
               ],
             ),
+             Divider(
+                  color: Colors.black,
+                ),
             Column(
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 1,
-                  height: 50.0,
-                  padding: EdgeInsets.only(top: 15.0),
+                  height: MediaQuery.of(context).size.height * .95,
+
+                  padding: EdgeInsets.only(top: 10.0),
                   child: FutureBuilder(
                       future: livedata,
                       builder: (context, snapshot) {
@@ -96,10 +109,12 @@ class _LiveSessionState extends State<LiveSession> {
                           );
                         }
                         if (snapshot.hasData) {
+                        print(snapshot.data);
+
                           return ListView.builder(
                               physics: ScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: livedata['data']["data"].length,
+                              itemCount: courses['data']["data"].length,
                               itemBuilder: (context, index) {
                                 return LiveClassesWidget(index, snapshot.data);
                               });
@@ -120,26 +135,78 @@ class _LiveSessionState extends State<LiveSession> {
 
   Widget LiveClassesWidget(int index, var subdata) {
     return Padding(
-      padding: EdgeInsets.only(top: 20.0),
+      padding: EdgeInsets.only(top: 4.0),
       child: Container(
-        height: 50.0,
+        //height: 50.0,
         width: MediaQuery.of(context).size.width * 1,
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    subdata['data']['data'][index]['start_data_time'],
-                    style: TextStyle(fontSize: 20.0, color: Colors.black),
+                  padding: EdgeInsets.only(left: 30.0),
+                  child: Column(
+                    children: [
+                      Container(
+                      child: Text(
+                        subdata['data']['data'][index]['title'],
+                        style: TextStyle(fontSize: 20.0, color: Colors.black),
+                      ),
+                    ),
+                    ],
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(right: 30.0),
+                  child: RaisedButton(
+                    color: Colors.indigo[800],
+                    onPressed: () {
+                      _launchURL(index,subdata);
+                    },
+                    child: Text("Join Me",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    ),
+                    ),
+                  ),
+                )
               ],
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 7.0,bottom: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                 Text(
+                 subdata['data']['data'][index]['start_date_time'],
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
+                 ),
+                ],
+              ),
+            ),
+             Divider(
+                  color: Colors.black,
+                )
           ],
         ),
+        
       ),
     );
+  }
+
+
+
+  _launchURL(int index, var data) async {
+     var url = data["data"]["data"][index]["link"];
+            print('video url:${data["data"]["data"][index]["link"]}');
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

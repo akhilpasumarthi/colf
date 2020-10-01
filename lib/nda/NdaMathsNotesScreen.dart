@@ -45,21 +45,7 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
           //mainAxisAlignment: MainAxisAlignment.start,
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Container(
-                width: 35.0,
-                height: 35.0,
-                child: CachedNetworkImage(
-                  imageUrl: widget.imageurl,
-                  fit: BoxFit.fill,
-                  placeholder: (context, url) => Container(
-                      height: 30.0,
-                      width: 30.0,
-                      child: CircularProgressIndicator()),
-                ),
-              ),
-            ),
+            
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
@@ -116,7 +102,7 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 27.0, left: 25.0),
+                padding: EdgeInsets.only(top: 15.0, left: 25.0,bottom: 15.0),
                 child: Text(
                   "Maths(Notes)",
                   style: TextStyle(
@@ -140,15 +126,26 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.4,
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 20),
+                                      horizontal: 5, vertical: 10),
                                   child: RaisedButton(
+                                    padding: EdgeInsets.only(top: 7.0,bottom: 7.0),
                                     elevation: 5,
                                     color: Colors.white,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8.0),
-                                      child: Text(tempdata["data"]["data"]
-                                          [index]['title']),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                          child: Text(tempdata["data"]["data"]
+                                              [index]['title'],
+                                              style: TextStyle(
+                                                fontSize: 20.0
+                                              ),
+                                              ),
+                                        ),
+                                        ],
+                                      ),
                                     ),
                                     onPressed: () async {
                                       Navigator.of(context)
@@ -177,30 +174,7 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentindex,
-        items: [
-          BottomNavigationBarItem(
-              backgroundColor: Colors.indigo[800],
-              icon: Icon(Icons.home),
-              title: Text("Home")),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            title: Text("Favorite"),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.book), title: Text("E-Book")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search), title: Text("Search")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.supervised_user_circle), title: Text("User")),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentindex = index;
-          });
-        },
-      ),
+      
     );
   }
 
@@ -213,22 +187,27 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
             //height: 95,
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 30, left: 140),
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 130,
-                          height: 130,
-                          child: Image.asset(
-                            "assets/images/oops.jpg",
-                            fit: BoxFit.cover,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                      Padding(
+                    padding: EdgeInsets.only(top: 20, left: 0.0),
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 130,
+                            height: 130,
+                            child: Image.asset(
+                              "assets/images/oops.jpg",
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
+                  ],
                 ),
               ],
             ),
@@ -236,12 +215,21 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
         ),
         Padding(
           padding: EdgeInsets.only(top: 30.0, left: 20.0),
-          child: Text(
-            "Oops! Currently there is no Notes Available",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20.0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+              child: Text(
+                "Oops! Currently there is no Notes Available",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20.0,
+                ),
+              ),
             ),
+            ],
           ),
         ),
       ],

@@ -117,6 +117,17 @@ Future<Map> orderRequest(var id,var price,var payment_id,var payment_type,var ty
  // print(data);
   return data;
 }
+Future<Map> Batches() async {
+  var token = await gettoken();
+  var uri = Uri.parse("https://bilaltech.in/api/public/api/getBatchs");
+  var response = await http
+      .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
+  print(response.statusCode);
+  Map data = jsonDecode(response.body);
+  print(data);
+  return data;
+}
+
 
 Future<Map> getPurchasedCourses() async {
   var token = await gettoken();
@@ -128,3 +139,14 @@ Future<Map> getPurchasedCourses() async {
   print(data);
   return data;
 }
+Future<Map> getBanner() async {
+  var token = await gettoken();
+  var uri = Uri.parse("https://bilaltech.in/api/public/api/getBanner");
+  var response = await http
+      .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
+  print(response.statusCode);
+  Map data = jsonDecode(response.body);
+  print(data);
+  return data;
+}
+

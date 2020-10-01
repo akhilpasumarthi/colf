@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:bvm/Screen/EbookScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:bvm/Screen/LoginSigninScreen.dart';
 import 'package:bvm/Screen/MyCourse.dart';
@@ -161,7 +162,10 @@ class _UserScreenState extends State<UserScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                       Navigator.push(context,
+                          MaterialPageRoute(builder: (ctx) => EbookScreen()));
+                    },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
                     color: Colors.white,
@@ -175,7 +179,7 @@ class _UserScreenState extends State<UserScreen> {
                         Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Text(
-                            "My Order",
+                            "E-Book",
                             style: TextStyle(
                               fontSize: 18.0,
                             ),

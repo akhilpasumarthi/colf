@@ -1,5 +1,11 @@
 import 'package:bvm/Screen/MyProfil.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
+import 'package:bvm/services/usertoken.dart';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangePasswordResset extends StatefulWidget {
   @override
@@ -7,6 +13,43 @@ class ChangePasswordResset extends StatefulWidget {
 }
 
 class _ChangePasswordRessetState extends State<ChangePasswordResset> {
+
+  TextEditingController oldpassword = TextEditingController();
+  TextEditingController newpassword = TextEditingController();
+
+
+  Future updatapassword() async {  
+    var response = await http.post('https://bilaltech.in/api/public/api/updatePassword',
+        body: {"old_password": oldpassword.text, "password": newpassword.text});
+    var msg = json.decode(response.body);
+    print(response.statusCode);
+    print(msg['success']);
+   setState(() {
+     
+   });
+    if (response.statusCode == 200) {
+      if (msg['success'].toString() == "true") {
+       
+        print(json.decode(response.body));
+        return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MyProfil(),
+          ),
+        );
+      } else {
+        print(json.decode(response.body));
+        showToast("Please Give correct old Password",
+            duration: 4, gravity: Toast.CENTER);
+      }
+    } else {
+      Toast.show("UPlease Give correct old Password", context,duration: 4,gravity: Toast.CENTER);
+    }
+    //print(msg);
+  }
+
+ 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +101,8 @@ class _ChangePasswordRessetState extends State<ChangePasswordResset> {
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     ),
                     child: TextField(
+                      controller: oldpassword,
+
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
                         border: new OutlineInputBorder(
@@ -74,7 +119,7 @@ class _ChangePasswordRessetState extends State<ChangePasswordResset> {
                           ),
                           borderRadius: BorderRadius.circular(7.0),
                         ),
-                        hintText: "Password",
+                        hintText: "Old Password",
                       ),
                     ),
                   ),
@@ -90,6 +135,8 @@ class _ChangePasswordRessetState extends State<ChangePasswordResset> {
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     ),
                     child: TextField(
+                      controller: newpassword,
+
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
                         border: new OutlineInputBorder(
@@ -106,7 +153,7 @@ class _ChangePasswordRessetState extends State<ChangePasswordResset> {
                           ),
                           borderRadius: BorderRadius.circular(7.0),
                         ),
-                        hintText: "Confirm Password",
+                        hintText: "New Password",
                       ),
                     ),
                   ),
@@ -119,8 +166,9 @@ class _ChangePasswordRessetState extends State<ChangePasswordResset> {
                   children: [
                     RaisedButton(
                       //elevation: 30.0,
-                      onPressed: () { Navigator.push(
-          context, MaterialPageRoute(builder: (ctx) => MyProfil()));},
+                      onPressed: () { 
+                        updatapassword();
+                      },
                       padding: EdgeInsets.only(top: 10.0,bottom: 10.0,left: 20.0,right: 20.0),
                       color: Colors.blue[800],
                       shape: RoundedRectangleBorder(
@@ -137,10 +185,15 @@ class _ChangePasswordRessetState extends State<ChangePasswordResset> {
                   ],
                 ),
               ),
+               
             ],
           ),
         ),
       ),
     );
+  }
+
+   void showToast(String msg, {int duration, int gravity}) {
+    Toast.show(msg, context, duration: duration, gravity: gravity);
   }
 }

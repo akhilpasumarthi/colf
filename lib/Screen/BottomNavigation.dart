@@ -75,12 +75,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
               color: Colors.white,
             ),
             Icon(
-              Icons.library_books,
+              Icons.subject,
               color: Colors.white,
               size: 25,
             ),
             Icon(
-              Icons.collections_bookmark,
+              Icons.library_books,
               size: 25,
               color: Colors.white,
             ),

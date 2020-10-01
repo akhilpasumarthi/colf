@@ -40,8 +40,8 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
-        backgroundColor: Colors.white,
+        leading: BackButton(color: Colors.white),
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
           //mainAxisAlignment: MainAxisAlignment.start,

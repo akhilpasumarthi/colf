@@ -3,7 +3,6 @@ import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../Nda/NdaMathsScreen.dart';
-import 'NdaPhysicsScreen.dart';
 import 'NdaBuyScreen.dart';
 import 'NdaMathsTopics.dart';
 
@@ -170,80 +169,7 @@ class _NdaScreenState extends State<NdaScreen> {
                               ),
                             ),
 
-                           Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.only(left: 10.0, top: 22.0),
-                                    child: RaisedButton(
-                                      color: Colors.indigo[800],
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (ctx) => NdaBuyScreen(
-                                                      amount: num.parse(widget
-                                                          .coursedata["price"]),
-                                                    )));
-                                      },
-                                      child: Text(
-                                        "Buy Now",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 10.0,
-                                            left: 13.0,
-                                            bottom: 60.0),
-                                        child: Row(
-                                          children: [
-                                            Text.rich(
-                                              TextSpan(
-                                                children: <TextSpan>[
-                                                  new TextSpan(
-                                                    text:
-                                                        '\₹${widget.coursedata["old_price"]}',
-                                                    style: new TextStyle(
-                                                      fontSize: 20.0,
-                                                      color: Colors.black,
-                                                      decoration: TextDecoration
-                                                          .lineThrough,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 10.0),
-                                              child: Text(
-                                                '\₹${widget.coursedata["price"]}',
-                                                style: TextStyle(
-                                                  color: Colors.black87,
-                                                  fontSize: 20.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
+                           
                           ],
                         ),
                       ),
@@ -290,13 +216,18 @@ class _NdaScreenState extends State<NdaScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                padding: EdgeInsets.only(top: 10.0, bottom: 9.0),
                 child: Container(
                   width: 130,
-                  //height: 105,
+                  height: 100,
                   child: CachedNetworkImage(
                     imageUrl: subData["data"]["data"][index]["image"],
-                    placeholder: (context, url) => CircularProgressIndicator(),
+                    placeholder: (context, url) => Center(
+                      child: Container(
+                        width: 30.0,
+                        height: 30.0,
+                        child: CircularProgressIndicator()),
+                    ),
                   ),
                 ),
               ),
@@ -310,13 +241,15 @@ class _NdaScreenState extends State<NdaScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          subData["data"]["data"][index]["subject_name"],
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
+                        Container(
+                          child: Text(
+                            subData["data"]["data"][index]["subject_name"],
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],

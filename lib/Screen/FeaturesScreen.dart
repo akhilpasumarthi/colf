@@ -191,7 +191,7 @@ class _FeaturesScreenState extends State<FeaturesScreen> {
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(
-                                "Buy Courses",
+                                "My Courses",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Colors.black,

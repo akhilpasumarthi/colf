@@ -1,4 +1,5 @@
 import 'package:bvm/Screen/ChangePasswordOtp.dart';
+import 'package:bvm/Screen/ChangePasswordReset.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 
@@ -89,7 +90,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     children: [
                     RaisedButton(onPressed: () {
                        Navigator.push(
-          context, MaterialPageRoute(builder: (ctx) => ChangePasswordOtp()));
+          context, MaterialPageRoute(builder: (ctx) => ChangePasswordResset()));
                     },
                     padding: EdgeInsets.only(top: 10.0,bottom: 10.0,right: 25.0,left: 25.0),
                     color: Colors.blue[800],

@@ -5,6 +5,7 @@ import 'package:bvm/Screen/DemoClasses.dart';
 import 'package:bvm/Screen/ExamTestSeriespage.dart';
 import 'package:bvm/Screen/TestSerisscreen.dart';
 import 'package:bvm/nda/NdaBuyScreen.dart';
+import 'package:bvm/nda/NdaScreenAllCourses.dart';
 import 'package:flutter/material.dart';
 import 'package:bvm/Screen/MoreCourseScreen.dart';
 import 'package:bvm/Screen/FeaturesScreen.dart';
@@ -35,6 +36,7 @@ class _HomeMainState extends State<HomeMain> {
   }
 
   courselist() async {
+    Map banners= await getBanner();
     Map course1 = await getcourses();
     setState(() {
       courses = course1;
@@ -62,7 +64,7 @@ class _HomeMainState extends State<HomeMain> {
             children: [
               
               Padding(
-                padding: EdgeInsetsDirectional.only(start: 12.0),
+                padding: EdgeInsetsDirectional.only(start: 0.0),
                 child: Text(
                   "BVN Academy",
                   style: TextStyle(
@@ -234,7 +236,7 @@ class _HomeMainState extends State<HomeMain> {
                                                                     new MaterialPageRoute(
                                                               builder:
                                                                   (context) {
-                                                                return NdaScreen(
+                                                                return NdaScreenAllCourses(
                                                                     coursedata: courses["data"]
                                                                             [
                                                                             "data"]
@@ -274,13 +276,15 @@ class _HomeMainState extends State<HomeMain> {
                                                                     fit: BoxFit
                                                                         .fill,
                                                                     // height: 100.0,
-                                                                    placeholder: (context, url) => Container(
-                                                                        height:
-                                                                            30.0,
-                                                                        width:
-                                                                            30.0,
-                                                                        child:
-                                                                            CircularProgressIndicator()),
+                                                                    placeholder: (context, url) => Center(
+                                                                      child: Container(
+                                                                          height:
+                                                                              30.0,
+                                                                          width:
+                                                                              30.0,
+                                                                          child:
+                                                                              CircularProgressIndicator()),
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
