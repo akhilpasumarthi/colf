@@ -1,3 +1,4 @@
+import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -5,8 +6,11 @@ import 'package:toast/toast.dart';
 
 class NdaBuyScreen extends StatefulWidget {
   final amount;
+  final id;
+  final String type;
 
-  const NdaBuyScreen({Key key, this.amount}) : super(key: key);
+  const NdaBuyScreen({Key key, this.amount, this.id, this.type})
+      : super(key: key);
   @override
   _NdaBuyScreenState createState() => _NdaBuyScreenState();
 }
@@ -44,8 +48,10 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
     }
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     Toast.show('Success, PaymentID:${response.paymentId}', context);
+    var data = await orderRequest(widget.id, widget.amount, "abc", "1", "test"); //add function of orderrequest..
+    print(data);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -103,7 +109,6 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

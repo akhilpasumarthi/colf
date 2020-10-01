@@ -8,7 +8,7 @@ class TestSeriesScreen extends StatefulWidget {
 }
 
 class _TestSeriesScreenState extends State<TestSeriesScreen> {
-  var examData, tempdata;
+  var examData, tempdata, paidtestData;
   @override
   void initState() {
     examData = getdata();
@@ -20,6 +20,8 @@ class _TestSeriesScreenState extends State<TestSeriesScreen> {
     setState(() {
       tempdata = data;
     });
+    paidtestData = await getPaidTests();
+    print(paidtestData);
     return data;
   }
 
@@ -71,7 +73,7 @@ class _TestSeriesScreenState extends State<TestSeriesScreen> {
                 padding: EdgeInsets.only(top: 25.0, left: 30.0),
                 child: Text(
                   "Test Series",
-                  style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
               ),
               Padding(
@@ -88,48 +90,54 @@ class _TestSeriesScreenState extends State<TestSeriesScreen> {
                         );
                       }
                       if (snapshot.hasData) {
-                        return(tempdata["data"]["data"].length!=0)? ListView.builder(
-                          physics: ScrollPhysics(),
-                          itemCount: tempdata["data"]["data"].length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.only(
-                                  top: 15.0, left: 10.0, right: 10.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 1,
-                                child: RaisedButton(
-                                  onPressed: () {
-                                    Navigator.of(context)
-                                        .push(new MaterialPageRoute(
-                                      builder: (context) {
-                                        return ExamSeriesPage(
-                                            id: tempdata["data"]["data"][index]
-                                                ["id"]);
-                                      },
-                                    ));
-                                  },
-                                  padding: EdgeInsets.only(
-                                      top: 15.0, bottom: 15.0, left: 10.0),
-                                  color: Colors.white,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 20.0),
-                                        child: Text(
-                                          tempdata["data"]["data"][index]
-                                              ['title'],
-                                          style: TextStyle(
-                                            fontSize: 18.0,
-                                          ),
+                        return (tempdata["data"]["data"].length != 0)
+                            ? ListView.builder(
+                                physics: ScrollPhysics(),
+                                itemCount: tempdata["data"]["data"].length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 15.0, left: 10.0, right: 10.0),
+                                    child: Container(
+                                      width:
+                                          MediaQuery.of(context).size.width * 1,
+                                      child: RaisedButton(
+                                        onPressed: () {
+                                          Navigator.of(context)
+                                              .push(new MaterialPageRoute(
+                                            builder: (context) {
+                                              return ExamSeriesPage(
+                                                  id: tempdata["data"]["data"]
+                                                      [index]["id"]);
+                                            },
+                                          ));
+                                        },
+                                        padding: EdgeInsets.only(
+                                            top: 15.0,
+                                            bottom: 15.0,
+                                            left: 10.0),
+                                        color: Colors.white,
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 20.0),
+                                              child: Text(
+                                                tempdata["data"]["data"][index]
+                                                    ['title'],
+                                                style: TextStyle(
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ):Center(
+                                    ),
+                                  );
+                                },
+                              )
+                            : Center(
                                 child: Text('No data found!'),
                               );
                       }

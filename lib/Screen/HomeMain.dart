@@ -199,7 +199,7 @@ class _HomeMainState extends State<HomeMain> {
                         itemCount: courseNameList.length,
                         physics: ScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            //childAspectRatio: 1.0,
+                            childAspectRatio: 0.9,
                             crossAxisSpacing: 20,
                             crossAxisCount: 2),
                         itemBuilder: (context, index) {

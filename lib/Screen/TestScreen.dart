@@ -94,11 +94,11 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
+  var col_1 = Colors.grey,
+      col_2 = Colors.grey,
+      col_3 = Colors.grey,
+      col_4 = Colors.grey;
   Widget quizSwiper(var tempdata) {
-    var col_1 = Colors.grey,
-        col_2 = Colors.grey,
-        col_3 = Colors.grey,
-        col_4 = Colors.grey;
     var count = tempdata["data"].length;
 
     var answerList = [], keyList = [];
@@ -107,7 +107,6 @@ class _TestScreenState extends State<TestScreen> {
         if (tempdata["data"][i]["options"][j]["correct"] == "1") keyList.add(j);
       }
     }
-    print(keyList);
     return Swiper(
       pagination: new SwiperPagination(),
       control: new SwiperControl(),
@@ -139,9 +138,13 @@ class _TestScreenState extends State<TestScreen> {
                       onPressed: () {
                         showanswer(index);
                         if (tempdata["data"][index]["options"][0]["correct"] ==
-                            1.toString()) {
+                            "1") {
                           setState(() {
                             col_1 = Colors.green;
+                          });
+                        } else {
+                          setState(() {
+                            col_1 = Colors.red;
                           });
                         }
                       },
@@ -153,9 +156,14 @@ class _TestScreenState extends State<TestScreen> {
                       onPressed: () {
                         showanswer(index);
                         if (tempdata["data"][index]["options"][1]["correct"] ==
-                            1.toString()) {
+                            "1") {
                           setState(() {
                             col_2 = Colors.green;
+                          });
+                        }
+                        else {
+                          setState(() {
+                            col_2 = Colors.red;
                           });
                         }
                       },
@@ -173,9 +181,14 @@ class _TestScreenState extends State<TestScreen> {
                       onPressed: () {
                         showanswer(index);
                         if (tempdata["data"][index]["options"][2]["correct"] ==
-                            1.toString()) {
+                            "1") {
                           setState(() {
                             col_3 = Colors.green;
+                          });
+                        }
+                        else {
+                          setState(() {
+                            col_3 = Colors.red;
                           });
                         }
                       },
@@ -186,10 +199,15 @@ class _TestScreenState extends State<TestScreen> {
                       color: col_4,
                       onPressed: () {
                         showanswer(index);
-                        if (tempdata["data"][index]["options"][2]["correct"] ==
-                            1.toString()) {
+                        if (tempdata["data"][index]["options"][3]["correct"] ==
+                            "1") {
                           setState(() {
                             col_4 = Colors.green;
+                          });
+                        }
+                        else {
+                          setState(() {
+                            col_4 = Colors.red;
                           });
                         }
                       },
@@ -219,6 +237,15 @@ class _TestScreenState extends State<TestScreen> {
   void showanswer(index) {
     setState(() {
       checklist[index] = true;
+      if (index == 0) {
+        col_1 = Colors.green;
+      } else if (index == 1) {
+        col_2 = Colors.green;
+      } else if (index == 2) {
+        col_3 = Colors.green;
+      } else if (index == 3) {
+        col_4 = Colors.green;
+      }
     });
   }
 }
