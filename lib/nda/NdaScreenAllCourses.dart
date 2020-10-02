@@ -191,7 +191,7 @@ class _NdaScreenAllCoursesState extends State<NdaScreenAllCourses> {
                                             MaterialPageRoute(
                                                 builder: (ctx) => NdaBuyScreen(
                                                   amount: num.parse(widget
-                                                      .coursedata["price"]),courseid: widget.coursedata["id"],
+                                                      .coursedata["price"]),id: widget.coursedata["id"],type: "course"
                                                 )));
                                       },
                                       child: Text(

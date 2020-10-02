@@ -27,7 +27,7 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
   void initState() {
     super.initState();
     print(widget.amount);
-    print(widget.courseid);
+
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
