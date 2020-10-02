@@ -6,11 +6,17 @@ import 'package:toast/toast.dart';
 
 class NdaBuyScreen extends StatefulWidget {
   final amount;
+
   final id;
   final String type;
 
   const NdaBuyScreen({Key key, this.amount, this.id, this.type})
       : super(key: key);
+
+
+
+ // const NdaBuyScreen({Key key, this.amount,this.courseid}) : super(key: key);
+
   @override
   _NdaBuyScreenState createState() => _NdaBuyScreenState();
 }
@@ -20,6 +26,8 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
   @override
   void initState() {
     super.initState();
+    print(widget.amount);
+    print(widget.courseid);
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -33,6 +41,7 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
   }
 
   void openCheckOut() async {
+    await orderRequest("2",widget.amount,"id","1","test");
     var options = {
       'key': 'rzp_test_l0Dmpg9h9w6ZhD', //enter your key form razorpay account.
       'amount': widget.amount.toInt() * 100,
@@ -109,6 +118,106 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
+                    Text(
+                      "Select Payment Option",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.0),
+                      child: Divider(
+                        color: Colors.white,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30.0),
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 40.0,
+                              width: 70.0,
+                              child:
+                                  SvgPicture.asset("assets/images/paytm.svg"),
+                            ),
+                            RaisedButton(
+                              onPressed: () {},
+                              color: Colors.white,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Pay Now",
+                                    style: TextStyle(
+                                      color: Colors.blueAccent[700],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 5.0),
+                                    child: Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 10.0,
+                                      color: Colors.blueAccent[700],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 70.0,
+                            width: 70.0,
+                            child:
+                                SvgPicture.asset("assets/images/GooglePay.svg"),
+                          ),
+                          RaisedButton(
+                            onPressed: () {},
+                            color: Colors.white,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Pay Now",
+                                  style: TextStyle(
+                                    color: Colors.blueAccent[700],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 5.0),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 10.0,
+                                    color: Colors.blueAccent[700],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 5.0),
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

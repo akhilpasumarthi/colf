@@ -61,7 +61,7 @@ class _SigninState extends State<Signin> {
             duration: 4, gravity: Toast.CENTER);
       }
     } else {
-      Toast.show("Username and password invalid", context,duration: 4,gravity: Toast.CENTER);
+      Toast.show("Error Occured!,Try again later!", context,duration: 4,gravity: Toast.CENTER);
     }
     //print(msg);
   }

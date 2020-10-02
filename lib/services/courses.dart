@@ -98,6 +98,7 @@ Future<Map> orderRequest(var id,var price,var payment_id,var payment_type,var ty
   var uri = Uri.parse("https://bilaltech.in/api/public/api/createOrder?item_id=$id&price=$price&type=$type&transaction_id=$payment_id&payment_type=$payment_type");
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
+
   print(response.statusCode);
   Map data = jsonDecode(response.body);
   return data;
@@ -106,9 +107,23 @@ Future<Map> orderRequest(var id,var price,var payment_id,var payment_type,var ty
 Future<Map> getPaidTests() async{
   var token = await gettoken();
   var uri = Uri.parse("https://bilaltech.in/api/public/api/getPurchasedTest");
+
+ // print(response.statusCode);
+  Map data = jsonDecode(response.body);
+ // print(data);
+  return data;
+}
+
+Future<Map> getPurchasedCourses() async {
+  var token = await gettoken();
+  var uri = Uri.parse("https://bilaltech.in/api/public/api/getPurchasedCourses");
+
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
   Map data = jsonDecode(response.body);
+
+  print(data);
+
   return data;
 }

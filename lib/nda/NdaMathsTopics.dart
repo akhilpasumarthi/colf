@@ -17,8 +17,6 @@ class NdaMathsTopics extends StatefulWidget {
 
 class _NdaMathsTopicsState extends State<NdaMathsTopics> {
   var lectures_data;
-  List courseimageurl = [];
-
   var topics;
   var count;
   @override
@@ -188,7 +186,7 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
                     context,
                     MaterialPageRoute(
                         builder: (ctx) => NdaMathsScreen(
-                          data:data["data"]["data"][index],
+                              data: data["data"]["data"][index],
                               id: data["data"]["data"][index]["id"],
                               subject_name: data["data"]["data"][index]
                                   ['title'],

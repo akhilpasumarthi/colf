@@ -164,7 +164,7 @@ int _currentindex = 0;
                         return Center(
                           child: Container(
                             width: 30.0,
-                            height: 30.0,
+                            height: 40.0,
                             child: CircularProgressIndicator()),
                         );
                       },

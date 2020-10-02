@@ -73,7 +73,9 @@ class _TestSeriesScreenState extends State<TestSeriesScreen> {
                 padding: EdgeInsets.only(top: 25.0, left: 30.0),
                 child: Text(
                   "Test Series",
+
                   style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+
                 ),
               ),
               Padding(

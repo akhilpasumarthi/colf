@@ -1,34 +1,31 @@
-import 'package:bvm/Screen/BottomNavigation.dart';
+
+
+
+import 'package:bvm/nda/NdaBuyScreen.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../Nda/NdaMathsScreen.dart';
-import 'NdaPhysicsScreen.dart';
-import 'NdaBuyScreen.dart';
-import 'NdaMathsTopics.dart';
 
-class NdaScreen extends StatefulWidget {
+class NdaScreenAllCourses extends StatefulWidget {
   final coursedata;
+  static const routeName = '/NdaScreenAllCourses';
 
-  static const routeName = '/NdaScreen';
-
-  const NdaScreen({Key key, this.coursedata}) : super(key: key);
-
+  const NdaScreenAllCourses({Key key, this.coursedata}) : super(key: key);
   @override
-  _NdaScreenState createState() => _NdaScreenState();
+  _NdaScreenAllCoursesState createState() => _NdaScreenAllCoursesState();
 }
 
-class _NdaScreenState extends State<NdaScreen> {
+class _NdaScreenAllCoursesState extends State<NdaScreenAllCourses> {
   var subjectsData;
   var subjects;
   List courseimageurl = [];
-
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     subjectsData = getsubDetails();
   }
-
   getsubDetails() async {
     print(widget.coursedata["id"]);
 
@@ -40,7 +37,6 @@ class _NdaScreenState extends State<NdaScreen> {
     });
     return data;
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,21 +154,21 @@ class _NdaScreenState extends State<NdaScreen> {
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     return (subjects["data"]["data"].length ==
-                                            0)
+                                        0)
                                         ? Center(
-                                            child:
-                                                Text("No subjects found yet!"),
-                                          )
+                                      child:
+                                      Text("No subjects found yet!"),
+                                    )
                                         : ListView.builder(
-                                            physics: ScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount:
-                                                subjects["data"]["data"].length,
-                                            itemBuilder: (context, index) {
-                                              return subjectListWidget(
-                                                  index, snapshot.data);
-                                            },
-                                          );
+                                      physics: ScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount:
+                                      subjects["data"]["data"].length,
+                                      itemBuilder: (context, index) {
+                                        return subjectListWidget(
+                                            index, snapshot.data);
+                                      },
+                                    );
                                   }
                                   return Center(
                                       child: CircularProgressIndicator());
@@ -186,7 +182,7 @@ class _NdaScreenState extends State<NdaScreen> {
                                 children: [
                                   Padding(
                                     padding:
-                                        EdgeInsets.only(left: 10.0, top: 22.0),
+                                    EdgeInsets.only(left: 10.0, top: 22.0),
                                     child: RaisedButton(
                                       color: Colors.indigo[800],
                                       onPressed: () {
@@ -194,13 +190,9 @@ class _NdaScreenState extends State<NdaScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (ctx) => NdaBuyScreen(
-
-                                                      
-
-                                                      amount: num.parse(widget
-                                                          .coursedata["price"]),id: widget.coursedata["id"],
-
-                                                    )));
+                                                  amount: num.parse(widget
+                                                      .coursedata["price"]),courseid: widget.coursedata["id"],
+                                                )));
                                       },
                                       child: Text(
                                         "Buy Now",
@@ -227,7 +219,7 @@ class _NdaScreenState extends State<NdaScreen> {
                                                 children: <TextSpan>[
                                                   new TextSpan(
                                                     text:
-                                                        '\₹${widget.coursedata["old_price"]}',
+                                                    '\₹${widget.coursedata["old_price"]}',
                                                     style: new TextStyle(
                                                       fontSize: 20.0,
                                                       color: Colors.black,
@@ -240,7 +232,7 @@ class _NdaScreenState extends State<NdaScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  EdgeInsets.only(left: 10.0),
+                                              EdgeInsets.only(left: 10.0),
                                               child: Text(
                                                 '\₹${widget.coursedata["price"]}',
                                                 style: TextStyle(
@@ -271,7 +263,6 @@ class _NdaScreenState extends State<NdaScreen> {
       //bottomNavigationBar: BottomNavigation(),
     );
   }
-
   Widget subjectListWidget(int index, var subData) {
     return Padding(
       padding: EdgeInsets.only(top: 20.0),
@@ -285,15 +276,17 @@ class _NdaScreenState extends State<NdaScreen> {
           //                   ["subject_name"],
           //               id: subData["data"]["data"][index]["id"],
           //             )));
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (ctx) => NdaMathsTopics(
-                        data: subData["data"]["data"][index],
-                        subject_name: subData["data"]["data"][index]
-                            ["subject_name"],
-                        id: subData["data"]["data"][index]["id"],
-                      )));
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (ctx) => NdaMathsTopics(
+          //           data: subData["data"]["data"][index],
+          //           subject_name: subData["data"]["data"][index]
+          //           ["subject_name"],
+          //           id: subData["data"]["data"][index]["id"],
+          //         )));
+
+          //writetoasthere
         },
         color: Colors.white,
         child: Container(

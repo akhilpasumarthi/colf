@@ -1,3 +1,4 @@
+import 'package:bvm/nda/NdaScreenAllCourses.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +27,10 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
 
   courselist() async {
     Map course1 = await getcourses();
+
     setState(() {
       courses = course1;
-      print(courses['success']);
+      //print(courses['success']);
       courses["data"]["data"].forEach((element) {
         courseNameList.add(element["title"]);
         courseimageurl.add(element['course_image']);
@@ -115,7 +117,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                 color: Colors.white,
                 onPressed: () {
                   Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-                    return NdaScreen(coursedata: courses["data"]["data"][index]);
+                    return NdaScreenAllCourses(coursedata: courses["data"]["data"][index]);
                   },));
                 },
                 elevation: 5.0,
@@ -164,7 +166,7 @@ class _MoreCourseScreenState extends State<MoreCourseScreen> {
                         return Center(
                           child: Container(
                             width: 30.0,
-                            height: 30.0,
+                            height: 40.0,
                             child: CircularProgressIndicator()),
                         );
                       },

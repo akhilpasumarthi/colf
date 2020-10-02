@@ -52,7 +52,7 @@ class _SpleshState extends State<Splesh> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: 140.0,
+                          width: 120.0,
                           height: 130.0,
                           child: Image.asset(
                             "assets/images/img1.PNG",
@@ -88,10 +88,11 @@ class _SpleshState extends State<Splesh> {
                       child: LiquidLinearProgressIndicator(
                       
                         value: _initial, // Defaults to 0.5.
-                        valueColor: AlwaysStoppedAnimation(Colors.blueAccent[700]), // Defaults to the current Theme's accentColor.
+                        valueColor: AlwaysStoppedAnimation(Colors.indigo[
+                            800]), // Defaults to the current Theme's accentColor.
                         backgroundColor: Colors
                             .white, // Defaults to the current Theme's backgroundColor.
-                        borderColor: Colors.blueAccent[700],
+                        borderColor: Colors.blue[800],
                         borderWidth: 2.0,
                         borderRadius: 5.0,
                         direction: Axis
