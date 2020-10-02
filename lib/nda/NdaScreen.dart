@@ -194,8 +194,12 @@ class _NdaScreenState extends State<NdaScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (ctx) => NdaBuyScreen(
+
+                                                      
+
                                                       amount: num.parse(widget
-                                                          .coursedata["price"]),courseid: widget.coursedata["id"],
+                                                          .coursedata["price"]),id: widget.coursedata["id"],
+
                                                     )));
                                       },
                                       child: Text(

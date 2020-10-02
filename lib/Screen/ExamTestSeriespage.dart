@@ -1,12 +1,18 @@
 import 'package:bvm/Screen/TestScreen.dart';
+import 'package:bvm/nda/NdaBuyScreen.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class ExamTestSeriesPage extends StatefulWidget {
   final id;
+  final amount;
+  final old_price;
+  final bool purchased;
 
-  const ExamTestSeriesPage({Key key, this.id}) : super(key: key);
+  const ExamTestSeriesPage(
+      {Key key, this.id, this.amount, this.old_price, this.purchased = true})
+      : super(key: key);
   @override
   _ExamTestSeriesPageState createState() => _ExamTestSeriesPageState();
 }
@@ -79,8 +85,6 @@ class _ExamTestSeriesPageState extends State<ExamTestSeriesPage> {
               ),
               Container(
                 padding: EdgeInsets.all(10),
-                height: MediaQuery.of(context).size.height * 0.9,
-                width: MediaQuery.of(context).size.width,
                 child: FutureBuilder(
                   future: testSeriesData,
                   builder: (context, snapshot) {
@@ -89,6 +93,7 @@ class _ExamTestSeriesPageState extends State<ExamTestSeriesPage> {
                     if (snapshot.hasData) {
                       return (tempData["data"]["data"].length != 0)
                           ? ListView.builder(
+                              shrinkWrap: true,
                               physics: ScrollPhysics(),
                               itemCount: tempData["data"]["data"].length,
                               itemBuilder: (context, index) {
@@ -96,15 +101,21 @@ class _ExamTestSeriesPageState extends State<ExamTestSeriesPage> {
                                   padding: EdgeInsets.only(
                                       top: 15.0, left: 10.0, right: 10.0),
                                   child: Container(
-                                    width: MediaQuery.of(context).size.width * 1,
+                                    width:
+                                        MediaQuery.of(context).size.width * 1,
                                     child: RaisedButton(
                                       onPressed: () {
-                                        Navigator.of(context)
-                                            .push(new MaterialPageRoute(
-                                          builder: (context) {
-                                            return TestScreen(id: tempData["data"]["data"][index]["id"],);
-                                          },
-                                        ));
+                                        if (!widget.purchased) {
+                                          Navigator.of(context)
+                                              .push(new MaterialPageRoute(
+                                            builder: (context) {
+                                              return TestScreen(
+                                                id: tempData["data"]["data"]
+                                                    [index]["id"],
+                                              );
+                                            },
+                                          ));
+                                        }
                                       },
                                       padding: EdgeInsets.only(
                                           top: 15.0, bottom: 15.0, left: 10.0),
@@ -112,7 +123,8 @@ class _ExamTestSeriesPageState extends State<ExamTestSeriesPage> {
                                       child: Row(
                                         children: [
                                           Padding(
-                                            padding: EdgeInsets.only(left: 20.0),
+                                            padding:
+                                                EdgeInsets.only(left: 20.0),
                                             child: Text(
                                               tempData["data"]["data"][index]
                                                   ['title'],
@@ -138,6 +150,79 @@ class _ExamTestSeriesPageState extends State<ExamTestSeriesPage> {
                   },
                 ),
               ),
+              (widget.purchased)
+                  ? Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 10.0, top: 22.0),
+                            child: RaisedButton(
+                              color: Colors.blueAccent[700],
+                              onPressed: () {
+                                print(widget.id);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (ctx) => NdaBuyScreen(
+                                              amount: widget.amount,
+                                              id: widget.id,
+                                              type: "test",
+                                            )));
+                              },
+                              child: Text(
+                                "Buy Now",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: 10.0, left: 13.0, bottom: 60.0),
+                                child: Row(
+                                  children: [
+                                    Text.rich(
+                                      TextSpan(
+                                        children: <TextSpan>[
+                                          new TextSpan(
+                                            text: '\₹${widget.old_price}',
+                                            style: new TextStyle(
+                                              fontSize: 20.0,
+                                              color: Colors.black,
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 10.0),
+                                      child: Text(
+                                        '\₹${widget.amount}',
+                                        style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 20.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  : SizedBox(),
             ],
           ),
         ),

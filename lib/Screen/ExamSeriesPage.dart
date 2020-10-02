@@ -1,4 +1,5 @@
 import 'package:bvm/Screen/ExamTestSeriespage.dart';
+import 'package:bvm/nda/NdaBuyScreen.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,9 @@ class ExamSeriesPage extends StatefulWidget {
 
 class _ExamSeriesPageState extends State<ExamSeriesPage> {
   var examSeriesData, tempData;
+  List purchaseList = [];
+  List examSeriesList = [];
+  Map purchasedTest = {};
   @override
   void initState() {
     examSeriesData = getdata(widget.id);
@@ -23,6 +27,33 @@ class _ExamSeriesPageState extends State<ExamSeriesPage> {
     setState(() {
       tempData = data;
     });
+    List series = tempData["data"]["data"];
+    series.forEach((element) {
+      setState(() {
+        examSeriesList.add(element["id"]);
+      });
+    });
+    print(examSeriesList);
+    var purchasedData = await getPaidTests();
+    List<dynamic> x = purchasedData["data"]["data"];
+    x.forEach((element) {
+      setState(() {
+        purchaseList.add(element["id"]);
+      });
+    });
+    print(purchaseList);
+    examSeriesList.forEach((element) {
+      for (var i = 0; i < purchaseList.length; i++) {
+        if (element == purchaseList[i]) {
+          setState(() {
+            purchasedTest["$element"] = true;
+          });
+          break;
+        }
+      }
+    });
+    print(purchasedTest);
+    print(data);
     return data;
   }
 
@@ -66,6 +97,8 @@ class _ExamSeriesPageState extends State<ExamSeriesPage> {
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,8 +113,6 @@ class _ExamSeriesPageState extends State<ExamSeriesPage> {
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 15, 10, 0),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.8,
-                  width: MediaQuery.of(context).size.width,
                   child: FutureBuilder(
                     future: examSeriesData,
                     builder: (context, snapshot) {
@@ -91,8 +122,9 @@ class _ExamSeriesPageState extends State<ExamSeriesPage> {
                         );
                       }
                       if (snapshot.hasData) {
-                        return (tempData["data"]["data"].length!=0)
+                        return (tempData["data"]["data"].length != 0)
                             ? ListView.builder(
+                                shrinkWrap: true,
                                 physics: ScrollPhysics(),
                                 itemCount: tempData["data"]["data"].length,
                                 itemBuilder: (context, index) {
@@ -108,6 +140,12 @@ class _ExamSeriesPageState extends State<ExamSeriesPage> {
                                               .push(new MaterialPageRoute(
                                             builder: (context) {
                                               return ExamTestSeriesPage(
+                                                purchased: (purchasedTest["${tempData["data"]["data"][index]["id"]}"])??false,
+                                                  old_price: tempData["data"]
+                                                          ['data'][index]
+                                                      ['old_price'],
+                                                  amount: tempData["data"]
+                                                      ['data'][index]['price'],
                                                   id: tempData["data"]["data"]
                                                       [index]["id"]);
                                             },

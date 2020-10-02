@@ -140,6 +140,7 @@ class _HomeMainState extends State<HomeMain> {
                                   //fontWeight: FontWeight.bold,
                                 ),
                               ),
+
                             ),
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
@@ -166,7 +167,7 @@ class _HomeMainState extends State<HomeMain> {
                       itemCount: courseNameList.length,
                       physics: ScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          //childAspectRatio: 1.0,
+                          childAspectRatio: 0.9,
                           crossAxisSpacing: 20,
                           crossAxisCount: 2),
                       itemBuilder: (context, index) {
@@ -204,6 +205,7 @@ class _HomeMainState extends State<HomeMain> {
                                           height: 30.0,
                                           width: 30.0,
                                           child: CircularProgressIndicator()),),
+
 
                                     ),
                                   ),
