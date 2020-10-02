@@ -39,7 +39,7 @@ class _TestSeriesScreenState extends State<TestSeriesScreen> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 15.0),
               child: Text(
-                "BVM Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,

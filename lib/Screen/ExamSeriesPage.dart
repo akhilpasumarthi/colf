@@ -42,7 +42,7 @@ class _ExamSeriesPageState extends State<ExamSeriesPage> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 15.0),
               child: Text(
-                "BVN Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,

@@ -55,7 +55,7 @@ class _MyCourseState extends State<MyCourse> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,

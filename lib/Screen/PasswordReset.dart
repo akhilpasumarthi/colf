@@ -34,7 +34,7 @@ class _PaswordResetState extends State<PaswordReset> {
                           Padding(
                             padding: EdgeInsets.only(top: 30.0, bottom: 15.0),
                             child: Text(
-                              "BVM DEFENCE ACADMEY",
+                              "BVM ACADMEY",
                               style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,

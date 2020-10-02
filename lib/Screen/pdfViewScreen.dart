@@ -24,7 +24,7 @@ class _PdfViewState extends State<PdfView> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 10.0),
               child: Text(
-                "BVM Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,

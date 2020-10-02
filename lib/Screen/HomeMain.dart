@@ -66,7 +66,7 @@ class _HomeMainState extends State<HomeMain> {
               Padding(
                 padding: EdgeInsetsDirectional.only(start: 0.0),
                 child: Text(
-                  "BVN Academy",
+                  "BVN ACADMEY",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,

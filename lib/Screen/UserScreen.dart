@@ -100,9 +100,9 @@ class _UserScreenState extends State<UserScreen> {
                             Padding(
                               padding: EdgeInsets.only(top: 30.0, left: 20.0),
                               child: Text(
-                                "BVN Academy",
+                                "BVN ACADMEY",
                                 style: TextStyle(
-                                  fontSize: 28.0,
+                                  fontSize: 25.0,
                                 ),
                               ),
                             ),
@@ -123,7 +123,7 @@ class _UserScreenState extends State<UserScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 20.0,left: 15.0),
+                        padding: EdgeInsets.only(top: 20.0,left: 10.0),
                         child: RaisedButton(
                           onPressed: () {
                             (userdata != null)
@@ -139,7 +139,7 @@ class _UserScreenState extends State<UserScreen> {
                                   style: BorderStyle.solid)),
                           elevation: 0.0,
                           padding: EdgeInsets.only(
-                              top: 10.0, right: 10.0, bottom: 10.0, left: 10.0),
+                              top: 10.0, right: 5.0, bottom: 10.0, left: 5.0),
                           color: Colors.white,
                           child: SvgPicture.asset("assets/images/edit.svg"),
                         ),
