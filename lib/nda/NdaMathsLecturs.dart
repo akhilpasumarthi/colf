@@ -50,7 +50,7 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
@@ -138,7 +138,10 @@ class _NdaMathsLectursState extends State<NdaMathsLecturs> {
                             );
                     }
                     return Center(
-                      child: CircularProgressIndicator(),
+                      child: Container(
+                        width: 30.0,
+                        height: 30.0,
+                        child: CircularProgressIndicator()),
                     );
                   },
                 ),

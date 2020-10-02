@@ -53,7 +53,7 @@ class _NdaScreenAllCoursesState extends State<NdaScreenAllCourses> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,

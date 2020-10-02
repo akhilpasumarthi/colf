@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bvm/Screen/MyProfil.dart';
+import 'package:bvm/Screen/UserScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,7 +37,8 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
     state = new TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
+        backgroundColor: Colors.pink[400],
+        leading: BackButton(color: Colors.white),
         //backgroundColor: Colors.blu,
         title: Text("Edit profile"),
       ),
@@ -217,7 +218,7 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
                       ),
                       padding: EdgeInsets.only(
                           top: 10.0, bottom: 10.0, left: 20.0, right: 20.0),
-                      color: Colors.blue[800],
+                      color: Colors.indigo[800],
                       child: Text(
                         "Submit",
                         style: TextStyle(
@@ -255,7 +256,7 @@ class _ProfilEditScreenState extends State<ProfilEditScreen> {
     Navigator.pop(context);
     Navigator.pushReplacement(context,
         new MaterialPageRoute(builder: (context) {
-      return MyProfil();
+      return UserScreen();
     }));
   }
 }

@@ -50,7 +50,7 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
                   color: Colors.pink[400],
                   fontSize: 20.0,
@@ -91,10 +91,12 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
                       child: CachedNetworkImage(
                         imageUrl: widget.data['image'],
                         fit: BoxFit.fill,
-                        placeholder: (context, url) => Container(
-                            height: 30.0,
-                            width: 30.0,
-                            child: CircularProgressIndicator()),
+                        placeholder: (context, url) => Center(
+                          child: Container(
+                              height: 30.0,
+                              width: 30.0,
+                              child: CircularProgressIndicator()),
+                        ),
                       ),
                     ),
                   ],
@@ -141,7 +143,10 @@ class _NdaMathsTopicsState extends State<NdaMathsTopics> {
                                   );
                           }
                           return Center(
-                            child: CircularProgressIndicator(),
+                            child: Container(
+                              width: 30.0,
+                              height: 30.0,
+                              child: CircularProgressIndicator()),
                           );
                         },
                       ),

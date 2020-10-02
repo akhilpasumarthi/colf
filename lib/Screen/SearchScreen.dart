@@ -163,10 +163,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                       child: CachedNetworkImage(imageUrl: courseimageurl[index],
                                       fit: BoxFit.fill,
                                      // height: 100.0,
-                                        placeholder: (context, url) => Container(
-                                          height: 30.0,
-                                          width: 30.0,
-                                          child: CircularProgressIndicator()),),
+                                        placeholder: (context, url) => Center(
+                                          child: Container(
+                                            height: 30.0,
+                                            width: 30.0,
+                                            child: CircularProgressIndicator()),
+                                        ),),
 
                                     ),
                                   ),

@@ -1,17 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:bvm/Screen/BuyTestScreen.dart';
 import 'package:bvm/Screen/EbookScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:bvm/Screen/LoginSigninScreen.dart';
 import 'package:bvm/Screen/MyCourse.dart';
-import 'package:bvm/Screen/MyProfil.dart';
+
 import 'package:share/share.dart';
 import 'package:bvm/services/usertoken.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
-
+import 'ProfilEditScreen.dart';
+import 'ChangePasswordReset.dart';
 class UserScreen extends StatefulWidget {
   static const routeName = '/UserScreen';
   @override
@@ -120,6 +122,28 @@ class _UserScreenState extends State<UserScreen> {
                           ],
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20.0,left: 15.0),
+                        child: RaisedButton(
+                          onPressed: () {
+                            (userdata != null)
+                                ? {
+                                    Navigator.push(context, MaterialPageRoute(builder: (ctx) => ProfilEditScreen(editableData: userdata,))),
+                                  }
+                                : null;
+                          },
+                          shape: CircleBorder(
+                              side: BorderSide(
+                                  width: 2,
+                                  color: Colors.white,
+                                  style: BorderStyle.solid)),
+                          elevation: 0.0,
+                          padding: EdgeInsets.only(
+                              top: 10.0, right: 10.0, bottom: 10.0, left: 10.0),
+                          color: Colors.white,
+                          child: SvgPicture.asset("assets/images/edit.svg"),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -130,8 +154,8 @@ class _UserScreenState extends State<UserScreen> {
                   width: MediaQuery.of(context).size.width * 1,
                   child: RaisedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (ctx) => MyProfil()));
+                       Navigator.push(context,
+                          MaterialPageRoute(builder: (ctx) => BuyTestScreen()));
                     },
                     padding:
                         EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
@@ -141,12 +165,12 @@ class _UserScreenState extends State<UserScreen> {
                         Container(
                           height: 40.0,
                           width: 40.0,
-                          child: SvgPicture.asset("assets/images/user2.svg"),
+                          child: SvgPicture.asset("assets/images/test.svg"),
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Text(
-                            "View My Profile",
+                            "My Test Series",
                             style: TextStyle(
                               fontSize: 18.0,
                             ),
@@ -223,7 +247,41 @@ class _UserScreenState extends State<UserScreen> {
                   ),
                 ),
               ),
-             
+             Padding(
+                padding: EdgeInsets.only(top: 25.0, left: 10.0, right: 10.0),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 1,
+                  child: RaisedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => ChangePasswordResset()));
+                    },
+                    padding:
+                        EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0),
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 40.0,
+                          width: 40.0,
+                          child: SvgPicture.asset("assets/images/password.svg"),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            "Change Password",
+                            style: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.only(top: 25.0, left: 10.0, right: 10.0),
                 child: Container(

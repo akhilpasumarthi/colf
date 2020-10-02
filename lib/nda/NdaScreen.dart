@@ -56,7 +56,7 @@ class _NdaScreenState extends State<NdaScreen> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
@@ -96,10 +96,12 @@ class _NdaScreenState extends State<NdaScreen> {
                         child: CachedNetworkImage(
                           imageUrl: widget.coursedata['course_image'],
                           fit: BoxFit.fill,
-                          placeholder: (context, url) => Container(
-                              height: 30.0,
-                              width: 30.0,
-                              child: CircularProgressIndicator()),
+                          placeholder: (context, url) => Center(
+                            child: Container(
+                                height: 30.0,
+                                width: 30.0,
+                                child: CircularProgressIndicator()),
+                          ),
                         ),
                       ),
                       Padding(
@@ -164,7 +166,10 @@ class _NdaScreenState extends State<NdaScreen> {
                                           );
                                   }
                                   return Center(
-                                      child: CircularProgressIndicator());
+                                      child: Container(
+                                        height: 30.0,
+                                        width: 30.0,
+                                        child: CircularProgressIndicator()));
                                 },
                               ),
                             ),

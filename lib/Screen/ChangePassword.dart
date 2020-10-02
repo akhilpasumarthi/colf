@@ -38,7 +38,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           Padding(
                             padding: EdgeInsets.only(top: 30.0, bottom: 15.0),
                             child: Text(
-                              "BVN DEFENCE ACADMEY",
+                              "BVN ACADMEY",
                               style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,

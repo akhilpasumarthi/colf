@@ -1,4 +1,4 @@
-import 'package:bvm/Screen/MyProfil.dart';
+import 'package:bvm/Screen/UserScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
@@ -34,7 +34,7 @@ class _ChangePasswordRessetState extends State<ChangePasswordResset> {
         return Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MyProfil(),
+            builder: (context) => UserScreen(),
           ),
         );
       } else {
@@ -75,16 +75,16 @@ class _ChangePasswordRessetState extends State<ChangePasswordResset> {
                               fit: BoxFit.fill,
                             ),
                           ),
-                          Padding(
+                          /*Padding(
                             padding: EdgeInsets.only(top: 30.0, bottom: 15.0),
                             child: Text(
-                              "BVN DEFENCE ACADMEY",
+                              "BVN ACADMEY",
                               style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
+                          ),*/
                         ],
                       ),
                     ),

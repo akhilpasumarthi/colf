@@ -45,7 +45,7 @@ class _SpleshState extends State<Splesh> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 150.0, left: 0.0, right: 0.0),
+                  padding: EdgeInsets.only(top: 170.0, left: 0.0, right: 0.0),
                   child: Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,7 +59,7 @@ class _SpleshState extends State<Splesh> {
                             fit: BoxFit.fill,
                           ),
                         ),
-                        Padding(
+                        /*Padding(
                           padding: EdgeInsets.only(top: 30.0, bottom: 15.0),
                           child: Text(
                             "BVN ACADMEY",
@@ -68,7 +68,7 @@ class _SpleshState extends State<Splesh> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
+                        ),*/
                       ],
                     ),
                   ),

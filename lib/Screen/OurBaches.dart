@@ -83,12 +83,7 @@ class _OurBatchesState extends State<OurBatches> {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 5.0),
-              child: Divider(
-                color: Colors.black,
-              ),
-            ),
+           
             Column(
               children: [
                 Container(
@@ -131,94 +126,114 @@ class _OurBatchesState extends State<OurBatches> {
 
   Widget LiveClassesWidget(int index, var subdata) {
     return Padding(
-      padding: EdgeInsets.only(top: 0.0),
-      child: Container(
-        //height: 50.0,
-        width: MediaQuery.of(context).size.width * 1,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 25.0),
-                  child: Column(
-                    children: [
-                      Container(
-                        child: Text(
-                          subdata['data']['data'][index]['name'],
-                          style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 5.0, left: 25.0,right: 5.0),
-              child: Row(
+      padding: EdgeInsets.only(top: 10.0,left: 7.0,right: 5.0),
+      child: RaisedButton(
+        padding: EdgeInsets.only(top: 7.0,bottom: 5.0),
+        color: Colors.white,
+        onPressed: () {},
+              child: Container(
+          //height: 50.0,
+          width: MediaQuery.of(context).size.width * 1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Medium:",
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-
                   Padding(
-                    padding: EdgeInsets.only(left: 5.0),
-                    child: medium(index, subdata),
+                    padding: EdgeInsets.only(left: 15.0,right: 5.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width*.67,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                              subdata['data']['data'][index]['name'],
+                              style: TextStyle(
+                                  fontSize: 22.0,
+                                  color: Colors.indigo[900],
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: RaisedButton(onPressed: () {},
+                    padding: EdgeInsets.only(left: 5.0,right: 5.0),
+                    elevation: 15.0,
+                    color: Colors.indigo[800],
+                    child: medium(index, subdata),
+                    ),
+                  )
                 ],
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 5.0,  left: 25.0),
-              child: Row(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Start Date:",
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 5.0),
-                    child: Text(
-                      subdata['data']['data'][index]['start_date'],
+              /*Padding(
+                padding: EdgeInsets.only(top: 5.0, left: 25.0,right: 5.0),
+                child: Row(
+                  children: [
+                    Text(
+                      "Medium:",
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: medium(index, subdata),
+                    ),
+                  ],
+                ),
+              ),*/
+              Padding(
+                padding: EdgeInsets.only(top: 2.0,  left: 15.0),
+                child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Start On",
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 5.0),
+                      child: Text(
+                        subdata['data']['data'][index]['start_date'],
+                        style: TextStyle(
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              /*Padding(
+                padding: EdgeInsets.only(top: 5.0, left: 25.0),
+                child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "End Date:",
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                    Text(
+                      subdata['data']['data'][index]['end_date'],
                       style: TextStyle(
                         fontSize: 18.0,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 5.0, left: 25.0),
-              child: Row(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "End Date:",
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                  Text(
-                    subdata['data']['data'][index]['end_date'],
-                    style: TextStyle(
-                      fontSize: 18.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            
-            
-                  Divider(
-                    color: Colors.black,
-                  ),
-          ],
+                  ],
+                ),
+              ),*/
+              
+              
+            ],
+          ),
         ),
       ),
     );
@@ -229,7 +244,9 @@ class _OurBatchesState extends State<OurBatches> {
       return Text(
         "Hindi",
         style: TextStyle(
-          fontSize: 18.0,
+          fontSize: 16.0,
+          //fontWeight: FontWeight.bold,
+          color: Colors.white,
         ),
       );
     }
@@ -237,7 +254,9 @@ class _OurBatchesState extends State<OurBatches> {
       return Text(
         "English",
         style: TextStyle(
-          fontSize: 18.0,
+          color: Colors.white,
+          //fontWeight: FontWeight.bold,
+          fontSize: 16.0,
         ),
       );
     }

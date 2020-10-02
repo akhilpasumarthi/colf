@@ -120,7 +120,10 @@ class _LiveSessionState extends State<LiveSession> {
                               });
                         }
                         return Center(
-                          child: CircularProgressIndicator(),
+                          child: Container(
+                            height: 30.0,
+                            width: 30.0,
+                            child: CircularProgressIndicator()),
                         );
                       }),
                 ),
@@ -142,23 +145,31 @@ class _LiveSessionState extends State<LiveSession> {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 30.0),
+                  padding: EdgeInsets.only(left: 15.0),
                   child: Column(
+                    //mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                      child: Text(
-                        subdata['data']['data'][index]['title'],
-                        style: TextStyle(fontSize: 20.0, color: Colors.black),
+                        width: MediaQuery.of(context).size.width*.70,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                          subdata['data']['data'][index]['title'],
+                          style: TextStyle(fontSize: 20.0, color: Colors.black),
+                        ),
+                        ],
                       ),
                     ),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(right: 30.0),
+                  padding: EdgeInsets.only(right: 11.0),
                   child: RaisedButton(
                     color: Colors.indigo[800],
                     onPressed: () {

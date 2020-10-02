@@ -49,7 +49,7 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
@@ -94,7 +94,10 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
                               height: 30.0,
                               width: 30.0,
                               child:
-                                  Center(child: CircularProgressIndicator())),
+                                  Center(child: Container(
+                                    width: 30.0,
+                                    height: 30.0,
+                                    child: CircularProgressIndicator()))),
                         ),
                       ),
                     ],
@@ -165,7 +168,10 @@ class _NdaNotesScreenState extends State<NdaNotesScreen> {
                           : emptyNotesWidget();
                     }
                     return Center(
-                      child: CircularProgressIndicator(),
+                      child: Container(
+                        width: 30.0,
+                        height: 30.0,
+                        child: CircularProgressIndicator()),
                     );
                   },
                 ),

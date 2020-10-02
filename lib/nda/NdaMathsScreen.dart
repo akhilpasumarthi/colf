@@ -33,7 +33,7 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
             Padding(
               padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVM Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
@@ -77,7 +77,10 @@ class _NdaMathsScreenState extends State<NdaMathsScreen> {
                         placeholder: (context, url) => Container(
                             height: 30.0,
                             width: 30.0,
-                            child: Center(child: CircularProgressIndicator())),
+                            child: Center(child: Container(
+                              height: 30.0,
+                              width: 30.0,
+                              child: CircularProgressIndicator()))),
                       ),
                     ),
                   ],

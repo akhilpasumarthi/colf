@@ -1,3 +1,5 @@
+import 'package:bvm/Screen/BuyTestScreen.dart';
+
 import 'Defince.dart';
 import 'package:bvm/Screen/HomeMain.dart';
 import 'package:bvm/Screen/MyCourse.dart';
@@ -25,7 +27,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final List<Widget> _childern = [
     HomeMain(),
     MyCourse(),
-    EbookScreen(),
+    BuyTestScreen(),
     SearchScreen(),
     UserScreen(),
   ];
