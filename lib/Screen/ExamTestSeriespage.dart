@@ -11,7 +11,7 @@ class ExamTestSeriesPage extends StatefulWidget {
   final bool purchased;
 
   const ExamTestSeriesPage(
-      {Key key, this.id, this.amount, this.old_price, this.purchased = true})
+      {Key key, this.id, this.amount, this.old_price, this.purchased})
       : super(key: key);
   @override
   _ExamTestSeriesPageState createState() => _ExamTestSeriesPageState();
@@ -105,7 +105,7 @@ class _ExamTestSeriesPageState extends State<ExamTestSeriesPage> {
                                         MediaQuery.of(context).size.width * 1,
                                     child: RaisedButton(
                                       onPressed: () {
-                                        if (!widget.purchased) {
+                                        if (widget.purchased) {
                                           Navigator.of(context)
                                               .push(new MaterialPageRoute(
                                             builder: (context) {
@@ -150,7 +150,7 @@ class _ExamTestSeriesPageState extends State<ExamTestSeriesPage> {
                   },
                 ),
               ),
-              (widget.purchased)
+              (!widget.purchased)
                   ? Container(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -166,7 +166,7 @@ class _ExamTestSeriesPageState extends State<ExamTestSeriesPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (ctx) => NdaBuyScreen(
-                                              amount: widget.amount,
+                                              amount: num.parse(widget.amount),
                                               id: widget.id,
                                               type: "test",
                                             )));

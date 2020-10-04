@@ -1,91 +1,45 @@
 import 'package:bvm/Screen/ExamTestSeriespage.dart';
-import 'package:bvm/nda/NdaBuyScreen.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
 
-class ExamSeriesPage extends StatefulWidget {
-  final id;
-
-  const ExamSeriesPage({Key key, this.id}) : super(key: key);
+class BuyTestScreen extends StatefulWidget {
   @override
-  _ExamSeriesPageState createState() => _ExamSeriesPageState();
+  _BuyTestScreenState createState() => _BuyTestScreenState();
 }
 
-class _ExamSeriesPageState extends State<ExamSeriesPage> {
-  var examSeriesData, tempData;
-  List purchaseList = [];
-  List examSeriesList = [];
-  Map purchasedTest = {};
+class _BuyTestScreenState extends State<BuyTestScreen> {
+  var data, tempData;
   @override
   void initState() {
-    examSeriesData = getdata(widget.id);
     super.initState();
+    data = getdata();
   }
 
-  getdata(var id) async {
-    var data = await getExamSeries(id);
+  getdata() async {
+    var x = await getPaidTests();
     setState(() {
-      tempData = data;
+      tempData = x;
     });
-    List series = tempData["data"]["data"];
-    series.forEach((element) {
-      setState(() {
-        examSeriesList.add(element["id"]);
-      });
-    });
-    print(examSeriesList);
-    var purchasedData = await getPaidTests();
-    List<dynamic> x = purchasedData["data"]["data"];
-    x.forEach((element) {
-      setState(() {
-        purchaseList.add(element["id"]);
-      });
-    });
-    print(purchaseList);
-    examSeriesList.forEach((element) {
-      for (var i = 0; i < purchaseList.length; i++) {
-        if (element == purchaseList[i]) {
-          setState(() {
-            purchasedTest["$element"] = true;
-          });
-          break;
-        }
-      }
-    });
-    print(purchasedTest);
-    print(data);
-    return data;
+    return x;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(color: Colors.black),
-        //shadowColor: Colors.red,
-        backgroundColor: Colors.white,
+        leading: BackButton(color: Colors.white),
+        backgroundColor: Colors.pink[400],
         elevation: 25.0,
         title: Row(
           //crossAxisAlignment: CrossAxisAlignment.start,
           //mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 0.0),
-              child: Container(
-                width: 35.0,
-                height: 35.0,
-                child: Image.asset(
-                  "assets/images/img1.PNG",
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.only(start: 15.0),
+              padding: EdgeInsetsDirectional.only(start: 12.0),
               child: Text(
-                "BVN Defence Academy",
+                "BVN ACADMEY",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -95,26 +49,29 @@ class _ExamSeriesPageState extends State<ExamSeriesPage> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: ScrollPhysics(),
         child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(top: 25.0, left: 30.0),
-                child: Text(
-                  "Exam Series",
-                  style: TextStyle(fontSize: 20.0),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 25.0),
+                    child: Text(
+                      "My Test Series",
+                      style: TextStyle(
+                        fontSize: 25.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 15, 10, 0),
                 child: Container(
                   child: FutureBuilder(
-                    future: examSeriesData,
+                    future: data,
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Center(
@@ -122,13 +79,11 @@ class _ExamSeriesPageState extends State<ExamSeriesPage> {
                         );
                       }
                       if (snapshot.hasData) {
-                        
                         return (tempData["data"]["data"].length != 0)
                             ? ListView.builder(
                                 shrinkWrap: true,
                                 physics: ScrollPhysics(),
                                 itemCount: tempData["data"]["data"].length,
-                              
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: EdgeInsets.only(
@@ -142,7 +97,7 @@ class _ExamSeriesPageState extends State<ExamSeriesPage> {
                                               .push(new MaterialPageRoute(
                                             builder: (context) {
                                               return ExamTestSeriesPage(
-                                                purchased: false,
+                                                  purchased: true,
                                                   old_price: tempData["data"]
                                                           ['data'][index]
                                                       ['old_price'],

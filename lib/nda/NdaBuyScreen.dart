@@ -12,9 +12,6 @@ class NdaBuyScreen extends StatefulWidget {
 
   const NdaBuyScreen({Key key, this.amount, this.id, this.type})
       : super(key: key);
-
-
-
  // const NdaBuyScreen({Key key, this.amount,this.courseid}) : super(key: key);
 
   @override
@@ -41,7 +38,7 @@ class _NdaBuyScreenState extends State<NdaBuyScreen> {
   }
 
   void openCheckOut() async {
-    await orderRequest("2",widget.amount,"id","1","test");
+    await orderRequest(widget.id,widget.amount,"id",1,widget.type);
     var options = {
       'key': 'rzp_test_l0Dmpg9h9w6ZhD', //enter your key form razorpay account.
       'amount': widget.amount.toInt() * 100,
