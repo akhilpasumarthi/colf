@@ -70,6 +70,7 @@ Future<Map> getExamSeries(var id) async{
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
   Map data = jsonDecode(response.body);
+  print(data);
   return data;
 }
 
@@ -79,7 +80,9 @@ Future<Map> getExamSeriesTest(var id) async{
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
+
   Map data = jsonDecode(response.body);
+  print(data);
   return data;
 }
 
@@ -89,7 +92,9 @@ Future<Map> getTestQsns(var id) async{
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
+
   Map data = jsonDecode(response.body);
+  print(data);
   return data;
 }
 
@@ -124,7 +129,7 @@ Future<Map> getPurchasedCourses() async {
   print(response.statusCode);
   Map data = jsonDecode(response.body);
 
-  print(data);
+  //print(data);
 
   return data;
 }

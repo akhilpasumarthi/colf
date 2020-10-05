@@ -13,6 +13,7 @@ class TestScreen extends StatefulWidget {
 
 class _TestScreenState extends State<TestScreen> {
   var qsndata, tempData;
+  final bool loop=false;
   List<bool> checklist = [];
   @override
   void initState() {
