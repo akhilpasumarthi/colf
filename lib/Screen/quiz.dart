@@ -12,9 +12,10 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
-  var qsndata, tempData;
-  final bool loop=false;
+  var qsndata, tempData, qsncount;
+  final bool loop = false;
   List<bool> checklist = [];
+  Map answerId = {};
   @override
   void initState() {
     qsndata = getdata(widget.id);
@@ -25,12 +26,13 @@ class _TestScreenState extends State<TestScreen> {
     var data = await getTestQsns(id);
     setState(() {
       tempData = data;
+      qsncount = tempData['data'].length;
     });
-    for (var i = 0; i < tempData["data"].length; i++) {
-      setState(() {
-        checklist.add(false);
-      });
+    for (var i = 0; i < qsncount; i++) {
+      var x = tempData['data'][i];
+      answerId[x['id']] = '';
     }
+    print(answerId);
     return data;
   }
 
@@ -72,31 +74,145 @@ class _TestScreenState extends State<TestScreen> {
         ),
       ),
       body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: FutureBuilder(
-          future: qsndata,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return (tempData["data"].length != 0)
-                  ?ListView.builder(
-                physics: ScrollPhysics(),
-                shrinkWrap: true,
-                itemCount:
-                tempData["data"].length,
-                itemBuilder: (context, index) {
-                  return showquiz(
-                      index, snapshot.data);
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              FutureBuilder(
+                future: qsndata,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return (tempData["data"].length != 0)
+                        ? ListView.separated(
+                            separatorBuilder: (context, index) {
+                              return Container(
+                                height: 15,
+                                width: MediaQuery.of(context).size.width,
+                                color: Colors.transparent,
+                              );
+                            },
+                            physics: BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: tempData["data"].length,
+                            itemBuilder: (context, index) {
+                              return showquiz(tempData, index);
+                            },
+                          )
+                        : Center(
+                            child: Text('No Test Found'),
+                          );
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 },
+              ),
+              Center(
+                child: RaisedButton(
+                  onPressed: () async {
+                    var x = await getmarks(widget.id, answerId.toString());
+                  },
+                  child: Text('Submit'),
+                ),
               )
-                  : Center(
-                child: Text('No Test Found'),
-              );
-            }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget showquiz(var tempdata, int index) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: Container(
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              blurRadius: 5.0, // soften the shadow
+              spreadRadius: 1.0, //extend the shadow
+            )
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${index + 1}. ${tempdata['data'][index]['question']}',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black87),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      answerId[tempdata['data'][index]['id']] =
+                          tempdata['data'][index]['options'][0]['id']
+                              .toString();
+                    });
+                  },
+                  color: Colors.grey,
+                  child: Text(
+                      tempdata['data'][index]['options'][0]['option_text']),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      answerId[tempdata['data'][index]['id']] =
+                          tempdata['data'][index]['options'][1]['id']
+                              .toString();
+                    });
+                  },
+                  color: Colors.grey,
+                  child: Text(
+                      tempdata['data'][index]['options'][1]['option_text']),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      answerId[tempdata['data'][index]['id']] =
+                          tempdata['data'][index]['options'][2]['id']
+                              .toString();
+                    });
+                  },
+                  color: Colors.grey,
+                  child: Text(
+                      tempdata['data'][index]['options'][2]['option_text']),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      answerId[tempdata['data'][index]['id']] =
+                          tempdata['data'][index]['options'][3]['id']
+                              .toString();
+                    });
+                  },
+                  color: Colors.grey,
+                  child: Text(
+                      tempdata['data'][index]['options'][3]['option_text']),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -255,131 +371,130 @@ class _TestScreenState extends State<TestScreen> {
       }
     });
   }
-  Widget showquiz(int index, var tempdata)
-  {
-    var count = tempdata["data"].length;
+  // Widget showquiz(int index, var tempdata)
+  // {
+  //   var count = tempdata["data"].length;
 
-    var answerList = [], keyList = [];
-    for (var i = 0; i < count; i++) {
-      for (var j = 0; j < 4; j++) {
-        if (tempdata["data"][i]["options"][j]["correct"] == "1") keyList.add(j);
-      }
-    }
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            new Text(
-              '${index + 1}. ${tempdata[index]["question"]}',
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black87),
-            ),
-            new SizedBox(height: 10),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RaisedButton(
-                  color: col_1 ,
-                  onPressed: () {
-                    showanswer(index);
-                    if (tempdata[index]["options"][0]["correct"] ==
-                        "1") {
-                      setState(() {
-                        col_1 = Colors.green;
-                      });
-                    } else {
-                      setState(() {
-                        col_1 = Colors.red;
-                      });
-                    }
-                  },
-                  child: Text(
-                      tempdata[index]["options"][0]["option_text"]),
-                ),
-                RaisedButton(
-                  color: col_2,
-                  onPressed: () {
-                    showanswer(index);
-                    if (tempdata[index]["options"][1]["correct"] ==
-                        "1") {
-                      setState(() {
-                        col_2 = Colors.green;
-                      });
-                    }
-                    else {
-                      setState(() {
-                        col_2 = Colors.red;
-                      });
-                    }
-                  },
-                  child: Text(
-                      tempdata[index]["options"][1]["option_text"]),
-                )
-              ],
-            ),
-            new SizedBox(height: 10),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RaisedButton(
-                  color: col_3,
-                  onPressed: () {
-                    showanswer(index);
-                    if (tempdata[index]["options"][2]["correct"] ==
-                        "1") {
-                      setState(() {
-                        col_3 = Colors.green;
-                      });
-                    }
-                    else {
-                      setState(() {
-                        col_3 = Colors.red;
-                      });
-                    }
-                  },
-                  child: Text(
-                      tempdata[index]["options"][2]["option_text"]),
-                ),
-                RaisedButton(
-                  color: col_4,
-                  onPressed: () {
-                    showanswer(index);
-                    if (tempdata["data"][index]["options"][3]["correct"] ==
-                        "1") {
-                      setState(() {
-                        col_4 = Colors.green;
-                      });
-                    }
-                    else {
-                      setState(() {
-                        col_4 = Colors.red;
-                      });
-                    }
-                  },
-                  child: Text(
-                      tempdata[index]["options"][3]["option_text"]),
-                ),
-              ],
-            ),
-            new SizedBox(height: 10),
-            (checklist[index])
-                ? Text(
-                "Correct Option is: ${tempdata[index]["options"][keyList[index]]["option_text"]}")
-                : SizedBox(),
-            new SizedBox(height: 10),
-            (checklist[index])
-                ? Text(
-                "Explaination is: ${tempdata[index]["options"][keyList[index]]["explanation"]}")
-                : SizedBox(),
-          ],
-        ),
-      ),
-    );
-  }
+  //   var answerList = [], keyList = [];
+  //   for (var i = 0; i < count; i++) {
+  //     for (var j = 0; j < 4; j++) {
+  //       if (tempdata["data"][i]["options"][j]["correct"] == "1") keyList.add(j);
+  //     }
+  //   }
+  //   return Container(
+  //     padding: EdgeInsets.symmetric(horizontal: 10),
+  //     child: Center(
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         crossAxisAlignment: CrossAxisAlignment.center,
+  //         children: [
+  //           new Text(
+  //             '${index + 1}. ${tempdata[index]["question"]}',
+  //             style: TextStyle(
+  //                 fontSize: 18,
+  //                 fontWeight: FontWeight.w400,
+  //                 color: Colors.black87),
+  //           ),
+  //           new SizedBox(height: 10),
+  //           new Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //             children: [
+  //               RaisedButton(
+  //                 color: col_1 ,
+  //                 onPressed: () {
+  //                   showanswer(index);
+  //                   if (tempdata[index]["options"][0]["correct"] ==
+  //                       "1") {
+  //                     setState(() {
+  //                       col_1 = Colors.green;
+  //                     });
+  //                   } else {
+  //                     setState(() {
+  //                       col_1 = Colors.red;
+  //                     });
+  //                   }
+  //                 },
+  //                 child: Text(
+  //                     tempdata[index]["options"][0]["option_text"]),
+  //               ),
+  //               RaisedButton(
+  //                 color: col_2,
+  //                 onPressed: () {
+  //                   showanswer(index);
+  //                   if (tempdata[index]["options"][1]["correct"] ==
+  //                       "1") {
+  //                     setState(() {
+  //                       col_2 = Colors.green;
+  //                     });
+  //                   }
+  //                   else {
+  //                     setState(() {
+  //                       col_2 = Colors.red;
+  //                     });
+  //                   }
+  //                 },
+  //                 child: Text(
+  //                     tempdata[index]["options"][1]["option_text"]),
+  //               )
+  //             ],
+  //           ),
+  //           new SizedBox(height: 10),
+  //           new Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //             children: [
+  //               RaisedButton(
+  //                 color: col_3,
+  //                 onPressed: () {
+  //                   showanswer(index);
+  //                   if (tempdata[index]["options"][2]["correct"] ==
+  //                       "1") {
+  //                     setState(() {
+  //                       col_3 = Colors.green;
+  //                     });
+  //                   }
+  //                   else {
+  //                     setState(() {
+  //                       col_3 = Colors.red;
+  //                     });
+  //                   }
+  //                 },
+  //                 child: Text(
+  //                     tempdata[index]["options"][2]["option_text"]),
+  //               ),
+  //               RaisedButton(
+  //                 color: col_4,
+  //                 onPressed: () {
+  //                   showanswer(index);
+  //                   if (tempdata["data"][index]["options"][3]["correct"] ==
+  //                       "1") {
+  //                     setState(() {
+  //                       col_4 = Colors.green;
+  //                     });
+  //                   }
+  //                   else {
+  //                     setState(() {
+  //                       col_4 = Colors.red;
+  //                     });
+  //                   }
+  //                 },
+  //                 child: Text(
+  //                     tempdata[index]["options"][3]["option_text"]),
+  //               ),
+  //             ],
+  //           ),
+  //           new SizedBox(height: 10),
+  //           (checklist[index])
+  //               ? Text(
+  //               "Correct Option is: ${tempdata[index]["options"][keyList[index]]["option_text"]}")
+  //               : SizedBox(),
+  //           new SizedBox(height: 10),
+  //           (checklist[index])
+  //               ? Text(
+  //               "Explaination is: ${tempdata[index]["options"][keyList[index]]["explanation"]}")
+  //               : SizedBox(),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
-

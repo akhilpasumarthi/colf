@@ -1,4 +1,4 @@
-import 'package:bvm/Screen/TestScreen.dart';
+import 'package:bvm/Screen/quiz.dart';
 import 'package:bvm/nda/NdaBuyScreen.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/material.dart';
