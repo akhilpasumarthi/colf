@@ -63,9 +63,10 @@ Future<Map> getExams() async {
   return data;
 }
 
-Future<Map> getExamSeries(var id) async{
+Future<Map> getExamSeries(var id) async {
   var token = await gettoken();
-  var uri = Uri.parse("https://bilaltech.in/api/public/api/getExamSeries?exam_id=$id");
+  var uri = Uri.parse(
+      "https://bilaltech.in/api/public/api/getExamSeries?exam_id=$id");
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
@@ -74,21 +75,10 @@ Future<Map> getExamSeries(var id) async{
   return data;
 }
 
-Future<Map> getExamSeriesTest(var id) async{
+Future<Map> getExamSeriesTest(var id) async {
   var token = await gettoken();
-  var uri = Uri.parse("https://bilaltech.in/api/public/api/getTest?exam_test_series_id=$id");
-  var response = await http
-      .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
-  print(response.statusCode);
-
-  Map data = jsonDecode(response.body);
-  print(data);
-  return data;
-}
-
-Future<Map> getTestQsns(var id) async{
-  var token = await gettoken();
-  var uri = Uri.parse("https://bilaltech.in/api/public/api/getQuestions?test_id=$id");
+  var uri = Uri.parse(
+      "https://bilaltech.in/api/public/api/getTest?exam_test_series_id=$id");
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
@@ -98,9 +88,24 @@ Future<Map> getTestQsns(var id) async{
   return data;
 }
 
-Future<Map> orderRequest(var id,var price,var payment_id,var payment_type,var type) async{
+Future<Map> getTestQsns(var id) async {
   var token = await gettoken();
-  var uri = Uri.parse("https://bilaltech.in/api/public/api/createOrder?item_id=$id&price=$price&type=$type&transaction_id=$payment_id&payment_type=$payment_type");
+  var uri =
+      Uri.parse("https://bilaltech.in/api/public/api/getQuestions?test_id=$id");
+  var response = await http
+      .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
+  print(response.statusCode);
+
+  Map data = jsonDecode(response.body);
+  print(data);
+  return data;
+}
+
+Future<Map> orderRequest(
+    var id, var price, var payment_id, var payment_type, var type) async {
+  var token = await gettoken();
+  var uri = Uri.parse(
+      "https://bilaltech.in/api/public/api/createOrder?item_id=$id&price=$price&type=$type&transaction_id=$payment_id&payment_type=$payment_type");
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
 
@@ -109,21 +114,21 @@ Future<Map> orderRequest(var id,var price,var payment_id,var payment_type,var ty
   return data;
 }
 
-Future<Map> getPaidTests() async{
+Future<Map> getPaidTests() async {
   var token = await gettoken();
   var uri = Uri.parse("https://bilaltech.in/api/public/api/getPurchasedTest");
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
- // print(response.statusCode);
+  // print(response.statusCode);
   Map data = jsonDecode(response.body);
- // print(data);
+  // print(data);
   return data;
 }
 
 Future<Map> getPurchasedCourses() async {
   var token = await gettoken();
-  var uri = Uri.parse("https://bilaltech.in/api/public/api/getPurchasedCourses");
-
+  var uri =
+      Uri.parse("https://bilaltech.in/api/public/api/getPurchasedCourses")
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
@@ -131,5 +136,19 @@ Future<Map> getPurchasedCourses() async {
 
   //print(data);
 
+  return data;
+}
+
+Future<Map> getmarks(var id, var questions) async {
+  print(questions);
+  print(id);
+  var token = await gettoken();
+  
+  var response = await http.post(
+      "https://bilaltech.in/api/public/api/testResult?test_id=$id&questions=$questions",
+      headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
+  print(response.statusCode);
+  Map data = jsonDecode(response.body);
+  print(data);
   return data;
 }
