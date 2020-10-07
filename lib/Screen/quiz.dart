@@ -138,7 +138,7 @@ class _TestScreenState extends State<TestScreen> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacit[300]y(0.5),
+              color: Colors.grey.withOpacity(0.5),
               blurRadius: 5.0, // soften the shadow
               spreadRadius: 1.0, //extend the shadow
             )
