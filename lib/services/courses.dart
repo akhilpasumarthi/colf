@@ -128,7 +128,7 @@ Future<Map> getPaidTests() async {
 Future<Map> getPurchasedCourses() async {
   var token = await gettoken();
   var uri =
-      Uri.parse("https://bilaltech.in/api/public/api/getPurchasedCourses")
+      Uri.parse("https://bilaltech.in/api/public/api/getPurchasedCourses");
   var response = await http
       .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
   print(response.statusCode);
@@ -143,7 +143,6 @@ Future<Map> getmarks(var id, var questions) async {
   print(questions);
   print(id);
   var token = await gettoken();
-  
   var response = await http.post(
       "https://bilaltech.in/api/public/api/testResult?test_id=$id&questions=$questions",
       headers: {HttpHeaders.authorizationHeader: "Bearer $token"});

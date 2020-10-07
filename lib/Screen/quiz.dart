@@ -15,6 +15,7 @@ class _TestScreenState extends State<TestScreen> {
   var qsndata, tempData, qsncount;
   final bool loop = false;
   List<bool> checklist = [];
+  var colorlist = [];
   Map answerId = {};
   @override
   void initState() {
@@ -32,7 +33,11 @@ class _TestScreenState extends State<TestScreen> {
       var x = tempData['data'][i];
       answerId[x['id']] = '';
     }
+    for (var i = 0; i < qsncount; i++) {
+      colorlist.add([false, false, false, false]);
+    }
     print(answerId);
+    print(colorlist);
     return data;
   }
 
@@ -133,7 +138,7 @@ class _TestScreenState extends State<TestScreen> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withOpacit[300]y(0.5),
               blurRadius: 5.0, // soften the shadow
               spreadRadius: 1.0, //extend the shadow
             )
@@ -156,12 +161,16 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      answerId[tempdata['data'][index]['id']] =
-                          tempdata['data'][index]['options'][0]['id']
-                              .toString();
+                      colorlist[index][0] = true;
+                      colorlist[index][1] = false;
+                      colorlist[index][2] = false;
+                      colorlist[index][3] = false;
+                      answerId[tempdata['data'][index]['id']] = tempdata['data']
+                              [index]['options'][0]['id']
+                          .toString();
                     });
                   },
-                  color: Colors.grey,
+                  color: (colorlist[index][0]) ? Colors.blue : Colors.grey[300],
                   child: Text(
                       tempdata['data'][index]['options'][0]['option_text']),
                 ),
@@ -171,12 +180,16 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      answerId[tempdata['data'][index]['id']] =
-                          tempdata['data'][index]['options'][1]['id']
-                              .toString();
+                      colorlist[index][0] = false;
+                      colorlist[index][1] = true;
+                      colorlist[index][2] = false;
+                      colorlist[index][3] = false;
+                      answerId[tempdata['data'][index]['id']] = tempdata['data']
+                              [index]['options'][1]['id']
+                          .toString();
                     });
                   },
-                  color: Colors.grey,
+                  color: (colorlist[index][1]) ? Colors.blue : Colors.grey[300],
                   child: Text(
                       tempdata['data'][index]['options'][1]['option_text']),
                 ),
@@ -186,12 +199,16 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      answerId[tempdata['data'][index]['id']] =
-                          tempdata['data'][index]['options'][2]['id']
-                              .toString();
+                      colorlist[index][0] = false;
+                      colorlist[index][1] = false;
+                      colorlist[index][2] = true;
+                      colorlist[index][3] = false;
+                      answerId[tempdata['data'][index]['id']] = tempdata['data']
+                              [index]['options'][2]['id']
+                          .toString();
                     });
                   },
-                  color: Colors.grey,
+                  color: (colorlist[index][2]) ? Colors.blue : Colors.grey[300],
                   child: Text(
                       tempdata['data'][index]['options'][2]['option_text']),
                 ),
@@ -201,12 +218,16 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      answerId[tempdata['data'][index]['id']] =
-                          tempdata['data'][index]['options'][3]['id']
-                              .toString();
+                      colorlist[index][0] = false;
+                      colorlist[index][1] = false;
+                      colorlist[index][2] = false;
+                      colorlist[index][3] = true;
+                      answerId[tempdata['data'][index]['id']] = tempdata['data']
+                              [index]['options'][3]['id']
+                          .toString();
                     });
                   },
-                  color: Colors.grey,
+                  color: (colorlist[index][3]) ? Colors.blue : Colors.grey[300],
                   child: Text(
                       tempdata['data'][index]['options'][3]['option_text']),
                 ),
@@ -218,10 +239,10 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  var col_1 = Colors.grey,
-      col_2 = Colors.grey,
-      col_3 = Colors.grey,
-      col_4 = Colors.grey;
+  var col_1 = Colors.grey[300],
+      col_2 = Colors.grey[300],
+      col_3 = Colors.grey[300],
+      col_4 = Colors.grey[300];
   // Widget quizSwiper(var tempdata) {
   //   var count = tempdata["data"].length;
   //
