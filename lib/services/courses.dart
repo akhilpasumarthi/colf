@@ -143,9 +143,16 @@ Future<Map> getmarks(var id, var questions) async {
   print(questions);
   print(id);
   var token = await gettoken();
+  print(id);
+  var list=['a','b'];
+  print(list.runtimeType);
+  print((questions).runtimeType);
   var response = await http.post(
-      "https://bilaltech.in/api/public/api/testResult?test_id=$id&questions=$questions",
-      headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
+      "https://bilaltech.in/api/public/api/testResult",
+      headers: {HttpHeaders.authorizationHeader: "Bearer $token",HttpHeaders.contentTypeHeader:"application/json"},body: jsonEncode({
+    "test_id": id.toString(), "questions": questions
+  }),
+  );
   print(response.statusCode);
   Map data = jsonDecode(response.body);
   print(data);

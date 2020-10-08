@@ -16,7 +16,7 @@ class _TestScreenState extends State<TestScreen> {
   final bool loop = false;
   List<bool> checklist = [];
   var colorlist = [];
-  Map answerId = {};
+  Map<String,String> answerId = {};
   @override
   void initState() {
     qsndata = getdata(widget.id);
@@ -26,12 +26,12 @@ class _TestScreenState extends State<TestScreen> {
   getdata(var id) async {
     var data = await getTestQsns(id);
     setState(() {
-      tempData = data;
+      tempData = (data);
       qsncount = tempData['data'].length;
     });
     for (var i = 0; i < qsncount; i++) {
       var x = tempData['data'][i];
-      answerId[x['id']] = '';
+      answerId[x['id'].toString()] = "0";
     }
     for (var i = 0; i < qsncount; i++) {
       colorlist.add([false, false, false, false]);
@@ -118,7 +118,9 @@ class _TestScreenState extends State<TestScreen> {
               Center(
                 child: RaisedButton(
                   onPressed: () async {
-                    var x = await getmarks(widget.id, answerId.toString());
+                    var x = await getmarks(widget.id, answerId);
+                    print(x);
+                    print(answerId);
                   },
                   child: Text('Submit'),
                 ),
@@ -165,7 +167,7 @@ class _TestScreenState extends State<TestScreen> {
                       colorlist[index][1] = false;
                       colorlist[index][2] = false;
                       colorlist[index][3] = false;
-                      answerId[tempdata['data'][index]['id']] = tempdata['data']
+                      answerId[tempdata['data'][index]['id'].toString()] = tempdata['data']
                               [index]['options'][0]['id']
                           .toString();
                     });
@@ -184,7 +186,7 @@ class _TestScreenState extends State<TestScreen> {
                       colorlist[index][1] = true;
                       colorlist[index][2] = false;
                       colorlist[index][3] = false;
-                      answerId[tempdata['data'][index]['id']] = tempdata['data']
+                      answerId[tempdata['data'][index]['id'].toString()] = tempdata['data']
                               [index]['options'][1]['id']
                           .toString();
                     });
@@ -203,7 +205,7 @@ class _TestScreenState extends State<TestScreen> {
                       colorlist[index][1] = false;
                       colorlist[index][2] = true;
                       colorlist[index][3] = false;
-                      answerId[tempdata['data'][index]['id']] = tempdata['data']
+                      answerId[tempdata['data'][index]['id'].toString()] = tempdata['data']
                               [index]['options'][2]['id']
                           .toString();
                     });
@@ -222,7 +224,7 @@ class _TestScreenState extends State<TestScreen> {
                       colorlist[index][1] = false;
                       colorlist[index][2] = false;
                       colorlist[index][3] = true;
-                      answerId[tempdata['data'][index]['id']] = tempdata['data']
+                      answerId[tempdata['data'][index]['id'].toString()] = tempdata['data']
                               [index]['options'][3]['id']
                           .toString();
                     });
