@@ -43,7 +43,8 @@ class _TestScreenState extends State<TestScreen1> {
     for (var i = 0; i < qsncount; i++) {
       for (var j = 0; j < 4; j++) {
         if (tempData["data"][i]["options"][j]["correct"] == "1") {
-          keylist.add(j);
+          print(j);
+          keylist.add(j+1);
           answerlist.add(tempData["data"][i]["options"][j]["option_text"]);
         }
       }

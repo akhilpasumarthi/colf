@@ -36,7 +36,7 @@ class _TestScreenState extends State<TestScreen> {
     for (var i = 0; i < qsncount; i++) {
       var x = tempData['data'][i];
       answerId[x['id'].toString()] = "0";
-      selectedanswers.add(0);
+      selectedanswers.add("none");
     }
     for (var i = 0; i < qsncount; i++) {
       colorlist.add([false, false, false, false]);
@@ -176,7 +176,7 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      selectedanswers[index]=1;
+                      selectedanswers[index]="1";
                       colorlist[index][0] = true;
                       colorlist[index][1] = false;
                       colorlist[index][2] = false;
@@ -196,7 +196,7 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      selectedanswers[index]=2;
+                      selectedanswers[index]="2";
                       colorlist[index][0] = false;
                       colorlist[index][1] = true;
                       colorlist[index][2] = false;
@@ -216,7 +216,7 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      selectedanswers[index]=3;
+                      selectedanswers[index]="3";
                       colorlist[index][0] = false;
                       colorlist[index][1] = false;
                       colorlist[index][2] = true;
@@ -236,7 +236,7 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      selectedanswers[index]=4;
+                      selectedanswers[index]="4";
                       colorlist[index][0] = false;
                       colorlist[index][1] = false;
                       colorlist[index][2] = false;
