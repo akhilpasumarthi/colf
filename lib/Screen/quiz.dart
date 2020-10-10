@@ -1,3 +1,4 @@
+import 'package:bvm/Screen/showresult.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,10 @@ class _TestScreenState extends State<TestScreen> {
   final bool loop = false;
   List<bool> checklist = [];
   var colorlist = [];
+  List selectedanswers =[];
   Map<String,String> answerId = {};
+  var keylist=[];
+  var answerlist=[];
   @override
   void initState() {
     qsndata = getdata(widget.id);
@@ -32,12 +36,18 @@ class _TestScreenState extends State<TestScreen> {
     for (var i = 0; i < qsncount; i++) {
       var x = tempData['data'][i];
       answerId[x['id'].toString()] = "0";
+      selectedanswers.add(0);
     }
     for (var i = 0; i < qsncount; i++) {
       colorlist.add([false, false, false, false]);
     }
+
+
     print(answerId);
     print(colorlist);
+    print(keylist);
+    print("hii");
+    print(answerlist);
     return data;
   }
 
@@ -120,7 +130,10 @@ class _TestScreenState extends State<TestScreen> {
                   onPressed: () async {
                     var x = await getmarks(widget.id, answerId);
                     print(x);
-                    print(answerId);
+                    var score= x['data']["test_score"];
+                    print(selectedanswers);
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>TestScreen1(selected: selectedanswers, result: score,id: widget.id, )));
+                    //print(answerId);
                   },
                   child: Text('Submit'),
                 ),
@@ -163,6 +176,7 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
+                      selectedanswers[index]=1;
                       colorlist[index][0] = true;
                       colorlist[index][1] = false;
                       colorlist[index][2] = false;
@@ -182,6 +196,7 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
+                      selectedanswers[index]=2;
                       colorlist[index][0] = false;
                       colorlist[index][1] = true;
                       colorlist[index][2] = false;
@@ -201,6 +216,7 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
+                      selectedanswers[index]=3;
                       colorlist[index][0] = false;
                       colorlist[index][1] = false;
                       colorlist[index][2] = true;
@@ -220,6 +236,7 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
+                      selectedanswers[index]=4;
                       colorlist[index][0] = false;
                       colorlist[index][1] = false;
                       colorlist[index][2] = false;

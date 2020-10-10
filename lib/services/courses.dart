@@ -158,3 +158,16 @@ Future<Map> getmarks(var id, var questions) async {
   print(data);
   return data;
 }
+Future<Map>getfrontdata()async {
+  var token=await gettoken();
+  var uri =
+  Uri.parse("https://bilaltech.in/api/public/api/getFrontData");
+  var response = await http
+      .post(uri, headers: {HttpHeaders.authorizationHeader: "Bearer $token"});
+  print(response.statusCode);
+  Map data = jsonDecode(response.body);
+
+  print(data);
+
+  return data;
+}

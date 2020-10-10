@@ -24,11 +24,16 @@ class _HomeMainState extends State<HomeMain> {
   List courseimageurl = [];
   var courseData;
   Map courses;
+  Map banners;
+  var bannerdata;
+  List upperbanner=[];
+  List lowerbanner=[];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     courseData = courselist();
+    bannerdata= bannerlist();
   }
 
   courselist() async {
@@ -43,6 +48,25 @@ class _HomeMainState extends State<HomeMain> {
     });
     return courses;
   }
+  bannerlist()async {
+   Map banner1= await getfrontdata();
+   //print(banner1);
+   setState(() {
+     banners=banner1;
+     print(banners['data']['bannerdata']['data'][1]);
+     banners['data']['bannerdata']['data'][1]['banner_images'].forEach((element){
+       lowerbanner.add(element['image']);
+     });
+     banners['data']['bannerdata']['data'][0]['banner_images'].forEach((element){
+       upperbanner.add(element['image']);
+     });
+     print(lowerbanner);
+     print(upperbanner);
+   });
+
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
