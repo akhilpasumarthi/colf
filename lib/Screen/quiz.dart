@@ -2,6 +2,7 @@ import 'package:bvm/Screen/showresult.dart';
 import 'package:bvm/services/courses.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 
 class TestScreen extends StatefulWidget {
   final id;
@@ -17,10 +18,10 @@ class _TestScreenState extends State<TestScreen> {
   final bool loop = false;
   List<bool> checklist = [];
   var colorlist = [];
-  List selectedanswers =[];
-  Map<String,String> answerId = {};
-  var keylist=[];
-  var answerlist=[];
+  List selectedanswers = [];
+  Map<String, String> answerId = {};
+  var keylist = [];
+  var answerlist = [];
   @override
   void initState() {
     qsndata = getdata(widget.id);
@@ -42,7 +43,6 @@ class _TestScreenState extends State<TestScreen> {
       colorlist.add([false, false, false, false]);
     }
 
-
     print(answerId);
     print(colorlist);
     print(keylist);
@@ -53,6 +53,7 @@ class _TestScreenState extends State<TestScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 60 * 5;
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(color: Colors.black),
@@ -96,6 +97,50 @@ class _TestScreenState extends State<TestScreen> {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Timer :',
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey[800]),
+                    ),
+                    CountdownTimer(
+                      endTime: endTime,
+                      textStyle:
+                          TextStyle(fontSize: 30, color: Colors.grey[600]),
+                      emptyWidget: Center(
+                          child: Text(
+                        'The current time has expired',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey[800]),
+                      )),
+                      onEnd: () async {
+                        var x = await getmarks(widget.id, answerId);
+                        print(x);
+                        var score = x['data']["test_score"];
+                        print(selectedanswers);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TestScreen1(
+                                      selected: selectedanswers,
+                                      result: score,
+                                      id: widget.id,
+                                    )));
+                      },
+                    ),
+                  ],
+                ),
+              ),
               FutureBuilder(
                 future: qsndata,
                 builder: (context, snapshot) {
@@ -130,9 +175,16 @@ class _TestScreenState extends State<TestScreen> {
                   onPressed: () async {
                     var x = await getmarks(widget.id, answerId);
                     print(x);
-                    var score= x['data']["test_score"];
+                    var score = x['data']["test_score"];
                     print(selectedanswers);
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>TestScreen1(selected: selectedanswers, result: score,id: widget.id, )));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TestScreen1(
+                                  selected: selectedanswers,
+                                  result: score,
+                                  id: widget.id,
+                                )));
                     //print(answerId);
                   },
                   child: Text('Submit'),
@@ -176,14 +228,14 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      selectedanswers[index]="1";
+                      selectedanswers[index] = "1";
                       colorlist[index][0] = true;
                       colorlist[index][1] = false;
                       colorlist[index][2] = false;
                       colorlist[index][3] = false;
-                      answerId[tempdata['data'][index]['id'].toString()] = tempdata['data']
-                              [index]['options'][0]['id']
-                          .toString();
+                      answerId[tempdata['data'][index]['id'].toString()] =
+                          tempdata['data'][index]['options'][0]['id']
+                              .toString();
                     });
                   },
                   color: (colorlist[index][0]) ? Colors.blue : Colors.grey[300],
@@ -196,14 +248,14 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      selectedanswers[index]="2";
+                      selectedanswers[index] = "2";
                       colorlist[index][0] = false;
                       colorlist[index][1] = true;
                       colorlist[index][2] = false;
                       colorlist[index][3] = false;
-                      answerId[tempdata['data'][index]['id'].toString()] = tempdata['data']
-                              [index]['options'][1]['id']
-                          .toString();
+                      answerId[tempdata['data'][index]['id'].toString()] =
+                          tempdata['data'][index]['options'][1]['id']
+                              .toString();
                     });
                   },
                   color: (colorlist[index][1]) ? Colors.blue : Colors.grey[300],
@@ -216,14 +268,14 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      selectedanswers[index]="3";
+                      selectedanswers[index] = "3";
                       colorlist[index][0] = false;
                       colorlist[index][1] = false;
                       colorlist[index][2] = true;
                       colorlist[index][3] = false;
-                      answerId[tempdata['data'][index]['id'].toString()] = tempdata['data']
-                              [index]['options'][2]['id']
-                          .toString();
+                      answerId[tempdata['data'][index]['id'].toString()] =
+                          tempdata['data'][index]['options'][2]['id']
+                              .toString();
                     });
                   },
                   color: (colorlist[index][2]) ? Colors.blue : Colors.grey[300],
@@ -236,14 +288,14 @@ class _TestScreenState extends State<TestScreen> {
                 child: RaisedButton(
                   onPressed: () {
                     setState(() {
-                      selectedanswers[index]="4";
+                      selectedanswers[index] = "4";
                       colorlist[index][0] = false;
                       colorlist[index][1] = false;
                       colorlist[index][2] = false;
                       colorlist[index][3] = true;
-                      answerId[tempdata['data'][index]['id'].toString()] = tempdata['data']
-                              [index]['options'][3]['id']
-                          .toString();
+                      answerId[tempdata['data'][index]['id'].toString()] =
+                          tempdata['data'][index]['options'][3]['id']
+                              .toString();
                     });
                   },
                   color: (colorlist[index][3]) ? Colors.blue : Colors.grey[300],
